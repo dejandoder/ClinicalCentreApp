@@ -3,10 +3,18 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { PacijentComponent } from './components/pacijent/pacijent.component';
+import { RegistracijaComponent } from './components/registracija/registracija.component';
+import { PrijavaComponent } from './components/prijava/prijava.component';
+import { PocetnaStranicaComponent } from './components/pocetna-stranica/pocetna-stranica.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    PacijentComponent,
+    RegistracijaComponent,
+    PrijavaComponent,
+    PocetnaStranicaComponent
   ],
   imports: [
     BrowserModule,
