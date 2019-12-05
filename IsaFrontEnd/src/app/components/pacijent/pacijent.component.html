@@ -1,1 +1,38 @@
-<p>pacijent works!</p>
+<nav class="navbar navbar-default navbar-light ">
+
+
+    <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav nav-tabs nav-justified" id="listanav">
+            <li class="nav-item">
+                <a class="nav-link" (click)="klinikaClick()">Lista klinika</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" (click)="istorijaClick()">Istorija pregleda i operacija</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" (click)="kartonClick()">Zdravstveni karton</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" (click)="profilClick()">Moj profil</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" (click)="odjaviClick()">Odjavi se</a>
+            </li>
+
+        </ul>
+    </div>
+
+</nav>
+
+<!--
+<body class="inventory-body">
+    <div class="container">
+        <div class="jumbotron">
+
+            <h1>DOBRO DOSLI NA VAS PROFIL</h1>
+        </div>
+    </div>
+
+</body>
+-->
+<router-outlet></router-outlet>

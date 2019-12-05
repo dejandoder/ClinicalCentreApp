@@ -4,9 +4,9 @@ html, body, app-root {
     }
 .inventory-body {
     position: fixed;
-    margin-top: 0cm;
+    margin-top: -0.7cm;
     min-width: 100%;
-    background-image: url("../pocetna-stranica/klinika.jpg");
+    background-image: url("klinika.jpg");
     background-repeat: no-repeat;
     background-size: 85%;
     background-position: center;
@@ -23,13 +23,4 @@ html, body, app-root {
 .nav-link{
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 
-}
-.anyClass {
-    
-    height:500px;
-    overflow-y: scroll;
-    
-  }
-.lijevo{
-    text-align: left;
 }
