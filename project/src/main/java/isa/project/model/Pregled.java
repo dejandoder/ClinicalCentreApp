@@ -31,13 +31,13 @@ public class Pregled {
 	private int popust;
 	
 	@Column(name="tip")
-	private int tip;
+	private String tip;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	private Ljekar ljekar;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
-	private Pregled pregled;
+	private Klinika klinika;
 	
 	public Pregled() {
 		// TODO Auto-generated constructor stub
@@ -83,11 +83,11 @@ public class Pregled {
 		this.popust = popust;
 	}
 
-	public int getTip() {
+	public String getTip() {
 		return tip;
 	}
 
-	public void setTip(int tip) {
+	public void setTip(String tip) {
 		this.tip = tip;
 	}
 
@@ -99,13 +99,15 @@ public class Pregled {
 		this.ljekar = ljekar;
 	}
 
-	public Pregled getPregled() {
-		return pregled;
+	public Klinika getKlinika() {
+		return klinika;
 	}
 
-	public void setPregled(Pregled pregled) {
-		this.pregled = pregled;
+	public void setKlinika(Klinika klinika) {
+		this.klinika = klinika;
 	}
+
+	
 	
 	
 	
