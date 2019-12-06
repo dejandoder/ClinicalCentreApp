@@ -12,7 +12,8 @@
                                 <label>Ime:</label>
                             </div>
                             <div class="col-6">
-                                <input class="form-control" id="mail" placeholder="Unesite ime" name="username">
+                                <input class="form-control" placeholder="Unesite ime" [(ngModel)]="korisnik.ime"
+                                    [ngModelOptions]="{standalone:true}">
                             </div>
                         </div>
                         <div class="form-group row">
@@ -20,23 +21,26 @@
                                 <label>Prezime:</label>
                             </div>
                             <div class="col-6">
-                                <input class="form-control" id="mail" placeholder="Unesite prezime" name="username">
+                                <input class="form-control" placeholder="Unesite prezime" [(ngModel)]="korisnik.prezime"
+                                    [ngModelOptions]="{standalone:true}">
                             </div>
                         </div>
                         <div class="form-group row">
-                                <div class="col-4">
-                                    <label>E-mail:</label>
-                                </div>
-                                <div class="col-6">
-                                    <input class="form-control" id="mail" placeholder="Unesite e-mail" name="username">
-                                </div>
+                            <div class="col-4">
+                                <label>E-mail:</label>
                             </div>
+                            <div class="col-6">
+                                <input class="form-control" placeholder="Unesite e-mail" [(ngModel)]="korisnik.email"
+                                    [ngModelOptions]="{standalone:true}">
+                            </div>
+                        </div>
                         <div class="form-group row">
                             <div class="col-4">
                                 <label>Adresa: </label>
                             </div>
                             <div class="col-6">
-                                <input class="form-control" id="mail" placeholder="Unesite adresu" name="username">
+                                <input class="form-control" placeholder="Unesite adresu" [(ngModel)]="korisnik.adresa"
+                                    [ngModelOptions]="{standalone:true}">
                             </div>
                         </div>
                         <div class="form-group row">
@@ -44,7 +48,8 @@
                                 <label>Grad: </label>
                             </div>
                             <div class="col-6">
-                                <input class="form-control" id="mail" placeholder="Unesite grad" name="username">
+                                <input class="form-control" placeholder="Unesite grad" [(ngModel)]="korisnik.grad"
+                                    [ngModelOptions]="{standalone:true}">
                             </div>
                         </div>
                         <div class="form-group row">
@@ -52,7 +57,8 @@
                                 <label>Država:</label>
                             </div>
                             <div class="col-6">
-                                <input class="form-control" id="mail" placeholder="Unesite državu" name="username">
+                                <input class="form-control" placeholder="Unesite državu" [(ngModel)]="korisnik.drzava"
+                                    [ngModelOptions]="{standalone:true}">
                             </div>
                         </div>
                         <div class="form-group row">
@@ -60,8 +66,8 @@
                                 <label>Broj telefona:</label>
                             </div>
                             <div class="col-6">
-                                <input class="form-control" id="mail" placeholder="Unesite broj telefona"
-                                    name="username">
+                                <input type="number" class="form-control" placeholder="Unesite broj telefona"
+                                    [(ngModel)]="korisnik.brojTelefona" [ngModelOptions]="{standalone:true}">
                             </div>
                         </div>
                         <div class="form-group row">
@@ -69,7 +75,8 @@
                                 <label>Jedinstveni broj:</label>
                             </div>
                             <div class="col-6">
-                                <input class="form-control" id="mail" placeholder="Unesite broj" name="username">
+                                <input type="number" class="form-control" placeholder="Unesite broj"
+                                    [(ngModel)]="korisnik.jedinstveniBroj" [ngModelOptions]="{standalone:true}">
                             </div>
                         </div>
 
@@ -78,8 +85,8 @@
                                 <label for="pwd">Lozinka:</label>
                             </div>
                             <div class="col-8">
-                                <input type="password" class="form-control provjeraPrazno" id="lozinka"
-                                    placeholder="Unesite lozinku">
+                                <input type="password" class="form-control provjeraPrazno" placeholder="Unesite lozinku"
+                                    [(ngModel)]="korisnik.password" [ngModelOptions]="{standalone:true}">
                             </div>
                         </div>
                         <div class="form-group row">
@@ -94,7 +101,8 @@
                         <div class="form-group row">
 
                             <div class="col-6">
-                                <button type="submit" (click)="clickLogIn()" class="btn btn-primary ">Registruj se</button>
+                                <button type="submit" (click)="registujSe()" class="btn btn-primary ">Registruj
+                                    se</button>
                                 <button (click)="odustani()" class="btn btn-secondary">Odustani</button>
                             </div>
                         </div>

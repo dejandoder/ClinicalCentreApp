@@ -1,5 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AgGridModule } from '@ag-grid-community/angular';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -12,6 +17,7 @@ import { KlinikaComponent } from './components/pacijent/klinika/klinika.componen
 import { ZdravstveniKartonComponent } from './components/pacijent/zdravstveni-karton/zdravstveni-karton.component';
 import { IstorijaComponent } from './components/pacijent/istorija/istorija.component';
 import { PocetnaPacijentComponent } from './components/pacijent/pocetna-pacijent/pocetna-pacijent.component';
+import { PregledComponent } from './components/pacijent/pregled/pregled.component';
 
 @NgModule({
   declarations: [
@@ -24,11 +30,17 @@ import { PocetnaPacijentComponent } from './components/pacijent/pocetna-pacijent
     KlinikaComponent,
     ZdravstveniKartonComponent,
     IstorijaComponent,
-    PocetnaPacijentComponent
+    PocetnaPacijentComponent,
+    PregledComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
+    AgGridModule.withComponents([])
   ],
   providers: [],
   bootstrap: [AppComponent]

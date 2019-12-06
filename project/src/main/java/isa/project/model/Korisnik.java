@@ -25,6 +25,9 @@ public class Korisnik {
 	@Column(name="adresa")
 	private String adresa;
 	
+	@Column(name="grad")
+	private String grad;
+	
 	@Column(name="drzava")
 	private String drzava;
 	
@@ -129,6 +132,18 @@ public class Korisnik {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
+
+	public String getGrad() {
+		return grad;
+	}
+
+
+	public void setGrad(String grad) {
+		this.grad = grad;
+	}
+	
+	
 	
 	
 }
