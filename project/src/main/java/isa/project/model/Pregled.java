@@ -4,9 +4,11 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Pregled {
@@ -30,6 +32,12 @@ public class Pregled {
 	
 	@Column(name="tip")
 	private int tip;
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+	private Ljekar ljekar;
+	
+	@ManyToOne(fetch = FetchType.EAGER)
+	private Pregled pregled;
 	
 	public Pregled() {
 		// TODO Auto-generated constructor stub
@@ -82,6 +90,23 @@ public class Pregled {
 	public void setTip(int tip) {
 		this.tip = tip;
 	}
+
+	public Ljekar getLjekar() {
+		return ljekar;
+	}
+
+	public void setLjekar(Ljekar ljekar) {
+		this.ljekar = ljekar;
+	}
+
+	public Pregled getPregled() {
+		return pregled;
+	}
+
+	public void setPregled(Pregled pregled) {
+		this.pregled = pregled;
+	}
+	
 	
 	
 	

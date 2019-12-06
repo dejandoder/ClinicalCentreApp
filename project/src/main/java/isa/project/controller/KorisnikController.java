@@ -22,7 +22,7 @@ public class KorisnikController {
 	
 	@RequestMapping(value = "/registracija", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody ResponseEntity<Korisnik> registrujKorisnika(@RequestBody Korisnik novi) {
-		Korisnik registrovan = new Korisnik();
+		//Korisnik registrovan = new Korisnik();
 		korisnikService.saveUser(novi);
         
 		return new ResponseEntity<>(novi, HttpStatus.OK);

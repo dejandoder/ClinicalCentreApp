@@ -5,14 +5,16 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinTable;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
-public class Klinika {
+public class Ljekar {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,21 +23,20 @@ public class Klinika {
 	@Column(name="ime")
 	private String ime;
 	
-	@Column(name="adresa")
-	private String adresa;
+	@Column(name="prezime")
+	private String prezime;
 	
-	@Column(name="opis")
-	private String opis;
-	
-	@OneToMany
-	@JoinTable(name = "klinikaLjekari")
-	private List<Ljekar> ljekari = new ArrayList<>();
+	@Column(name="ocjena")
+	private String ocjena;
 	
 	@OneToMany
-	@JoinTable(name = "klinikaPregledi")
+	@JoinTable(name = "ljekarPregledi")
 	private List<Pregled> pregledi = new ArrayList<>();
 	
-	public Klinika() {
+	@ManyToOne(fetch = FetchType.EAGER)
+	private Klinika klinika;
+	
+	public Ljekar() {
 		// TODO Auto-generated constructor stub
 	}
 
@@ -55,28 +56,20 @@ public class Klinika {
 		this.ime = ime;
 	}
 
-	public String getAdresa() {
-		return adresa;
+	public String getPrezime() {
+		return prezime;
 	}
 
-	public void setAdresa(String adresa) {
-		this.adresa = adresa;
+	public void setPrezime(String prezime) {
+		this.prezime = prezime;
 	}
 
-	public String getOpis() {
-		return opis;
+	public String getOcjena() {
+		return ocjena;
 	}
 
-	public void setOpis(String opis) {
-		this.opis = opis;
-	}
-
-	public List<Ljekar> getLjekari() {
-		return ljekari;
-	}
-
-	public void setLjekari(List<Ljekar> ljekari) {
-		this.ljekari = ljekari;
+	public void setOcjena(String ocjena) {
+		this.ocjena = ocjena;
 	}
 
 	public List<Pregled> getPregledi() {
@@ -86,6 +79,16 @@ public class Klinika {
 	public void setPregledi(List<Pregled> pregledi) {
 		this.pregledi = pregledi;
 	}
+
+	public Klinika getKlinika() {
+		return klinika;
+	}
+
+	public void setKlinika(Klinika klinika) {
+		this.klinika = klinika;
+	}
+	
+	
 	
 	
 	
