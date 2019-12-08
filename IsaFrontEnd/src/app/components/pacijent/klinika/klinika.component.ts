@@ -18,7 +18,7 @@ export class KlinikaComponent implements OnInit {
   constructor(private service: StudentService) { }
 
   ngOnInit() {
-    this.service.preuzmiSveStudente().subscribe(
+   /* this.service.preuzmiSveStudente().subscribe(
       data =>{
         this.studenti=data;
         data.forEach(function (value) {
@@ -30,7 +30,7 @@ export class KlinikaComponent implements OnInit {
       error => {
         console.log(error);
       }
-    )
+    )*/
   }
   
 

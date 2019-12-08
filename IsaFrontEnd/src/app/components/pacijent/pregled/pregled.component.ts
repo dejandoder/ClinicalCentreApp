@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Pregled } from 'src/app/model/Pregled';
+import { PregledService } from 'src/app/service/pregled.service';
 
 @Component({
   selector: 'app-pregled',
@@ -7,9 +9,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PregledComponent implements OnInit {
 
-  constructor() { }
+  pregledi: Pregled[]=[];
+
+  constructor(private service: PregledService) { }
 
   ngOnInit() {
+      this.service.preuzmiSvePreglede().subscribe(
+      data =>{
+        this.pregledi=data;
+
+      },
+      error => {
+        console.log(error);
+      }
+    )
   }
+
 
 }

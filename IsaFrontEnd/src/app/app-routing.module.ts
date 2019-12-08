@@ -9,6 +9,7 @@ import { IstorijaComponent } from './components/pacijent/istorija/istorija.compo
 import { KlinikaComponent } from './components/pacijent/klinika/klinika.component';
 import { ZdravstveniKartonComponent } from './components/pacijent/zdravstveni-karton/zdravstveni-karton.component';
 import { PocetnaPacijentComponent } from './components/pacijent/pocetna-pacijent/pocetna-pacijent.component';
+import { PregledComponent } from './components/pacijent/pregled/pregled.component';
 
 
 const routes: Routes = [
@@ -21,6 +22,7 @@ const routes: Routes = [
     children: [
       { path: '', redirectTo: 'pocetnaPacijent',  pathMatch: 'full' },
       {path: 'pocetnaPacijent', component: PocetnaPacijentComponent},
+      {path: 'pregledi', component: PregledComponent},
       {path: 'profil', component: ProfilComponent},
       {path: 'istorija', component: IstorijaComponent},
       {path: 'klinika', component: KlinikaComponent},

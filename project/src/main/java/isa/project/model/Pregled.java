@@ -9,6 +9,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 public class Pregled {
@@ -18,7 +20,10 @@ public class Pregled {
 	private Long id;
 	
 	//ostaje veza sa ljekarom
-	@Column(name="termin")
+	//@Column(name="termin")
+	//private Date termin;
+	
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date termin;
 	
 	@Column(name="sala")
@@ -32,6 +37,12 @@ public class Pregled {
 	
 	@Column(name="tip")
 	private String tip;
+	
+	@Column(name="opis")
+	private String opis;
+	
+	@Column(name="trajanje")
+	private String trajanje;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	private Ljekar ljekar;
@@ -89,6 +100,23 @@ public class Pregled {
 
 	public void setTip(String tip) {
 		this.tip = tip;
+	}
+	
+
+	public String getOpis() {
+		return opis;
+	}
+
+	public void setOpis(String opis) {
+		this.opis = opis;
+	}
+	
+	public String getTrajanje() {
+		return trajanje;
+	}
+
+	public void setTrajanje(String trajanje) {
+		this.trajanje = trajanje;
 	}
 
 	public Ljekar getLjekar() {

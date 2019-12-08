@@ -2,6 +2,8 @@ package isa.project.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -12,6 +14,9 @@ public class Korisnik {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
+	@Column(name = "username")
+	private String username;
 	
 	@Column(name="ime")
 	private String ime;
@@ -39,6 +44,10 @@ public class Korisnik {
 	
 	@Column(name="lozinka")
 	private String password;
+	
+	@Enumerated(EnumType.STRING)
+	@Column(name = "role")
+	private Role role;
     
 	public Korisnik() {
 		// TODO Auto-generated constructor stub
@@ -142,6 +151,28 @@ public class Korisnik {
 	public void setGrad(String grad) {
 		this.grad = grad;
 	}
+
+
+	public String getUsername() {
+		return username;
+	}
+
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+
+	public Role getRole() {
+		return role;
+	}
+
+
+	public void setRole(Role role) {
+		this.role = role;
+	}
+	
+	
 	
 	
 	

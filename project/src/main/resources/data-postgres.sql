@@ -9,3 +9,5 @@ insert into student (index_number, first_name, last_name) values ('ra8-2014', 'M
 insert into student (index_number, first_name, last_name) values ('ra9-2014', 'Jovana', 'Jovanić');
 
 insert INTO korisnik (ime,prezime) VALUES ('dejan','doder');
+
+insert into pregled (cijena, popust,sala,termin,tip) VALUES (12,0,3, '2019-10-07 00:00:00','dobar');
