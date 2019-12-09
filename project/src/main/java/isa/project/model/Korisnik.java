@@ -42,7 +42,7 @@ public class Korisnik {
 	@Column(name="jedinstveni_broj")
 	private int jedinstveniBroj;
 	
-	@Column(name="lozinka")
+	@Column(name="password")
 	private String password;
 	
 	@Enumerated(EnumType.STRING)

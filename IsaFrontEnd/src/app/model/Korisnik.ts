@@ -1,4 +1,5 @@
 export class Korisnik{
+    username : string = "";
     ime : string = "";
     prezime : string = "";
     id : number;

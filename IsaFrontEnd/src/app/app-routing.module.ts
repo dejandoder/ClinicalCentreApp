@@ -15,10 +15,10 @@ import { PregledComponent } from './components/pacijent/pregled/pregled.componen
 const routes: Routes = [
   { path: '', redirectTo: '/pocetna', pathMatch: 'full' },
   { path: 'pocetna', component: PocetnaStranicaComponent },
-  { path: 'prijava', component: PrijavaComponent },
+  { path: 'login', component: PrijavaComponent},
   { path: 'registracija', component: RegistracijaComponent },
   {
-    path: 'pacijent', component: PacijentComponent,
+    path: 'registrovan', component: PacijentComponent,
     children: [
       { path: '', redirectTo: 'pocetnaPacijent',  pathMatch: 'full' },
       {path: 'pocetnaPacijent', component: PocetnaPacijentComponent},

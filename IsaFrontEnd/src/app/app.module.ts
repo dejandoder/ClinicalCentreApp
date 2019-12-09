@@ -18,6 +18,8 @@ import { ZdravstveniKartonComponent } from './components/pacijent/zdravstveni-ka
 import { IstorijaComponent } from './components/pacijent/istorija/istorija.component';
 import { PocetnaPacijentComponent } from './components/pacijent/pocetna-pacijent/pocetna-pacijent.component';
 import { PregledComponent } from './components/pacijent/pregled/pregled.component';
+import { AuthInterceptor } from './http-interceptor/AuthInterceptor';
+import { AuthService } from './service/AuthService';
 
 @NgModule({
   declarations: [
@@ -42,7 +44,9 @@ import { PregledComponent } from './components/pacijent/pregled/pregled.componen
     ToastrModule.forRoot(),
     AgGridModule.withComponents([])
   ],
-  providers: [],
+  providers: [
+    AuthService,
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

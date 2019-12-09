@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { AuthService } from 'src/app/service/AuthService';
 
 @Component({
   selector: 'app-pacijent',
@@ -8,7 +9,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class PacijentComponent implements OnInit {
 
-  constructor(private router : Router, private route : ActivatedRoute) { }
+  constructor(private router : Router, private route : ActivatedRoute, private serviceOdjava : AuthService) { }
 
   ngOnInit() {
   }
@@ -27,6 +28,9 @@ export class PacijentComponent implements OnInit {
 
     this.router.navigate(["pregledi"],{relativeTo: this.route});
 
+  }
+  odjaviClick(){
+    this.serviceOdjava.logOutUser();
   }
 
 }

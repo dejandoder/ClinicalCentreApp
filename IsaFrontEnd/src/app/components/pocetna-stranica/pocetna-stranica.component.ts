@@ -14,7 +14,7 @@ export class PocetnaStranicaComponent implements OnInit {
   }
 
   prijavaClick() {
-    this.router.navigate(["prijava"]);   
+    this.router.navigate(["login"]);   
   }
   
   registracijaClick() {

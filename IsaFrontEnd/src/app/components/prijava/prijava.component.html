@@ -13,7 +13,8 @@
                             </div>
                             <div class="col-6">
                                 <input class="form-control" id="mail" placeholder="Unesite korisnicko ime"
-                                    name="username">
+                                    name="username" [(ngModel)]="user.username"
+                                    [ngModelOptions]="{standalone: true}">
                             </div>
                         </div>
                         <div class="form-group row">
@@ -22,7 +23,8 @@
                             </div>
                             <div class="col-8">
                                 <input type="password" class="form-control provjeraPrazno" id="lozinka"
-                                    placeholder="Unesite lozinku">
+                                    placeholder="Unesite lozinku" [(ngModel)]="user.password"
+                                    [ngModelOptions]="{standalone: true}">
                             </div>
                         </div>
                         <div class="form-group row">

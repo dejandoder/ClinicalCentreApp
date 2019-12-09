@@ -52,14 +52,8 @@ public class SecurityLoginConfig extends WebSecurityConfigurerAdapter {
 		    // allow all POST requests 
 		    .antMatchers(HttpMethod.POST, "/login").permitAll()
 		    
-		    .antMatchers("/**/admin/**").hasRole("ADMIN_SISTEM")
-		    .antMatchers("/**/adminRent/**").hasRole("ADMIN_RENT")
-		    .antMatchers("/**/adminAvio/**").hasRole("ADMIN_AVIO")
-		    .antMatchers("/**/adminHotel/**").hasRole("ADMIN_HOTEL")
 		    .antMatchers("/**/registrovan/**").hasRole("REGISTROVAN")
 
-
-		    
 		    .antMatchers("/**").permitAll()
 
 		    .anyRequest().authenticated();

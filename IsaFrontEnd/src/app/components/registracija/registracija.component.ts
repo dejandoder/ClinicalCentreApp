@@ -19,6 +19,7 @@ export class RegistracijaComponent implements OnInit {
   }
 
   registujSe(){
+    this.korisnik.username=this.korisnik.email;
     this.korisnikService.registracija(this.korisnik).subscribe(
       data => {
         this.toastr.warning("Dobicete e-mail za verifikaciju!");
