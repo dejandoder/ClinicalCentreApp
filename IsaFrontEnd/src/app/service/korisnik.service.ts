@@ -12,5 +12,13 @@ export class KorisnikService {
   registracija(korisnik: Korisnik) {
     return this.http.post<Korisnik>('api/korisnici/registracija', korisnik);
   }
+
+  vratiTrenutnogKorisnika() {
+    return this.http.get<any>('api/korisnici/trenutniKorisnik');
+  }
+
+  izmjenaPodataka(korisnik: Korisnik) {
+    return this.http.post<Korisnik>('api/korisnici/izmjena', korisnik);
+  }
  
 }

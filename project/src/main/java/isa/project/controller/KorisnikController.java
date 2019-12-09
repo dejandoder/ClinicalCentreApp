@@ -47,5 +47,21 @@ public class KorisnikController {
 		return user;
 	}
 	
+	@RequestMapping(value="/trenutniKorisnik",method = RequestMethod.GET)
+	public Korisnik trenutniKorisnik(@Context HttpServletRequest request){
+		return korisnikService.getCurrentUser();
+	}
+	
+	@RequestMapping(value = "/izmjena", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody ResponseEntity<Korisnik> izmijeniKorisnika(@RequestBody Korisnik novi) {
+			
+		String hashPass="";
+		hashPass=encoder.encode(novi.getPassword());
+		novi.setPassword(hashPass);
+		korisnikService.saveUser(novi);
+		      
+		return new ResponseEntity<>(novi, HttpStatus.OK);
+	}
+	
 
 }

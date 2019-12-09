@@ -32,6 +32,7 @@ export class PrijavaComponent implements OnInit {
   ngOnInit() {
   }
 
+
   clickLogIn() {
     //this.router.navigate(['/pacijent']);
     this.authService.login(this.user).subscribe(
