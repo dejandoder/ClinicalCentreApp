@@ -53,6 +53,9 @@ public class Pregled {
 	@ManyToOne(fetch = FetchType.EAGER)
 	private Klinika klinika;
 	
+	@ManyToOne(fetch = FetchType.EAGER)
+	private Korisnik korisnik;
+	
 	public Pregled() {
 		// TODO Auto-generated constructor stub
 	}
@@ -137,14 +140,15 @@ public class Pregled {
 	public void setStanje(StanjePregleda stanje) {
 		this.stanje = stanje;
 	}
+
+	public Korisnik getKorisnik() {
+		return korisnik;
+	}
+
+	public void setKorisnik(Korisnik korisnik) {
+		this.korisnik = korisnik;
+	}
 	
 
-	
-	
-	
-	
-	
-	
-	
 
 }

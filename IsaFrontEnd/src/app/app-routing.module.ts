@@ -10,6 +10,7 @@ import { KlinikaComponent } from './components/pacijent/klinika/klinika.componen
 import { ZdravstveniKartonComponent } from './components/pacijent/zdravstveni-karton/zdravstveni-karton.component';
 import { PocetnaPacijentComponent } from './components/pacijent/pocetna-pacijent/pocetna-pacijent.component';
 import { PregledComponent } from './components/pacijent/pregled/pregled.component';
+import { ZakazaniPreglediComponent } from './components/pacijent/zakazani-pregledi/zakazani-pregledi.component';
 
 
 const routes: Routes = [
@@ -27,6 +28,7 @@ const routes: Routes = [
       {path: 'istorija', component: IstorijaComponent},
       {path: 'klinika', component: KlinikaComponent},
       {path: 'karton', component: ZdravstveniKartonComponent},
+      {path: 'zakazaniPregledi', component: ZakazaniPreglediComponent},
       {path: '**', redirectTo: 'pocetnaPacijent'}
     ]
 }

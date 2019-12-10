@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Pregled } from '../model/Pregled';
 
 @Injectable({
   providedIn: 'root'
@@ -11,4 +12,17 @@ export class PregledService {
   preuzmiSvePreglede(){
     return this.http.get<any>('api/pregledi/all');
   }
+
+  zakaziDostupniPregled(pregled : Pregled){
+    return this.http.post<any>("api/pregledi/zakaziDostupni", pregled);
+  }
+
+  otkaziPregled(pregled : Pregled){
+    return this.http.post<any>("api/pregledi/otkazi", pregled);
+  }
+
+  preuzmiZakazanePreglede(){
+    return this.http.get<any>('api/pregledi/zakazani');
+  }
+
 }

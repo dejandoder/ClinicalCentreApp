@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Pregled } from 'src/app/model/Pregled';
 import { PregledService } from 'src/app/service/pregled.service';
-import {DatePipe} from '@angular/common';
+import { DatePipe } from '@angular/common';
+import { error } from 'util';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-pregled',
   templateUrl: './pregled.component.html',
@@ -9,16 +11,16 @@ import {DatePipe} from '@angular/common';
 })
 export class PregledComponent implements OnInit {
 
-  pregledi: Pregled[]=[];
-  
-  constructor(private service: PregledService,private datePipe: DatePipe) { }
+  pregledi: Pregled[] = [];
+
+  constructor(private service: PregledService, private datePipe: DatePipe,private toastr: ToastrService) { }
 
   ngOnInit() {
-      this.service.preuzmiSvePreglede().subscribe(
-      data =>{
-        this.pregledi=data;
-        for(let date of this.pregledi){
-          date.medium = this.datePipe.transform(date.termin,"MMM d, y, h:mm a");
+    this.service.preuzmiSvePreglede().subscribe(
+      data => {
+        this.pregledi = data;
+        for (let date of this.pregledi) {
+          date.medium = this.datePipe.transform(date.termin, "MMM d, y, h:mm a");
         }
       },
       error => {
@@ -28,6 +30,33 @@ export class PregledComponent implements OnInit {
   }
   transformDate(date) {
     this.datePipe.transform(date, 'yyyy-MM-dd'); //whatever format you need. 
+  }
+
+  zakaziDostupniPregled(pregled: Pregled) {
+    this.service.zakaziDostupniPregled(pregled).subscribe(
+      data => {
+        this.toastr.warning("Pregled je moguce otkazati najkasnije 24h prije pocetka!", "Upozorenje!",  {
+          timeOut: 6000});
+        this.toastr.success("Uspjesno ste zakazali pregled");
+        
+        this.service.preuzmiSvePreglede().subscribe(
+          data => {
+            this.pregledi = data;
+            for (let date of this.pregledi) {
+              date.medium = this.datePipe.transform(date.termin, "MMM d, y, h:mm a");
+            }
+          },
+          error => {
+            console.log(error);
+          }
+        )
+
+      },
+      error => {
+        console.log(error);
+      }
+    )
+
   }
 
 

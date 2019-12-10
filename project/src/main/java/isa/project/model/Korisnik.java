@@ -1,5 +1,8 @@
 package isa.project.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -7,6 +10,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Korisnik {
@@ -48,6 +53,10 @@ public class Korisnik {
 	@Enumerated(EnumType.STRING)
 	@Column(name = "role")
 	private Role role;
+	
+	@OneToMany
+	@JoinTable(name = "korisnikPregledi")
+	private List<Pregled> pregledi = new ArrayList<>();
     
 	public Korisnik() {
 		// TODO Auto-generated constructor stub
