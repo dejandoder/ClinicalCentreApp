@@ -4,6 +4,8 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -37,12 +39,13 @@ public class Pregled {
 	
 	@Column(name="tip")
 	private String tip;
-	
-	@Column(name="opis")
-	private String opis;
-	
+		
 	@Column(name="trajanje")
 	private String trajanje;
+	
+	@Enumerated(EnumType.STRING)
+	@Column(name="stanje")
+	private StanjePregleda stanje;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	private Ljekar ljekar;
@@ -102,14 +105,6 @@ public class Pregled {
 		this.tip = tip;
 	}
 	
-
-	public String getOpis() {
-		return opis;
-	}
-
-	public void setOpis(String opis) {
-		this.opis = opis;
-	}
 	
 	public String getTrajanje() {
 		return trajanje;
@@ -134,6 +129,15 @@ public class Pregled {
 	public void setKlinika(Klinika klinika) {
 		this.klinika = klinika;
 	}
+
+	public StanjePregleda getStanje() {
+		return stanje;
+	}
+
+	public void setStanje(StanjePregleda stanje) {
+		this.stanje = stanje;
+	}
+	
 
 	
 	

@@ -20,6 +20,8 @@ import { PocetnaPacijentComponent } from './components/pacijent/pocetna-pacijent
 import { PregledComponent } from './components/pacijent/pregled/pregled.component';
 import { AuthInterceptor } from './http-interceptor/AuthInterceptor';
 import { AuthService } from './service/AuthService';
+import { DatePipe } from '@angular/common';
+import { ZakazaniPreglediComponent } from './components/pacijent/zakazani-pregledi/zakazani-pregledi.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,8 @@ import { AuthService } from './service/AuthService';
     ZdravstveniKartonComponent,
     IstorijaComponent,
     PocetnaPacijentComponent,
-    PregledComponent
+    PregledComponent,
+    ZakazaniPreglediComponent
   ],
   imports: [
     BrowserModule,
@@ -45,6 +48,7 @@ import { AuthService } from './service/AuthService';
     AgGridModule.withComponents([])
   ],
   providers: [
+    DatePipe,
     AuthService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
   bootstrap: [AppComponent]

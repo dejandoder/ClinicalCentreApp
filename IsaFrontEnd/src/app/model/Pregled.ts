@@ -9,4 +9,5 @@ export class Pregled{
     trajanje : number;
     termin : Date;
     ljekar : Ljekar = new Ljekar();
+    medium : string="";
 }
