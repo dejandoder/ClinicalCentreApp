@@ -5,12 +5,16 @@ import java.util.List;
 import isa.project.model.Korisnik;
 import isa.project.model.Pregled;
 import isa.project.model.StanjePregleda;
+import isa.project.service.EmailService;
 import isa.project.service.KorisnikService;
 import isa.project.service.PregledService;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,11 +26,18 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "pregledi")
 public class PregledController {
 	
+	private Logger logger = LoggerFactory.getLogger(PregledController.class);
+	
 	@Autowired
 	private PregledService pregledService;
 	
 	@Autowired
 	private KorisnikService korisnikService;
+	
+	@Autowired
+	private EmailService emailService;
+	
+	private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 	
 	@GetMapping(value = "/all")
 	public ResponseEntity<List<Pregled>> getAllPregled() {
@@ -42,6 +53,12 @@ public class PregledController {
 		pregled.setStanje(StanjePregleda.ZAKAZAN);
 		pregled.setKorisnik(trenutni);
 		pregledService.savePregled(pregled);
+		
+		try {
+			emailService.slanjeMejlaZaDostupnePreglede(trenutni);
+		}catch( Exception e ){
+			logger.info("Greska prilikom slanja emaila: " + e.getMessage());
+		}
 		return pregled;
 				
 	}

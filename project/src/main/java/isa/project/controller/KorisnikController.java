@@ -38,8 +38,6 @@ public class KorisnikController {
 	
 	@RequestMapping(value = "/registracija", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody ResponseEntity<Korisnik> registrujKorisnika(@RequestBody Korisnik novi) {
-		//Korisnik registrovan = new Korisnik();
-		
 		
 		String hashPass="";
 		hashPass=encoder.encode(novi.getPassword());

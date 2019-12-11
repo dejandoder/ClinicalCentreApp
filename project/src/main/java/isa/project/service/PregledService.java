@@ -2,7 +2,6 @@ package isa.project.service;
 
 import java.util.List;
 
-import isa.project.model.Korisnik;
 import isa.project.model.Pregled;
 import isa.project.repository.PregledRepository;
 

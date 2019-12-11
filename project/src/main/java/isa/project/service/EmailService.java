@@ -42,6 +42,22 @@ public class EmailService {
 
 		System.out.println("Email poslat!");
 	}
+	
+	@Async
+	public void slanjeMejlaZaDostupnePreglede(Korisnik user) throws MailException, InterruptedException {
+
+		Thread.sleep(10000);
+		System.out.println("Slanje emaila...");
+
+		SimpleMailMessage mail = new SimpleMailMessage();
+		mail.setTo(user.getEmail());
+		mail.setFrom(env.getProperty("spring.mail.username"));
+		mail.setSubject("Potvrda o uspjesno zakazanom pregledu");
+		mail.setText("Pozdrav, uspjesno ste zakazali pregled");
+		javaMailSender.send(mail);
+
+		System.out.println("Email poslat!");
+	}
 
 	public void sendNotificaitionSync(Korisnik user) throws MailException, InterruptedException {
 
