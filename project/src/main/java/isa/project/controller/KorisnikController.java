@@ -3,10 +3,13 @@ package isa.project.controller;
 import javax.servlet.http.HttpServletRequest;
 
 import isa.project.model.Korisnik;
+import isa.project.service.EmailService;
 import isa.project.service.KorisnikService;
 
 import javax.ws.rs.core.Context;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -22,8 +25,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "korisnici")
 public class KorisnikController {
 	
+	
+	private Logger logger = LoggerFactory.getLogger(KorisnikController.class);
+	
 	@Autowired
-	KorisnikService korisnikService;
+	private KorisnikService korisnikService;
+	
+	@Autowired
+	private EmailService emailService;
 	
 	private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 	
@@ -31,13 +40,12 @@ public class KorisnikController {
 	public @ResponseBody ResponseEntity<Korisnik> registrujKorisnika(@RequestBody Korisnik novi) {
 		//Korisnik registrovan = new Korisnik();
 		
+		
 		String hashPass="";
 		hashPass=encoder.encode(novi.getPassword());
 		novi.setPassword(hashPass);
 		korisnikService.saveUser(novi);
-		
-				
-        
+		 
 		return new ResponseEntity<>(novi, HttpStatus.OK);
 	}
 	
@@ -54,11 +62,23 @@ public class KorisnikController {
 	
 	@RequestMapping(value = "/izmjena", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody ResponseEntity<Korisnik> izmijeniKorisnika(@RequestBody Korisnik novi) {
-			
+		Korisnik user= korisnikService.getCurrentUser();
+		
+
+		try {
+			emailService.sendNotificaitionAsync(user);
+		}catch( Exception e ){
+			logger.info("Greska prilikom slanja emaila: " + e.getMessage());
+		}
+
+		      
+		
 		String hashPass="";
 		hashPass=encoder.encode(novi.getPassword());
 		novi.setPassword(hashPass);
 		korisnikService.saveUser(novi);
+		
+		
 		      
 		return new ResponseEntity<>(novi, HttpStatus.OK);
 	}
