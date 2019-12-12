@@ -54,6 +54,9 @@ public class Korisnik {
 	@Column(name = "role")
 	private Role role;
 	
+	@Column(name="verifikovan")
+	private boolean verifikovan;
+	
 	@OneToMany
 	@JoinTable(name = "korisnikPregledi")
 	private List<Pregled> pregledi = new ArrayList<>();
@@ -180,6 +183,28 @@ public class Korisnik {
 	public void setRole(Role role) {
 		this.role = role;
 	}
+
+
+	public boolean isVerifikovan() {
+		return verifikovan;
+	}
+
+
+	public void setVerifikovan(boolean verifikovan) {
+		this.verifikovan = verifikovan;
+	}
+
+
+	public List<Pregled> getPregledi() {
+		return pregledi;
+	}
+
+
+	public void setPregledi(List<Pregled> pregledi) {
+		this.pregledi = pregledi;
+	}
+	
+	
 	
 	
 	

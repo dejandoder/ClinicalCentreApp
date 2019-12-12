@@ -58,6 +58,22 @@ public class EmailService {
 
 		System.out.println("Email poslat!");
 	}
+	
+	@Async
+	public void slanjeMejlaZaVerifikaciju(Korisnik user) throws MailException, InterruptedException {
+
+		Thread.sleep(10000);
+		System.out.println("Slanje emaila...");
+		
+		SimpleMailMessage mail = new SimpleMailMessage();
+		mail.setTo(user.getEmail());
+		mail.setFrom(env.getProperty("spring.mail.username"));
+		mail.setSubject("Verifikacija naloga");
+		mail.setText("Da biste verifikovali nalog, otvorite link http://localhost:8888/korisnici/aktiviraj/"+user.getEmail()+"/");
+		javaMailSender.send(mail);
+
+		System.out.println("Email poslat!");
+	}
 
 	public void sendNotificaitionSync(Korisnik user) throws MailException, InterruptedException {
 

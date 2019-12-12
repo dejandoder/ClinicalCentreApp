@@ -3,6 +3,7 @@ package isa.project.controller;
 import javax.servlet.http.HttpServletRequest;
 
 import isa.project.model.Korisnik;
+import isa.project.model.Role;
 import isa.project.service.EmailService;
 import isa.project.service.KorisnikService;
 
@@ -15,6 +16,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -42,6 +44,14 @@ public class KorisnikController {
 		String hashPass="";
 		hashPass=encoder.encode(novi.getPassword());
 		novi.setPassword(hashPass);
+		novi.setVerifikovan(false);
+		
+		try {
+			emailService.slanjeMejlaZaVerifikaciju(novi);
+		}catch( Exception e ){
+			logger.info("Greska prilikom slanja emaila: " + e.getMessage());
+		}
+		
 		korisnikService.saveUser(novi);
 		 
 		return new ResponseEntity<>(novi, HttpStatus.OK);
@@ -60,25 +70,22 @@ public class KorisnikController {
 	
 	@RequestMapping(value = "/izmjena", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody ResponseEntity<Korisnik> izmijeniKorisnika(@RequestBody Korisnik novi) {
-		Korisnik user= korisnikService.getCurrentUser();
-		
-
-		try {
-			emailService.sendNotificaitionAsync(user);
-		}catch( Exception e ){
-			logger.info("Greska prilikom slanja emaila: " + e.getMessage());
-		}
-
-		      
 		
 		String hashPass="";
 		hashPass=encoder.encode(novi.getPassword());
 		novi.setPassword(hashPass);
 		korisnikService.saveUser(novi);
-		
-		
-		      
+
 		return new ResponseEntity<>(novi, HttpStatus.OK);
+	}
+	
+	@RequestMapping(value="/verifikuj/{email}",method = RequestMethod.GET)
+	void verifikuj(@PathVariable String email){
+		Korisnik korisnik = korisnikService.findByEmail(email);
+		korisnik.setVerifikovan(true);
+		korisnik.setRole(Role.REGISTROVAN);
+		korisnikService.saveUser(korisnik);
+		//return korisnikService.getCurrentUser();
 	}
 	
 
