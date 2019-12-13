@@ -20,8 +20,11 @@ import { PocetnaPacijentComponent } from './components/pacijent/pocetna-pacijent
 import { PregledComponent } from './components/pacijent/pregled/pregled.component';
 import { AuthInterceptor } from './http-interceptor/AuthInterceptor';
 import { AuthService } from './service/AuthService';
-import { DatePipe } from '@angular/common';
+import { DatePipe, CommonModule } from '@angular/common';
 import { ZakazaniPreglediComponent } from './components/pacijent/zakazani-pregledi/zakazani-pregledi.component';
+import { MatTableModule } from '@angular/material';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 
 @NgModule({
   declarations: [
@@ -40,9 +43,13 @@ import { ZakazaniPreglediComponent } from './components/pacijent/zakazani-pregle
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
+    MatTableModule,
+    CommonModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    NgbModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
     AgGridModule.withComponents([])
@@ -51,6 +58,7 @@ import { ZakazaniPreglediComponent } from './components/pacijent/zakazani-pregle
     DatePipe,
     AuthService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
+  exports: [AppComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

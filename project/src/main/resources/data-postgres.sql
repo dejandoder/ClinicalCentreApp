@@ -9,7 +9,7 @@ insert into student (index_number, first_name, last_name) values ('ra8-2014', 'M
 insert into student (index_number, first_name, last_name) values ('ra9-2014', 'Jovana', 'Jovanić');
 
 insert into korisnik (ime,prezime) values ('dejan','doder');
-insert into korisnik (grad,ime,password,email,prezime,broj_telefona,role,username, jedinstveni_broj, drzava, adresa) VALUES (NULL,'janko','$2a$10$PyUWKQye6ObdS417LOa08u.rmr.ms7lZ7y5JlQ52PfWE16.uraAHC','dejandoder96@gmail.com',NULL,0,'REGISTROVAN','janko',55,'srbija','njegoseva');
+insert into korisnik (grad,ime,password,email,prezime,broj_telefona,role,username, jedinstveni_broj, drzava, adresa, verifikovan) VALUES (NULL,'janko','$2a$10$PyUWKQye6ObdS417LOa08u.rmr.ms7lZ7y5JlQ52PfWE16.uraAHC','dejandoder96@gmail.com',NULL,0,'REGISTROVAN','janko',55,'srbija','njegoseva',true);
 
 insert into klinika (ime, adresa, opis) values ('Drzavna','Njegoseva','Drzavna klinika');
 insert into klinika (ime, adresa, opis) values ('Privatna','Tolstojeva','Privatna klinika');
