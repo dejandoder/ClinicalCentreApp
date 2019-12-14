@@ -4,11 +4,12 @@ import { Korisnik } from 'src/app/model/Korisnik';
 import { StudentService } from 'src/app/service/student.service';
 import { Student } from 'src/app/model/Student';
 import { Klinika } from 'src/app/model/Klinika';
-import { MatTableDataSource } from '@angular/material';
-import { MatSortModule, MatSort } from '@angular/material/sort';
+import { MatTableDataSource, MatPaginator } from '@angular/material';
+import { MatSortModule, MatSort, Sort } from '@angular/material/sort';
 import { KlinikaService } from 'src/app/service/klinika.service';
 import { Subscription } from 'rxjs';
 import { SortService } from 'src/app/service/sort.service';
+
 
 @Component({
   selector: 'app-klinika',
@@ -23,8 +24,12 @@ export class KlinikaComponent implements OnInit {
   student: Student = new Student();
   klinike: Klinika[] = [];
 
+  sortedData;
 
-  constructor(private service: StudentService, private serviceKlinika: KlinikaService, private sortService: SortService) { }
+ 
+  constructor(private service: StudentService, private serviceKlinika: KlinikaService, private sortService: SortService) { 
+    this.sortedData = this.klinike.slice();
+  }
 
   //displayedColumns: string[] = ['ime'];
   //dataSource = new MatTableDataSource(this.klinike);
@@ -33,8 +38,8 @@ export class KlinikaComponent implements OnInit {
 
     this.serviceKlinika.preuzmiSveKlinike().subscribe(
       data => {
-
         this.klinike = data;
+        this.sortedData=this.klinike;
       },
       error => {
         console.log(error);
@@ -44,4 +49,31 @@ export class KlinikaComponent implements OnInit {
 
   }
 
+  sortData(sort: Sort) {
+    const data = this.klinike.slice();
+    if (!sort.active || sort.direction == '') {
+      this.sortedData = data;
+      return;
+    }
+
+    this.sortedData = data.sort((a, b) => {
+      let isAsc = sort.direction == 'asc';
+      switch (sort.active) {
+        case 'id': return compare(a.id, b.id, isAsc);
+        case 'ime': return compare(a.ime, b.ime, isAsc);
+        case 'adresa': return compare(+a.adresa, +b.adresa, isAsc);
+        case 'opis': return compare(+a.opis, +b.opis, isAsc);
+        case 'grad': return compare(+a.grad, +b.grad, isAsc);
+        default: return 0;
+      }
+    });
+  }
+
+  
+
 }
+
+function compare(a, b, isAsc) {
+  return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
+}
+

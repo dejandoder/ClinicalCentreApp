@@ -22,7 +22,7 @@ import { AuthInterceptor } from './http-interceptor/AuthInterceptor';
 import { AuthService } from './service/AuthService';
 import { DatePipe, CommonModule } from '@angular/common';
 import { ZakazaniPreglediComponent } from './components/pacijent/zakazani-pregledi/zakazani-pregledi.component';
-import { MatTableModule } from '@angular/material';
+import { MatTableModule, MatSortModule } from '@angular/material';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
@@ -46,6 +46,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     BrowserAnimationsModule,
     MatTableModule,
     CommonModule,
+    MatSortModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,

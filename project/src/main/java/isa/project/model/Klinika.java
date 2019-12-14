@@ -27,6 +27,9 @@ public class Klinika {
 	@Column(name="opis")
 	private String opis;
 	
+	@Column(name="grad")
+	private String grad;
+	
 	@OneToMany
 	@JoinTable(name = "klinikaLjekari")
 	private List<Ljekar> ljekari = new ArrayList<>();
@@ -86,6 +89,15 @@ public class Klinika {
 	public void setPregledi(List<Pregled> pregledi) {
 		this.pregledi = pregledi;
 	}
+
+	public String getGrad() {
+		return grad;
+	}
+
+	public void setGrad(String grad) {
+		this.grad = grad;
+	}
+	
 	
 	
 	

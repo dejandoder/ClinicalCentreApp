@@ -8,4 +8,5 @@ export class Klinika{
     opis : string = "";
     ljekari : Ljekar[]=[];
     pregledi : Pregled[]=[];
+    grad: string="";
 }
