@@ -80,5 +80,13 @@ public class PregledController {
 		return new ResponseEntity<>(pregledi, HttpStatus.OK);
 		
 	}
+	
+	@GetMapping(value = "/istorija")
+	public ResponseEntity<List<Pregled>> getIstorija() {
+		
+		List<Pregled> pregledi = pregledService.getIstorijaPregleda();
+		return new ResponseEntity<>(pregledi, HttpStatus.OK);
+		
+	}
 
 }

@@ -1,4 +1,5 @@
 import { Ljekar } from './Ljekar';
+import { Klinika } from './Klinika';
 
 export class Pregled{
     id : number;
@@ -10,4 +11,7 @@ export class Pregled{
     termin : Date;
     ljekar : Ljekar = new Ljekar();
     medium : string="";
+    stanje : string="";
+    klinika : Klinika = new Klinika();
+    novo : number;
 }

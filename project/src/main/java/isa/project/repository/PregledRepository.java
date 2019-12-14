@@ -10,10 +10,13 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface PregledRepository extends JpaRepository<Pregled, Long> {
 	
-	@Query("select pregled from Pregled pregled where pregled.stanje = isa.project.model.StanjePregleda.SLOBODAN or pregled.stanje = isa.project.model.StanjePregleda.OTKAZAN ")
+	@Query("select pregled from Pregled pregled where pregled.stanje = isa.project.model.StanjePregleda.SLOBODAN")
 	List<Pregled> findAll();
 	
 	@Query("select pregled from Pregled pregled where pregled.stanje = isa.project.model.StanjePregleda.ZAKAZAN ")
 	List<Pregled> getZakazaniPregledi();
+	
+	@Query("select pregled from Pregled pregled where pregled.stanje = isa.project.model.StanjePregleda.ZAKAZAN or pregled.stanje = isa.project.model.StanjePregleda.OTKAZAN")
+	List<Pregled> getIstorijaPregleda();
 
 }

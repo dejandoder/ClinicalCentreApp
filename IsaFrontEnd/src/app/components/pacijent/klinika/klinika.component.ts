@@ -60,20 +60,22 @@ export class KlinikaComponent implements OnInit {
       let isAsc = sort.direction == 'asc';
       switch (sort.active) {
         case 'id': return compare(a.id, b.id, isAsc);
-        case 'ime': return compare(a.ime, b.ime, isAsc);
-        case 'adresa': return compare(+a.adresa, +b.adresa, isAsc);
-        case 'opis': return compare(+a.opis, +b.opis, isAsc);
-        case 'grad': return compare(+a.grad, +b.grad, isAsc);
+        case 'ime': return compareString(a.ime, b.ime, isAsc);
+        case 'adresa': return compareString(a.adresa, b.adresa, isAsc);
+        case 'opis': return compareString(a.opis, b.opis, isAsc);
+        case 'grad': return compareString(a.grad, b.grad, isAsc);
         default: return 0;
       }
     });
   }
 
-  
-
 }
 
-function compare(a, b, isAsc) {
+function compare(a: number, b: number, isAsc: boolean) {
+  return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
+}
+
+function compareString(a: string, b: string, isAsc: boolean) {
   return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
 }
 

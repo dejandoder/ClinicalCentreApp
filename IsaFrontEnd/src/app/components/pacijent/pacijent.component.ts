@@ -42,4 +42,10 @@ export class PacijentComponent implements OnInit {
     
   }
 
+  istorijaClick(){
+
+    this.router.navigate(["istorija"],{relativeTo: this.route});
+
+  }
+
 }

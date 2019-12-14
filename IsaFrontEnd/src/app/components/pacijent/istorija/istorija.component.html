@@ -1,1 +1,39 @@
-<p>istorija works!</p>
+<body class="inventory-body">
+    <div class="container">
+        <div class="jumbotron anyClass">
+            <div >
+                <h2>Istorija pregleda </h2>
+                <br>
+                <table class="table sortable-table" matSort (matSortChange)="sortData($event)">
+                    <thead>
+                        <tr>
+                           
+                            <th mat-sort-header="medium" >Datum i vrijeme pregleda</th>
+                            <th mat-sort-header="tip">Tip</th>
+                            <th mat-sort-header="trajanje">Trajanje</th>
+                            <th mat-sort-header="sala">Sala</th>
+                            <th mat-sort-header="ljekar">Ljekar</th>
+                            <th mat-sort-header="klinika">Klinika</th>
+                            <th mat-sort-header="cijena">Cijena</th>
+                            <th mat-sort-header="stanje">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody *ngFor="let a of sortedData; let i = index">
+                        <tr>
+                            
+                            <td style="text-align: left;">{{a.medium}}</td>
+                            <td style="text-align: center;">{{a.tip}}</td>
+                            <td style="text-align: center;">{{a.trajanje}} min</td>
+                            <td style="text-align: center;">{{a.sala}}</td>
+                            <td style="text-align: center;">{{a.ljekar.ime}}</td>
+                            <td style="text-align: center;">{{a.klinika.ime}}</td>
+                            <td style="text-align: center;">{{a.cijena}} €</td>
+                            <td style="text-align: center;">{{a.stanje}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</body>

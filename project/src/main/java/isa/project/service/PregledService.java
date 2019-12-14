@@ -25,5 +25,9 @@ public class PregledService {
 	public List<Pregled> getPregledZakazani() {
 		return pregledRepository.getZakazaniPregledi();
 	}
+	
+	public List<Pregled> getIstorijaPregleda() {
+		return pregledRepository.getIstorijaPregleda();
+	}
 
 }
