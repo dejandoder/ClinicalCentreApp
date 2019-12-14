@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AgGridModule } from '@ag-grid-community/angular';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -53,6 +54,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     NgbModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
+    ModalModule.forRoot(),
     AgGridModule.withComponents([])
   ],
   providers: [

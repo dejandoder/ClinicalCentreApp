@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { PregledService } from 'src/app/service/pregled.service';
 import { DatePipe } from '@angular/common';
 import { Pregled } from 'src/app/model/Pregled';
 import { Sort } from '@angular/material';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap';
+import { Klinika } from 'src/app/model/Klinika';
 
 @Component({
   selector: 'app-istorija',
@@ -14,8 +16,16 @@ export class IstorijaComponent implements OnInit {
   pregledi: Pregled[] = [];
   sortedData;
   novo : number;
+  modalRef: BsModalRef;
+  imeKlinike : string="";
+  adresaKlinike : string="";
+  gradKlinike : string="";
+  ocjenaKlinike : number;
+  imeLjekara : string="";
+  prezimeLjekara : string="";
+  ocjenaLjekara : number;
 
-  constructor(private service: PregledService, private datePipe: DatePipe) { 
+  constructor(private service: PregledService, private datePipe: DatePipe, private modalService: BsModalService) { 
     this.sortedData = this.pregledi.slice();
   }
 
@@ -62,6 +72,22 @@ export class IstorijaComponent implements OnInit {
         default: return 0;
       }
     });
+  }
+
+  ocijeniKliniku(template: TemplateRef<any>, pregled: Pregled) {
+    this.modalRef = this.modalService.show(template);
+    this.imeKlinike=pregled.klinika.ime;
+    this.adresaKlinike=pregled.klinika.adresa;
+    this.gradKlinike=pregled.klinika.grad;
+    this.ocjenaKlinike=pregled.klinika.ocjena;
+  }
+
+  ocijeniLjekara(template: TemplateRef<any>, pregled: Pregled) {
+    this.modalRef = this.modalService.show(template);
+    this.imeLjekara=pregled.ljekar.ime;
+    this.prezimeLjekara=pregled.ljekar.prezime;
+    this.ocjenaLjekara=pregled.ljekar.ocjena;
+  
   }
 
 }

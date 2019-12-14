@@ -9,4 +9,5 @@ export class Klinika{
     ljekari : Ljekar[]=[];
     pregledi : Pregled[]=[];
     grad: string="";
+    ocjena: number;
 }
