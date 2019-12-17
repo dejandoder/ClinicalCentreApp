@@ -42,6 +42,12 @@ export class PacijentComponent implements OnInit {
     
   }
 
+  zakazivanjeClick(){
+
+    this.router.navigate(["zakazivanje"],{relativeTo: this.route});
+    
+  }
+
   istorijaClick(){
 
     this.router.navigate(["istorija"],{relativeTo: this.route});

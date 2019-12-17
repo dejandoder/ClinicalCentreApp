@@ -16,7 +16,7 @@ export class PregledComponent implements OnInit {
   constructor(private service: PregledService, private datePipe: DatePipe,private toastr: ToastrService) { }
 
   ngOnInit() {
-    this.service.preuzmiSvePreglede().subscribe(
+    this.service.preuzmiDostupnePreglede().subscribe(
       data => {
         this.pregledi = data;
         for (let date of this.pregledi) {

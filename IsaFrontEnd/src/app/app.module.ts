@@ -25,6 +25,7 @@ import { DatePipe, CommonModule } from '@angular/common';
 import { ZakazaniPreglediComponent } from './components/pacijent/zakazani-pregledi/zakazani-pregledi.component';
 import { MatTableModule, MatSortModule } from '@angular/material';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ZakazivanjePregledaComponent } from './components/pacijent/zakazivanje-pregleda/zakazivanje-pregleda.component';
 
 
 @NgModule({
@@ -40,7 +41,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     IstorijaComponent,
     PocetnaPacijentComponent,
     PregledComponent,
-    ZakazaniPreglediComponent
+    ZakazaniPreglediComponent,
+    ZakazivanjePregledaComponent
   ],
   imports: [
     BrowserModule,

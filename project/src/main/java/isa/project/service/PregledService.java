@@ -29,5 +29,10 @@ public class PregledService {
 	public List<Pregled> getIstorijaPregleda() {
 		return pregledRepository.getIstorijaPregleda();
 	}
-
+	
+	public List<Pregled> getDostupniPregledi(){
+		return pregledRepository.getDostupniPregledi();
+	}
+	
+	
 }

@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-
 @RestController
 @RequestMapping(value = "pregledi")
 public class PregledController {
@@ -88,5 +87,14 @@ public class PregledController {
 		return new ResponseEntity<>(pregledi, HttpStatus.OK);
 		
 	}
+	
+	@GetMapping(value = "/sviDostupni")
+	public ResponseEntity<List<Pregled>> getDostupniPregled() {
+		
+		List<Pregled> pregledi = pregledService.getDostupniPregledi();
+		return new ResponseEntity<>(pregledi, HttpStatus.OK);
+		
+	}
+	
 
 }

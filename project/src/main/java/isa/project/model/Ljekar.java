@@ -3,6 +3,7 @@ package isa.project.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -12,6 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Ljekar {
@@ -29,6 +32,7 @@ public class Ljekar {
 	@Column(name="ocjena")
 	private String ocjena;
 	
+	//@OneToMany(mappedBy="ljekar", cascade = CascadeType.ALL)
 	@OneToMany
 	@JoinTable(name = "ljekarPregledi")
 	private List<Pregled> pregledi = new ArrayList<>();

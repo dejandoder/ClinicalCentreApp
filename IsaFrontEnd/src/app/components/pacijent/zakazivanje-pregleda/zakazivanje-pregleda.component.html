@@ -1,0 +1,84 @@
+<body class="inventory-body">
+    <div class="container">
+        <div class="jumbotron anyClass">
+            <div class="row" style="max-width: 90%; margin: 0 auto; ">
+                <h2 text-align="center">Zakazivanje pregleda</h2>
+                <br>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Datum pregleda:</label>
+                            <div class="input-group">
+                                <span class="input-group-addon"> <i class="glyphicon glyphicon-calendar"></i></span>
+                                <input class="form-control" type="date" required="required">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Tip pregleda:</label>
+                            <select class="form-control" [(ngModel)]="pregled">
+                                <option *ngFor="let pregled of sviTipoviPregleda" [ngValue]="pregled">
+                                    {{pregled.tip}}
+                                </option>
+                            </select>
+
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="datumPovratka">Ocjena klinike:</label>
+                            <select class="form-control" id="kategorijaIzmjena">
+                                <option value="5">5</option>
+                                <option value="4">4</option>
+                                <option value="3">3</option>
+                                <option value="2">2</option>
+                                <option value="1">1</option>
+                            </select>
+
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="endDestination">Lokacija klinike: </label>
+                            <div class="input-group">
+                                <span class="input-group-addon"> <i class="glyphicon glyphicon-map-marker"></i></span>
+                                <input class="form-control" type="text" id="lokacijaKlinike" required="required">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-11">
+                        <button type="button" (click)="pretraziKlinike()" style="margin-left:40%;margin-right:30%;"
+                            class="btn btn-primary  btn-lg ">Pretrazi
+                            klinke</button>
+                    </div>
+                </div>
+
+
+            </div>
+            <br>
+            <!-- <table class="table sortable-table" *ngIf="prikazTabeleKlinike == true">
+                <thead>
+                    <tr>
+                        <th style="text-align: center;">Ime</th>
+                        <th style="text-align: center;">Adresa</th>
+                        <th style="text-align: center;">Opis</th>
+                        <th style="text-align: center;">Grad</th>
+                        <th style="text-align: center;">Ljekari</th>
+                    </tr>
+                </thead>
+                <tbody *ngFor="let klinike of sortedData">
+                    <tr>
+                        <td style="text-align: center;">{{klinike.ime}}</td>
+                        <td style="text-align: center;">{{klinike.adresa}}</td>
+                        <td style="text-align: center;">{{klinike.opis}}</td>
+                        <td style="text-align: center;">{{klinike.grad}}</td>
+                    </tr>
+                </tbody>
+            </table> -->
+        </div>
+    </div>
+</body>

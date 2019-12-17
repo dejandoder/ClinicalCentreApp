@@ -3,13 +3,18 @@ package isa.project.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinTable;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Klinika {
@@ -30,10 +35,13 @@ public class Klinika {
 	@Column(name="grad")
 	private String grad;
 	
+	//@OneToMany(mappedBy="klinika", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@OneToMany
 	@JoinTable(name = "klinikaLjekari")
 	private List<Ljekar> ljekari = new ArrayList<>();
 	
+	
+	//@OneToMany(mappedBy="klinika", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	@OneToMany
 	@JoinTable(name = "klinikaPregledi")
 	private List<Pregled> pregledi = new ArrayList<>();

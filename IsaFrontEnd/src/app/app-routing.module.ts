@@ -11,6 +11,7 @@ import { ZdravstveniKartonComponent } from './components/pacijent/zdravstveni-ka
 import { PocetnaPacijentComponent } from './components/pacijent/pocetna-pacijent/pocetna-pacijent.component';
 import { PregledComponent } from './components/pacijent/pregled/pregled.component';
 import { ZakazaniPreglediComponent } from './components/pacijent/zakazani-pregledi/zakazani-pregledi.component';
+import { ZakazivanjePregledaComponent } from './components/pacijent/zakazivanje-pregleda/zakazivanje-pregleda.component';
 
 
 const routes: Routes = [
@@ -29,6 +30,7 @@ const routes: Routes = [
       {path: 'klinika', component: KlinikaComponent},
       {path: 'karton', component: ZdravstveniKartonComponent},
       {path: 'zakazaniPregledi', component: ZakazaniPreglediComponent},
+      {path: 'zakazivanje', component: ZakazivanjePregledaComponent},
       {path: '**', redirectTo: 'pocetnaPacijent'}
     ]
 }

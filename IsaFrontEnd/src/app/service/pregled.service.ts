@@ -28,5 +28,8 @@ export class PregledService {
   preuzmiIstoriju(){
     return this.http.get<any>('api/pregledi/istorija');
   }
+  preuzmiDostupnePreglede(){
+    return this.http.get<any>('api/pregledi/sviDostupni');
+  }
 
 }
