@@ -110,7 +110,8 @@
                             <label>Ime </label>
                             <div class="input-group">
                                 <span class="input-group-addon"> <i class="glyphicon glyphicon-text-size"></i></span>
-                                <input class="form-control" type="text" id="imeLjekara">
+                                <input class="form-control" type="text" id="imeLjekara"
+                                    [(ngModel)]=" imeLjekaraPretraga" [ngModelOptions]="{standalone:true}">
                             </div>
                         </div>
                     </div>
@@ -119,20 +120,18 @@
                             <label>Prezime</label>
                             <div class="input-group">
                                 <span class="input-group-addon"> <i class="glyphicon glyphicon-text-size"></i></span>
-                                <input class="form-control" type="text" id="prezimeLjekara">
+                                <input class="form-control" type="text" id="prezimeLjekara"
+                                    [(ngModel)]="prezimeLjekaraPretraga" [ngModelOptions]="{standalone:true}">
                             </div>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="datumPovratka">Ocjena ljekara</label>
-                            <select class="form-control" id="kategorijaIzmjena">
-                                <option value="5">5</option>
-                                <option value="4">4</option>
-                                <option value="3">3</option>
-                                <option value="2">2</option>
-                                <option value="1">1</option>
-                            </select>
+                            <label>Ocjena</label>
+                            <div class="input-group">
+                                <input class="form-control" type="number" id="ocjenaLjekara" [(ngModel)]="ocjenaLjekara"
+                                    [ngModelOptions]="{standalone:true}">
+                            </div>
                         </div>
                     </div>
                 </div>

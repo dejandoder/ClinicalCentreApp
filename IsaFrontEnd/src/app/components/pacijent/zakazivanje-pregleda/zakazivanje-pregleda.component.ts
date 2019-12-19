@@ -5,6 +5,7 @@ import { Pregled } from 'src/app/model/Pregled';
 import { Klinika } from 'src/app/model/Klinika';
 import { Ljekar } from 'src/app/model/Ljekar';
 import { TipPregleda } from 'src/app/model/TipPregleda';
+import { LjekarService } from 'src/app/service/ljekar.service';
 
 @Component({
   selector: 'app-zakazivanje-pregleda',
@@ -24,8 +25,12 @@ export class ZakazivanjePregledaComponent implements OnInit {
   pregled: TipPregleda = new TipPregleda();
   tipLjekar: TipPregleda = new TipPregleda();
   cijena: number;
+  imeLjekaraPretraga: string="";
+  prezimeLjekaraPretraga: string="";
+  ocjenaLjekara: number;
 
-  constructor(private serviceKlinika: KlinikaService, private servicePregled: PregledService) { }
+
+  constructor(private serviceKlinika: KlinikaService, private servicePregled: PregledService, private serviceLjekar: LjekarService) { }
 
   ngOnInit() {
     this.servicePregled.preuzmiTipovePregleda().subscribe(
@@ -62,7 +67,16 @@ export class ZakazivanjePregledaComponent implements OnInit {
   prikaziLjekare(klinika: Klinika) {
     this.prikazTabeleLjekara = true;
     this.ljekari = klinika.ljekari;
-    console.log(this.ljekari);
+  }
+
+  pretraziLjekare(){
+    
+    this.serviceLjekar.pretragaLjekara(this.imeLjekaraPretraga, this.prezimeLjekaraPretraga, this.ocjenaLjekara, this.ljekari).subscribe(
+      data => {
+        this.ljekari=data;
+      }
+    )
+
   }
 
 

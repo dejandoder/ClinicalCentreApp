@@ -16,15 +16,15 @@ insert into klinika (ime, adresa, opis, grad, ocjena) values ('Privatna','Tolsto
 insert into klinika (ime, adresa, opis, grad, ocjena) values ('Vojna','Drenovik','Vojna klinika', 'Herceg Novi',5);
 insert into klinika (ime, adresa, opis, grad, ocjena) values ('Nasa','Kotorska','Nasa', 'Kotor',4);
 
-insert into ljekar (ime, prezime, ocjena, klinika_id) values ('Dejan','Doder',5,1);
-insert into ljekar (ime, prezime, ocjena, klinika_id) values ('Todor','Doder',4,1);
-insert into ljekar (ime, prezime, ocjena, klinika_id) values ('Dragan','Doder',3,1);
-insert into ljekar (ime, prezime, ocjena, klinika_id) values ('Ranka','Doder',2,2);
-insert into ljekar (ime, prezime, ocjena, klinika_id) values ('Ranko','Doder',1,2);
-insert into ljekar (ime, prezime, ocjena, klinika_id) values ('Lazar','Doder',2,2);
-insert into ljekar (ime, prezime, ocjena, klinika_id) values ('Slavko','Doder',3,3);
-insert into ljekar (ime, prezime, ocjena, klinika_id) values ('Nikola','Doder',4,3);
-insert into ljekar (ime, prezime, ocjena, klinika_id) values ('Miljan','Doder',5,3);
+insert into ljekar (ime, prezime, ocjena, klinika_id, godisnji_od, godisnji_do) values ('Dejan', 'Doder', 5, 1, '2019-10-28 00:00:00', '2019-11-28 00:00:00');
+insert into ljekar (ime, prezime, ocjena, klinika_id, godisnji_od, godisnji_do) values ('Todor', 'Doder', 4, 1, '2019-10-28 00:00:00', '2019-10-28 00:00:00');
+insert into ljekar (ime, prezime, ocjena, klinika_id, godisnji_od, godisnji_do) values ('Dragan', 'Doder', 3, 1, '2019-10-28 00:00:00', '2019-10-28 00:00:00');
+insert into ljekar (ime, prezime, ocjena, klinika_id, godisnji_od, godisnji_do) values ('Ranka', 'Doder',2 , 2, '2019-10-28 00:00:00', '2019-10-28 00:00:00');
+insert into ljekar (ime, prezime, ocjena, klinika_id, godisnji_od, godisnji_do) values ('Ranko', 'Doder',1 , 2, '2019-10-28 00:00:00', '2019-10-28 00:00:00');
+insert into ljekar (ime, prezime, ocjena, klinika_id, godisnji_od, godisnji_do) values ('Lazar', 'Doder',2, 2, '2019-10-28 00:00:00', '2019-10-28 00:00:00');
+insert into ljekar (ime, prezime, ocjena, klinika_id, godisnji_od, godisnji_do) values ('Slavko', 'Doder',3, 3, '2019-10-28 00:00:00', '2019-10-28 00:00:00');
+insert into ljekar (ime, prezime, ocjena, klinika_id, godisnji_od, godisnji_do) values ('Nikola', 'Doder',4, 3, '2019-10-28 00:00:00', '2019-10-28 00:00:00');
+insert into ljekar (ime, prezime, ocjena, klinika_id, godisnji_od, godisnji_do) values ('Miljan', 'Doder',5, 3, '2019-10-28 00:00:00', '2019-10-28 00:00:00');
 
 insert into tip_pregleda(ime, cijena) values('oko',100);
 insert into tip_pregleda(ime, cijena) values('glava',200);

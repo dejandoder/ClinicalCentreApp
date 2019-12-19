@@ -1,6 +1,7 @@
 package isa.project.model;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -8,7 +9,6 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -17,11 +17,10 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 public class Ljekar {
@@ -37,7 +36,13 @@ public class Ljekar {
 	private String prezime;
 	
 	@Column(name="ocjena")
-	private String ocjena;
+	private double ocjena;
+	
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date godisnji_od;
+	
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date godisnji_do;
 	
 	@OneToMany(mappedBy="ljekar", cascade = CascadeType.ALL)
 	@JsonIgnore
@@ -79,14 +84,6 @@ public class Ljekar {
 		this.prezime = prezime;
 	}
 
-	public String getOcjena() {
-		return ocjena;
-	}
-
-	public void setOcjena(String ocjena) {
-		this.ocjena = ocjena;
-	}
-
 	public List<Pregled> getPregledi() {
 		return pregledi;
 	}
@@ -110,10 +107,31 @@ public class Ljekar {
 	public void setTipovi(Set<TipPregleda> tipovi) {
 		this.tipovi = tipovi;
 	}
-	
-	
-	
+
+	public Date getGodisnji_od() {
+		return godisnji_od;
+	}
+
+	public void setGodisnji_od(Date godisnji_od) {
+		this.godisnji_od = godisnji_od;
+	}
+
+	public Date getGodisnji_do() {
+		return godisnji_do;
+	}
+
+	public void setGodisnji_do(Date godisnji_do) {
+		this.godisnji_do = godisnji_do;
+	}
+
+	public double getOcjena() {
+		return ocjena;
+	}
+
+	public void setOcjena(double ocjena) {
+		this.ocjena = ocjena;
+	}
 	
 
-
+	
 }
