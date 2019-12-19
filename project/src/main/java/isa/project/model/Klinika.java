@@ -1,7 +1,9 @@
 package isa.project.model;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -12,9 +14,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
+import org.hibernate.internal.build.AllowSysOut;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 public class Klinika {
@@ -35,16 +42,26 @@ public class Klinika {
 	@Column(name="grad")
 	private String grad;
 	
-	//@OneToMany(mappedBy="klinika", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@OneToMany
-	@JoinTable(name = "klinikaLjekari")
+	@Column(name="ocjena")
+	private double ocjena;
+	
+	@OneToMany(mappedBy="klinika", cascade = CascadeType.ALL)
+	@JsonIgnoreProperties(value={"klinika"}, allowSetters=true)
+	//@OneToMany(cascade=CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Ljekar> ljekari = new ArrayList<>();
 	
 	
-	//@OneToMany(mappedBy="klinika", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@OneToMany
-	@JoinTable(name = "klinikaPregledi")
+	@OneToMany(mappedBy="klinika", cascade = CascadeType.ALL)
+	@JsonIgnore
 	private List<Pregled> pregledi = new ArrayList<>();
+	
+	/*@OneToMany(mappedBy="klinika", cascade = CascadeType.ALL)
+	@JsonIgnore
+	private List<TipPregleda> tipoviPregleda = new ArrayList<>();*/
+	
+	@ManyToMany
+	@JoinTable(name = "klinika_tip_pregleda", joinColumns = @JoinColumn(name = "klinika_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "tip_pregleda_id", referencedColumnName = "id"))
+	private Set<TipPregleda> tipovi = new HashSet<TipPregleda>();
 	
 	public Klinika() {
 		// TODO Auto-generated constructor stub
@@ -105,6 +122,58 @@ public class Klinika {
 	public void setGrad(String grad) {
 		this.grad = grad;
 	}
+	
+	public double getOcjena() {
+		return ocjena;
+	}
+
+	public void setOcjena(double ocjena) {
+		this.ocjena = ocjena;
+	}
+	
+	
+
+	/*public List<TipPregleda> getTipoviPregleda() {
+		return tipoviPregleda;
+	}
+
+	public void setTipoviPregleda(List<TipPregleda> tipoviPregleda) {
+		this.tipoviPregleda = tipoviPregleda;
+	}*/
+
+	public Set<TipPregleda> getTipovi() {
+		return tipovi;
+	}
+
+	public void setTipovi(Set<TipPregleda> tipovi) {
+		this.tipovi = tipovi;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Klinika other = (Klinika) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		return true;
+	}
+	
 	
 	
 	

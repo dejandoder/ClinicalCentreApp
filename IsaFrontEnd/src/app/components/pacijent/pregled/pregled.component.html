@@ -21,11 +21,11 @@
                         <tr>
                             <th style="text-align: center;" scope="row">{{i+1}}</th>
                             <td style="text-align: center;">{{a.medium}}</td>
-                            <td style="text-align: center;">{{a.tip}}</td>
+                            <td style="text-align: center;">{{a.tipPregleda.ime}}</td>
                             <td style="text-align: center;">{{a.trajanje}} min</td>
                             <td style="text-align: center;">{{a.sala}}</td>
                             <td style="text-align: center;">{{a.ljekar.ime}}</td>
-                            <td style="text-align: center;">{{a.klinika.ime}}</td>
+                            <td style="text-align: center;">{{a.ljekar.klinika.ime}}</td>
                             <td style="text-align: center;">{{a.cijena}} €</td>
                             <td style="text-align: center;"><button class="btn btn-link"
                                     (click)="zakaziDostupniPregled(a)">Zakaži pregled</button></td>

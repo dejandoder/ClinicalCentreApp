@@ -19,7 +19,7 @@
                             <label>Tip pregleda:</label>
                             <select class="form-control" [(ngModel)]="pregled">
                                 <option *ngFor="let pregled of sviTipoviPregleda" [ngValue]="pregled">
-                                    {{pregled.tip}}
+                                    {{pregled.ime}}
                                 </option>
                             </select>
 
@@ -48,37 +48,103 @@
                         </div>
                     </div>
                 </div>
-
+                <br>
                 <div class="row">
                     <div class="col-md-11">
-                        <button type="button" (click)="pretraziKlinike()" style="margin-left:40%;margin-right:30%;"
-                            class="btn btn-primary  btn-lg ">Pretrazi
-                            klinke</button>
+                        <button type="button " (click)="pretraziKlinike()" style="margin-left:40%;margin-right:30%;"
+                            class="btn btn-primary">Pretraži
+                            klinike</button>
                     </div>
                 </div>
-
-
             </div>
             <br>
-            <!-- <table class="table sortable-table" *ngIf="prikazTabeleKlinike == true">
+            <br>
+            <table class="table sortable-table" *ngIf="prikazTabeleKlinike == true">
                 <thead>
                     <tr>
                         <th style="text-align: center;">Ime</th>
-                        <th style="text-align: center;">Adresa</th>
                         <th style="text-align: center;">Opis</th>
-                        <th style="text-align: center;">Grad</th>
-                        <th style="text-align: center;">Ljekari</th>
+                        <th style="text-align: center;">Lokacija</th>
+                        <th style="text-align: center;">Ocjena</th>
+                        <th style="text-align: center;">Cijena</th>
                     </tr>
                 </thead>
-                <tbody *ngFor="let klinike of sortedData">
+                <tbody *ngFor="let klinika of klinike">
                     <tr>
-                        <td style="text-align: center;">{{klinike.ime}}</td>
-                        <td style="text-align: center;">{{klinike.adresa}}</td>
-                        <td style="text-align: center;">{{klinike.opis}}</td>
-                        <td style="text-align: center;">{{klinike.grad}}</td>
+                        <td style="text-align: center;">{{klinika.ime}}</td>
+                        <td style="text-align: center;">{{klinika.opis}}</td>
+                        <td style="text-align: center;">{{klinika.grad}}</td>
+                        <td style="text-align: center;">{{klinika.ocjena}}</td>
+                        <td style="text-align: center;">{{cijena}}</td>
+                        <td style="text-align: center;"><button class="btn btn-link"
+                                (click)="prikaziLjekare(klinika)">Prikaži ljekare</button></td>
                     </tr>
                 </tbody>
-            </table> -->
+            </table>
+            <div class="row" *ngIf="prikazTabeleLjekara == true">
+                <h3>Spisak ljekara</h3>
+                <br>
+                <table class="table sortable-table">
+                    <thead>
+                        <tr>
+                            <th style="text-align: center;">Ime </th>
+                            <th style="text-align: center;">Prezime</th>
+                            <th style="text-align: center;">Ocjena</th>
+                        </tr>
+                    </thead>
+                    <tbody *ngFor="let ljekar of ljekari">
+                        <tr>
+                            <td style="text-align: center;">{{ljekar.ime}}</td>
+                            <td style="text-align: center;">{{ljekar.prezime}}</td>
+                            <td style="text-align: center;">{{ljekar.ocjena}}</td>
+                            <td style="text-align: center;"><button class="btn btn-link"
+                                    (click)="zakaziPregled(ljekar)">Zakaži pregled</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="row" style="max-width: 90%; margin: 0 auto;" *ngIf="prikazTabeleLjekara == true">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Ime </label>
+                            <div class="input-group">
+                                <span class="input-group-addon"> <i class="glyphicon glyphicon-text-size"></i></span>
+                                <input class="form-control" type="text" id="imeLjekara">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Prezime</label>
+                            <div class="input-group">
+                                <span class="input-group-addon"> <i class="glyphicon glyphicon-text-size"></i></span>
+                                <input class="form-control" type="text" id="prezimeLjekara">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="datumPovratka">Ocjena ljekara</label>
+                            <select class="form-control" id="kategorijaIzmjena">
+                                <option value="5">5</option>
+                                <option value="4">4</option>
+                                <option value="3">3</option>
+                                <option value="2">2</option>
+                                <option value="1">1</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-md-11">
+                        <button type="button " (click)="pretraziLjekare()" style="margin-left:40%;margin-right:30%;"
+                            class="btn btn-primary">Pretraži
+                            Ljekare</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </body>

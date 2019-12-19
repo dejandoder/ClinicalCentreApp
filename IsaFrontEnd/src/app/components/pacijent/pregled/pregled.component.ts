@@ -13,7 +13,7 @@ export class PregledComponent implements OnInit {
 
   pregledi: Pregled[] = [];
 
-  constructor(private service: PregledService, private datePipe: DatePipe,private toastr: ToastrService) { }
+  constructor(private service: PregledService, private datePipe: DatePipe, private toastr: ToastrService) { }
 
   ngOnInit() {
     this.service.preuzmiDostupnePreglede().subscribe(
@@ -35,11 +35,12 @@ export class PregledComponent implements OnInit {
   zakaziDostupniPregled(pregled: Pregled) {
     this.service.zakaziDostupniPregled(pregled).subscribe(
       data => {
-        this.toastr.warning("Pregled je moguce otkazati najkasnije 24h prije pocetka!", "Upozorenje!",  {
-          timeOut: 6000});
+        this.toastr.warning("Pregled je moguce otkazati najkasnije 24h prije pocetka!", "Upozorenje!", {
+          timeOut: 6000
+        });
         this.toastr.success("Uspjesno ste zakazali pregled");
-        
-        this.service.preuzmiSvePreglede().subscribe(
+
+        this.service.preuzmiDostupnePreglede().subscribe(
           data => {
             this.pregledi = data;
             for (let date of this.pregledi) {

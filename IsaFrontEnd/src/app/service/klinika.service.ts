@@ -13,7 +13,7 @@ export class KlinikaService {
     return this.http.get<any>('api/klinike/all');
   }
   pretragaKlinika(tipPregleda: string){
-    return this.http.post<Klinika[]>("api/klinike/pretragaKlinika", { tipPregleda: tipPregleda})
+    return this.http.post<any>("api/klinike/pretragaKlinika", { tipPregleda: tipPregleda})
 
   }
 }

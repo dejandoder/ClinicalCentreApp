@@ -13,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -54,15 +55,21 @@ public class Pregled {
 	@Column(name="stanje")
 	private StanjePregleda stanje;
 	
-
-	@ManyToOne(fetch = FetchType.EAGER)
+	
+	@ManyToOne
+	@JoinColumn(name = "ljekar_id")
 	private Ljekar ljekar;
 	
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne
+	@JoinColumn(name="klinika_id")
 	private Klinika klinika;
 	
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne
+	@JoinColumn(name = "korisnik_id")
 	private Korisnik korisnik;
+	
+	@OneToOne
+	private TipPregleda tipPregleda;
 	
 	public Pregled() {
 		// TODO Auto-generated constructor stub
@@ -156,7 +163,15 @@ public class Pregled {
 	public void setKorisnik(Korisnik korisnik) {
 		this.korisnik = korisnik;
 	}
-	
 
+	public TipPregleda getTipPregleda() {
+		return tipPregleda;
+	}
+
+	public void setTipPregleda(TipPregleda tipPregleda) {
+		this.tipPregleda = tipPregleda;
+	}
+	
+	
 
 }

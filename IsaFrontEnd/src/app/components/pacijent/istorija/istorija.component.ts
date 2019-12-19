@@ -62,7 +62,7 @@ export class IstorijaComponent implements OnInit {
         case 'id': return compare(a.id, b.id, isAsc);
         case 'cijena': return compare(a.cijena, b.cijena, isAsc);
         case 'popust': return compare(+a.popust, +b.popust, isAsc);
-        case 'tip': return compareString(a.tip, b.tip, isAsc);
+        case 'tip': return compareString(a.tipPregleda.ime, b.tipPregleda.ime, isAsc);
         case 'sala': return compare(+a.sala, +b.sala, isAsc);
         case 'trajanje': return compare(+a.trajanje, +b.trajanje, isAsc);
         case 'stanje': return compareString(a.stanje, b.stanje, isAsc);

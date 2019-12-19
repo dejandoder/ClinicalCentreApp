@@ -34,5 +34,9 @@ public class PregledService {
 		return pregledRepository.getDostupniPregledi();
 	}
 	
+	public List<Pregled> getPreglediPoTipu(String tip){
+		return pregledRepository.getPregledPoTipu(tip);
+	}
+	
 	
 }

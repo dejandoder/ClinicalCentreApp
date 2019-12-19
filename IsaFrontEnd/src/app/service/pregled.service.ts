@@ -9,27 +9,32 @@ export class PregledService {
 
   constructor(private http: HttpClient) { }
 
-  preuzmiSvePreglede(){
+  preuzmiSvePreglede() {
     return this.http.get<any>('api/pregledi/all');
   }
 
-  zakaziDostupniPregled(pregled : Pregled){
+  zakaziDostupniPregled(pregled: Pregled) {
     return this.http.post<any>("api/pregledi/zakaziDostupni", pregled);
   }
 
-  otkaziPregled(pregled : Pregled){
+  otkaziPregled(pregled: Pregled) {
     return this.http.post<any>("api/pregledi/otkazi", pregled);
   }
 
-  preuzmiZakazanePreglede(){
+  preuzmiZakazanePreglede() {
     return this.http.get<any>('api/pregledi/zakazani');
   }
 
-  preuzmiIstoriju(){
+  preuzmiIstoriju() {
     return this.http.get<any>('api/pregledi/istorija');
   }
-  preuzmiDostupnePreglede(){
+
+  preuzmiDostupnePreglede() {
     return this.http.get<any>('api/pregledi/sviDostupni');
+  }
+
+  preuzmiTipovePregleda(){
+    return this.http.get<any>('api/tipovi/all');
   }
 
 }

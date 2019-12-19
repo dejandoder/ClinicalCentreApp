@@ -3,15 +3,21 @@ package isa.project.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 public class Korisnik {
@@ -57,8 +63,9 @@ public class Korisnik {
 	@Column(name="verifikovan")
 	private boolean verifikovan;
 	
-	@OneToMany
-	@JoinTable(name = "korisnikPregledi")
+	@OneToMany(mappedBy="korisnik", cascade = CascadeType.ALL)
+	@JsonIgnore
+	//@JoinTable(name = "korisnikPregledi")
 	private List<Pregled> pregledi = new ArrayList<>();
     
 	public Korisnik() {

@@ -22,18 +22,19 @@
                         <tr>
 
                             <td style="text-align: left;">{{a.medium}}</td>
-                            <td style="text-align: center;">{{a.tip}}</td>
+                            <td style="text-align: center;">{{a.tipPregleda.ime}}</td>
                             <td style="text-align: center;">{{a.trajanje}} min</td>
                             <td style="text-align: center;">{{a.sala}}</td>
                             <td style="text-align: center;">{{a.ljekar.ime}}</td>
-                            <td style="text-align: center;">{{a.klinika.ime}}</td>
+                            <td style="text-align: center;">{{a.ljekar.klinika.ime}}</td>
                             <td style="text-align: center;">{{a.cijena}} €</td>
                             <td style="text-align: center;">{{a.stanje}}</td>
                             <td style="text-align: center;"><button class="btn btn-link"
                                     (click)="ocijeniKliniku(ocjKlinika, a)" *ngIf="a.stanje == 'ZAKAZAN'">Ocijeni
                                     kliniku</button></td>
-                            <td style="text-align: center;"><button class="btn btn-link" (click)="ocijeniLjekara(ocjLjekar, a)"
-                                    *ngIf="a.stanje == 'ZAKAZAN'">Ocijeni ljekara</button></td>
+                            <td style="text-align: center;"><button class="btn btn-link"
+                                    (click)="ocijeniLjekara(ocjLjekar, a)" *ngIf="a.stanje == 'ZAKAZAN'">Ocijeni
+                                    ljekara</button></td>
                         </tr>
                     </tbody>
                 </table>

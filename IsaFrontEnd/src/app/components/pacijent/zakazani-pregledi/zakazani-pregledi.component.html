@@ -1,8 +1,8 @@
 <body class="inventory-body">
     <div class="container">
         <div class="jumbotron anyClass">
-            <div >
-                <h2>Lista zakazanih pregleda </h2>
+            <div>
+                <h2>Lista zakazanih pregleda</h2>
                 <br>
                 <table class="table">
                     <thead>
@@ -21,11 +21,11 @@
                         <tr>
                             <th style="text-align: center;" scope="row">{{i+1}}</th>
                             <td style="text-align: center;">{{a.medium}}</td>
-                            <td style="text-align: center;">{{a.tip}}</td>
+                            <td style="text-align: center;">{{a.tipPregleda.ime}}</td>
                             <td style="text-align: center;">{{a.trajanje}} min</td>
                             <td style="text-align: center;">{{a.sala}}</td>
                             <td style="text-align: center;">{{a.ljekar.ime}}</td>
-                            <td style="text-align: center;">{{a.klinika.ime}}</td>
+                            <td style="text-align: center;">{{a.ljekar.klinika.ime}}</td>
                             <td style="text-align: center;">{{a.cijena}} €</td>
                             <td style="text-align: center;"><button class="btn btn-link"
                                     (click)="otkaziPregled(a)">Otkaži pregled</button></td>

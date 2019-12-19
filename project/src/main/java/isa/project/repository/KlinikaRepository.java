@@ -13,8 +13,10 @@ public interface KlinikaRepository extends JpaRepository<Klinika, Long> {
 	List<Klinika> findAll();
 	
 	//@Query("select klinika from Klinika klinika where klinika.id in (select id from Pregled p where p.tip = ?1)")
-	@Query("select k from Klinika as k join k.pregledi as p where p.tip = ?1")
-	List<Klinika> pronadjiPoTipuPregleda(String parametar);
+	//@Query("select k from Klinika as k join k.pregledi as p where p.tip = ?1")
+	//List<Klinika> pronadjiPoTipuPregleda(String parametar);
+	
+	//List<Klinika> findById();
     
 	/*
 	 * from Book b where b.id in (select bookId from Author a

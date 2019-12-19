@@ -1,5 +1,6 @@
 package isa.project.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import isa.project.model.Korisnik;
@@ -39,15 +40,23 @@ public class PregledController {
 	private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 	
 	@GetMapping(value = "/all")
-	public ResponseEntity<List<Pregled>> getAllPregled() {
+	public ResponseEntity<List<String>> getAllPregled() {
 		
 		List<Pregled> pregledi = pregledService.findAll();
-		return new ResponseEntity<>(pregledi, HttpStatus.OK);
+		List <String> tipovi = new ArrayList<>();
+		
+		for(Pregled p : pregledi){
+			if(!tipovi.contains(p.getTip()))
+				tipovi.add(p.getTip());
+		}
+		
+		
+		return new ResponseEntity<>(tipovi, HttpStatus.OK);
 		
 	}
 	
 	@RequestMapping(value="/zakaziDostupni", method=RequestMethod.POST)
-	public Pregled zakaziDostupniPregled(@RequestBody Pregled pregled){
+	public void zakaziDostupniPregled(@RequestBody Pregled pregled){
 		Korisnik trenutni = korisnikService.getCurrentUser();
 		pregled.setStanje(StanjePregleda.ZAKAZAN);
 		pregled.setKorisnik(trenutni);
@@ -58,7 +67,7 @@ public class PregledController {
 		}catch( Exception e ){
 			logger.info("Greska prilikom slanja emaila: " + e.getMessage());
 		}
-		return pregled;
+		//return new ResponseEntity<>(pregled, HttpStatus.OK);
 				
 	}
 	

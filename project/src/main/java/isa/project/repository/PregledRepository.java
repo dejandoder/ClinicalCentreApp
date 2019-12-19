@@ -20,5 +20,8 @@ public interface PregledRepository extends JpaRepository<Pregled, Long> {
 	
 	@Query("select pregled from Pregled pregled where pregled.stanje = isa.project.model.StanjePregleda.SLOBODAN")
 	List<Pregled> getDostupniPregledi();
+	
+	@Query("select pregled from Pregled pregled where pregled.tip = ?1")
+	List<Pregled> getPregledPoTipu(String tip);
 
 }

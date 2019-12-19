@@ -1,11 +1,12 @@
 import { Ljekar } from './Ljekar';
 import { Klinika } from './Klinika';
+import { TipPregleda } from './TipPregleda';
 
 export class Pregled{
     id : number;
     cijena : number;
     popust : number;
-    tip : string= "";
+    tipPregleda : TipPregleda=new TipPregleda();
     sala : number;
     trajanje : number;
     termin : Date;
