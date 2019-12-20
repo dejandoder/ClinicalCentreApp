@@ -2,15 +2,15 @@
     <div class="container">
         <div class="jumbotron anyClass">
             <div class="row" style="max-width: 90%; margin: 0 auto; ">
-                <h2 text-align="center">Zakazivanje pregleda</h2>
-                <br>
+                <p text-align="center">Zakazivanje pregleda</p>
+                
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
                             <label>Datum pregleda:</label>
                             <div class="input-group">
                                 <span class="input-group-addon"> <i class="glyphicon glyphicon-calendar"></i></span>
-                                <input class="form-control" type="date" required="required">
+                                <input class="form-control" type="date" required="required" [(ngModel)]="datumPregleda">
                             </div>
                         </div>
                     </div>

@@ -33,6 +33,7 @@ export class ZakazivanjePregledaComponent implements OnInit {
   zakazaniPregled: Pregled=new Pregled();
   status: string="ZAKAZAN";
   klinikaZaPregled: Klinika = new Klinika();
+  datumPregleda: Date;
 
 
   constructor(private serviceKlinika: KlinikaService, private servicePregled: PregledService, private serviceLjekar: LjekarService, private toastr: ToastrService) { }
@@ -93,6 +94,7 @@ export class ZakazivanjePregledaComponent implements OnInit {
     this.zakazaniPregled.stanje=this.status;
     this.zakazaniPregled.klinika=this.klinikaZaPregled;
     this.zakazaniPregled.ljekar=ljekar;
+    this.zakazaniPregled.termin=this.datumPregleda;
 
 
     this.servicePregled.zakaziDostupniPregled(this.zakazaniPregled).subscribe(

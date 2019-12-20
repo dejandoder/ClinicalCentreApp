@@ -19,7 +19,7 @@ html, body, app-root {
     align-items: center;
     color: rgb(0, 47, 255);
     font: outline;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-family: 'Montserrat', sans-serif;
 }
 .nav-link{
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
@@ -35,3 +35,8 @@ html, body, app-root {
   .thead, .tbody{
       margin-left: 5cm;
   }
+  p{
+    font-family: 'Montserrat', sans-serif;
+    font-size: 30px;
+    font-weight: bold;
+}

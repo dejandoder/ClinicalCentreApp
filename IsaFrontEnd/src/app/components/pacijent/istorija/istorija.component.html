@@ -2,12 +2,10 @@
     <div class="container">
         <div class="jumbotron anyClass">
             <div>
-                <h2>Istorija pregleda </h2>
-
+                <p>Istorija pregleda </p>
                 <table class="table sortable-table" matSort (matSortChange)="sortData($event)">
                     <thead>
                         <tr>
-
                             <th mat-sort-header="medium">Datum i vrijeme pregleda</th>
                             <th mat-sort-header="tip">Tip</th>
                             <th mat-sort-header="trajanje">Trajanje</th>
@@ -51,51 +49,31 @@
     <div class="modal-body d-flex ">
         <div>
             <div class="jumbotron2">
-
-                <div>
-                    <form method="post">
-                        <div class="form-group row">
-                            <div class="col-4">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
                                 <label>Ime klinike</label>
-                            </div>
-                            <div class="col-6">
                                 <input class="form-control" [(ngModel)]="imeKlinike"
                                     [ngModelOptions]="{standalone:true}" disabled>
                             </div>
                         </div>
-                        <div class="form-group row">
-                            <div class="col-4">
-                                <label>Adresa</label>
-                            </div>
-                            <div class="col-6">
-                                <input class="form-control" [(ngModel)]="adresaKlinike"
-                                    [ngModelOptions]="{standalone:true}" disabled>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <div class="col-4">
+                        <div class="col-md-6">
+                        <div class="form-group">
                                 <label>Grad</label>
-                            </div>
-                            <div class="col-6">
                                 <input class="form-control" [(ngModel)]="gradKlinike"
                                     [ngModelOptions]="{standalone:true}" disabled>
                             </div>
                         </div>
-                        <div class="form-group row">
-                            <div class="col-4">
+                        <div class="col-md-6">
+                        <div class="form-group">
                                 <label>Trenutna ocjena</label>
-                            </div>
-                            <div class="col-6">
                                 <input class="form-control" [(ngModel)]="ocjenaKlinike"
                                     [ngModelOptions]="{standalone:true}" disabled>
                             </div>
                         </div>
-
-                        <div class="form-group row">
-                            <div class="col-4">
-                                <label>Moja ocjena</label>
-                            </div>
-                            <div class="col-6">
+                        <div class="col-md-6">
+                        <div class="form-group">                           
+                                <label>Moja ocjena</label>                           
                                 <select class="form-control" id="ocjenaKlinika" name="ocjenaKlinika">
                                     <option value="1">1</option>
                                     <option value="2">2</option>
@@ -106,14 +84,13 @@
                             </div>
                         </div>
                         <br>
-                        <div class="form-group row">
-
-                            <div class="col-6">
+                        <div class="form-group">
+                            <div class="col-md-12">
                                 <button type="submit" (click)="ocijeniK()" class="btn btn-primary ">Ocijeni</button>
                                 <button (click)="odustani()" class="btn btn-secondary">Odustani</button>
                             </div>
                         </div>
-                    </form>
+                   
                 </div>
 
             </div>
@@ -128,60 +105,50 @@
     <div class="modal-body d-flex ">
         <div>
             <div class="jumbotron2">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Ime </label>
+                            <input class="form-control" [(ngModel)]="imeLjekara" [ngModelOptions]="{standalone:true}"
+                                disabled>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Prezime</label>
+                            <input class="form-control" [(ngModel)]="prezimeLjekara"
+                                [ngModelOptions]="{standalone:true}" disabled>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Trenutna ocjena</label>
+                            <input class="form-control" [(ngModel)]="ocjenaLjekara" [ngModelOptions]="{standalone:true}"
+                                disabled>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Moja ocjena</label>
+                            <select class="form-control" id="ocjenaLjekar" name="ocjenaLjekar">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+                        </div>
+                    </div>
+                    <br>
+                    <br>
+                    <div class="form-group">
+                    <div class="col-md-12">
+                        
+                            <button type="submit" (click)="ocijeniLj()" class="btn btn-primary ">Ocijeni</button>
+                            <button (click)="odustani()" class="btn btn-secondary">Odustani</button>
+                        </div>
+                    </div>
 
-                <div>
-                    <form method="post">
-                        <div class="form-group row">
-                            <div class="col-4">
-                                <label>Ime </label>
-                            </div>
-                            <div class="col-6">
-                                <input class="form-control" [(ngModel)]="imeLjekara"
-                                    [ngModelOptions]="{standalone:true}" disabled>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <div class="col-4">
-                                <label>Prezime</label>
-                            </div>
-                            <div class="col-6">
-                                <input class="form-control" [(ngModel)]="prezimeLjekara"
-                                    [ngModelOptions]="{standalone:true}" disabled>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <div class="col-4">
-                                <label>Trenutna ocjena</label>
-                            </div>
-                            <div class="col-6">
-                                <input class="form-control" [(ngModel)]="ocjenaLjekara"
-                                    [ngModelOptions]="{standalone:true}" disabled>
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <div class="col-4">
-                                <label>Moja ocjena</label>
-                            </div>
-                            <div class="col-6">
-                                <select class="form-control" id="ocjenaLjekar" name="ocjenaLjekar">
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
-                                </select>
-                            </div>
-                        </div>
-                        <br>
-                        <div class="form-group row">
-
-                            <div class="col-6">
-                                <button type="submit" (click)="ocijeniLj()" class="btn btn-primary ">Ocijeni</button>
-                                <button (click)="odustani()" class="btn btn-secondary">Odustani</button>
-                            </div>
-                        </div>
-                    </form>
                 </div>
 
             </div>

@@ -18,13 +18,12 @@ html, body, app-root {
     text-align: center;
     color: rgb(0, 47, 255);
     font: outline;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-family: 'Montserrat', sans-serif;
 }
 
 .naslov{
     color: rgb(0, 47, 255);
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-
+    font-family: 'Montserrat', sans-serif;
 }
 
 .jumbotron2{
@@ -32,8 +31,7 @@ html, body, app-root {
     text-align: center;
     color: rgb(0, 47, 255);
     font: outline;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-}
+    font-family: 'Montserrat', sans-serif;}
 .nav-link{
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 
@@ -44,3 +42,11 @@ html, body, app-root {
     overflow-y: scroll;
     
   }
+  p{
+    font-family: 'Montserrat', sans-serif;
+    font-size: 30px;
+    font-weight: bold;
+}
+button{
+    margin: 5px;
+}
