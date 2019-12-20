@@ -26,67 +26,68 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(value = "korisnici")
 public class KorisnikController {
-	
-	
+
 	private Logger logger = LoggerFactory.getLogger(KorisnikController.class);
-	
+
 	@Autowired
 	private KorisnikService korisnikService;
-	
+
 	@Autowired
 	private EmailService emailService;
-	
+
 	private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-	
+
 	@RequestMapping(value = "/registracija", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody ResponseEntity<Korisnik> registrujKorisnika(@RequestBody Korisnik novi) {
-		
-		String hashPass="";
-		hashPass=encoder.encode(novi.getPassword());
+	public @ResponseBody ResponseEntity<Korisnik> registrujKorisnika(
+			@RequestBody Korisnik novi) {
+
+		String hashPass = "";
+		hashPass = encoder.encode(novi.getPassword());
 		novi.setPassword(hashPass);
 		novi.setVerifikovan(false);
-		
+
 		try {
 			emailService.slanjeMejlaZaVerifikaciju(novi);
-		}catch( Exception e ){
+		} catch (Exception e) {
 			logger.info("Greska prilikom slanja emaila: " + e.getMessage());
 		}
-		
+
 		korisnikService.saveUser(novi);
-		 
+
 		return new ResponseEntity<>(novi, HttpStatus.OK);
 	}
-	
+
 	@RequestMapping(value = "/getCurrentUser", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody Korisnik getCurrentUser(@Context HttpServletRequest request) {
+	public @ResponseBody Korisnik getCurrentUser(
+			@Context HttpServletRequest request) {
 		Korisnik user = korisnikService.getCurrentUser();
 		return user;
 	}
-	
-	@RequestMapping(value="/trenutniKorisnik",method = RequestMethod.GET)
-	public Korisnik trenutniKorisnik(@Context HttpServletRequest request){
+
+	@RequestMapping(value = "/trenutniKorisnik", method = RequestMethod.GET)
+	public Korisnik trenutniKorisnik(@Context HttpServletRequest request) {
 		return korisnikService.getCurrentUser();
 	}
-	
+
 	@RequestMapping(value = "/izmjena", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody ResponseEntity<Korisnik> izmijeniKorisnika(@RequestBody Korisnik novi) {
-		
-		String hashPass="";
-		hashPass=encoder.encode(novi.getPassword());
+	public @ResponseBody ResponseEntity<Korisnik> izmijeniKorisnika(
+			@RequestBody Korisnik novi) {
+
+		String hashPass = "";
+		hashPass = encoder.encode(novi.getPassword());
 		novi.setPassword(hashPass);
 		korisnikService.saveUser(novi);
 
 		return new ResponseEntity<>(novi, HttpStatus.OK);
 	}
-	
-	@RequestMapping(value="/verifikuj/{email}",method = RequestMethod.GET)
-	void verifikuj(@PathVariable String email){
+
+	@RequestMapping(value = "/verifikuj/{email}", method = RequestMethod.GET)
+	void verifikuj(@PathVariable String email) {
 		Korisnik korisnik = korisnikService.findByEmail(email);
 		korisnik.setVerifikovan(true);
 		korisnik.setRole(Role.REGISTROVAN);
 		korisnikService.saveUser(korisnik);
-		//return korisnikService.getCurrentUser();
+		// return korisnikService.getCurrentUser();
 	}
-	
 
 }

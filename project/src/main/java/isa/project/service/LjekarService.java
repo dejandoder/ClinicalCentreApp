@@ -33,18 +33,6 @@ public class LjekarService {
 			lista.removeIf(n -> (n.getOcjena() > pom.getOcjena()));
 		}
 
-		/*
-		 * if (pom.getPolazisna() != null) lista.removeIf(n ->
-		 * (!n.getPolaznaDestinacija().getLokacija()
-		 * .contains(pom.getPolazisna()))); if (pom.getOdredisna() != null)
-		 * lista.removeIf(n -> (!n.getDolaznaDestinacija().getLokacija()
-		 * .contains(pom.getOdredisna()))); if (pom.getCijena() != 0)
-		 * lista.removeIf(n -> (n.getCijenaKarte() > pom.getCijena())); if
-		 * (pom.getDatumPocetak() != null) lista.removeIf(n ->
-		 * (n.getPolijetanje().compareTo( pom.getDatumPocetak()) != 0)); if
-		 * (pom.getDatumKraj() != null) lista.removeIf(n -> (n.getSlijetanje()
-		 * .compareTo(pom.getDatumKraj()) != 0));
-		 */
 		return lista;
 	}
 

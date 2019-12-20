@@ -13,6 +13,8 @@ import { ToastrService } from 'ngx-toastr';
 export class PrijavaComponent implements OnInit {
 
   user: Korisnik = new Korisnik();
+  validacijaKorisnickoIme: boolean = false;
+  validacijaLozinka: boolean = false;
 
   constructor(private toastr: ToastrService, private authService: AuthService, private router: Router, private route: ActivatedRoute, private userService: KorisnikService, private serviceOdjava: AuthService) {
     if (!this.authService.isUserLogged()) {
@@ -34,12 +36,13 @@ export class PrijavaComponent implements OnInit {
 
 
   clickLogIn() {
-    //this.router.navigate(['/pacijent']);
+    this.validacijaKorisnickoIme = true;
+    this.validacijaLozinka = true;
     this.authService.login(this.user).subscribe(
       success => {
 
         if (!success) {
-          this.toastr.warning("Neispravni kredencijali");
+          this.toastr.error("Neispravni kredencijali");
         } else {
           this.authService.getCurrentUser().subscribe(
             data => {
@@ -49,7 +52,6 @@ export class PrijavaComponent implements OnInit {
               //}else{
               localStorage.setItem("ROLE", data.role);
               localStorage.setItem("USERNAME", data.username);
-              //localStorage.setItem("PROMIJENIOLOZINKU", data.promijenioLozinku);
               if (localStorage.getItem("ROLE") == "REGISTROVAN") {
                 this.router.navigate(["/registrovan"]);
               } else {

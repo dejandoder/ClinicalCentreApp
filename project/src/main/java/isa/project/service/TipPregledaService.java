@@ -10,11 +10,11 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class TipPregledaService {
-	
+
 	@Autowired
 	private TipPregledaRepository tipPregledaRepository;
-	
-	public List<TipPregleda> sviTipoviPregleda(){
+
+	public List<TipPregleda> sviTipoviPregleda() {
 		return tipPregledaRepository.findAll();
 	}
 

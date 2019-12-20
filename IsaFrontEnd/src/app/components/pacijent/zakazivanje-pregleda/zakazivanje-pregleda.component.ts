@@ -6,6 +6,7 @@ import { Klinika } from 'src/app/model/Klinika';
 import { Ljekar } from 'src/app/model/Ljekar';
 import { TipPregleda } from 'src/app/model/TipPregleda';
 import { LjekarService } from 'src/app/service/ljekar.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-zakazivanje-pregleda',
@@ -28,9 +29,13 @@ export class ZakazivanjePregledaComponent implements OnInit {
   imeLjekaraPretraga: string="";
   prezimeLjekaraPretraga: string="";
   ocjenaLjekara: number;
+  ljekar : Ljekar = new Ljekar();
+  zakazaniPregled: Pregled=new Pregled();
+  status: string="ZAKAZAN";
+  klinikaZaPregled: Klinika = new Klinika();
 
 
-  constructor(private serviceKlinika: KlinikaService, private servicePregled: PregledService, private serviceLjekar: LjekarService) { }
+  constructor(private serviceKlinika: KlinikaService, private servicePregled: PregledService, private serviceLjekar: LjekarService, private toastr: ToastrService) { }
 
   ngOnInit() {
     this.servicePregled.preuzmiTipovePregleda().subscribe(
@@ -67,6 +72,8 @@ export class ZakazivanjePregledaComponent implements OnInit {
   prikaziLjekare(klinika: Klinika) {
     this.prikazTabeleLjekara = true;
     this.ljekari = klinika.ljekari;
+    this.klinikaZaPregled=klinika;
+    
   }
 
   pretraziLjekare(){
@@ -74,6 +81,27 @@ export class ZakazivanjePregledaComponent implements OnInit {
     this.serviceLjekar.pretragaLjekara(this.imeLjekaraPretraga, this.prezimeLjekaraPretraga, this.ocjenaLjekara, this.ljekari).subscribe(
       data => {
         this.ljekari=data;
+      }
+    )
+
+  }
+
+  zakaziPregled(ljekar: Ljekar){
+
+    this.zakazaniPregled.tipPregleda=this.pregled;
+    this.zakazaniPregled.cijena=this.pregled.cijena;
+    this.zakazaniPregled.stanje=this.status;
+    this.zakazaniPregled.klinika=this.klinikaZaPregled;
+    this.zakazaniPregled.ljekar=ljekar;
+
+
+    this.servicePregled.zakaziDostupniPregled(this.zakazaniPregled).subscribe(
+      data => {
+        this.toastr.success("Uspjesno ste zakazali pregled");
+
+      },
+      error => {
+        console.log(error);
       }
     )
 

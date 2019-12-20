@@ -8,7 +8,6 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -17,52 +16,43 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
-import org.hibernate.internal.build.AllowSysOut;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 public class Klinika {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
-	@Column(name="ime")
+
+	@Column(name = "ime")
 	private String ime;
-	
-	@Column(name="adresa")
+
+	@Column(name = "adresa")
 	private String adresa;
-	
-	@Column(name="opis")
+
+	@Column(name = "opis")
 	private String opis;
-	
-	@Column(name="grad")
+
+	@Column(name = "grad")
 	private String grad;
-	
-	@Column(name="ocjena")
+
+	@Column(name = "ocjena")
 	private double ocjena;
-	
-	@OneToMany(mappedBy="klinika", cascade = CascadeType.ALL)
-	@JsonIgnoreProperties(value={"klinika"}, allowSetters=true)
-	//@OneToMany(cascade=CascadeType.ALL, fetch = FetchType.LAZY)
+
+	@OneToMany(mappedBy = "klinika", cascade = CascadeType.ALL)
+	@JsonIgnoreProperties(value = { "klinika" }, allowSetters = true)
 	private List<Ljekar> ljekari = new ArrayList<>();
-	
-	
-	@OneToMany(mappedBy="klinika", cascade = CascadeType.ALL)
+
+	@OneToMany(mappedBy = "klinika", cascade = CascadeType.ALL)
 	@JsonIgnore
 	private List<Pregled> pregledi = new ArrayList<>();
-	
-	/*@OneToMany(mappedBy="klinika", cascade = CascadeType.ALL)
-	@JsonIgnore
-	private List<TipPregleda> tipoviPregleda = new ArrayList<>();*/
-	
+
 	@ManyToMany
 	@JoinTable(name = "klinika_tip_pregleda", joinColumns = @JoinColumn(name = "klinika_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "tip_pregleda_id", referencedColumnName = "id"))
 	private Set<TipPregleda> tipovi = new HashSet<TipPregleda>();
-	
+
 	public Klinika() {
 		// TODO Auto-generated constructor stub
 	}
@@ -122,7 +112,7 @@ public class Klinika {
 	public void setGrad(String grad) {
 		this.grad = grad;
 	}
-	
+
 	public double getOcjena() {
 		return ocjena;
 	}
@@ -130,16 +120,6 @@ public class Klinika {
 	public void setOcjena(double ocjena) {
 		this.ocjena = ocjena;
 	}
-	
-	
-
-	/*public List<TipPregleda> getTipoviPregleda() {
-		return tipoviPregleda;
-	}
-
-	public void setTipoviPregleda(List<TipPregleda> tipoviPregleda) {
-		this.tipoviPregleda = tipoviPregleda;
-	}*/
 
 	public Set<TipPregleda> getTipovi() {
 		return tipovi;
@@ -173,10 +153,5 @@ public class Klinika {
 			return false;
 		return true;
 	}
-	
-	
-	
-	
-	
 
 }

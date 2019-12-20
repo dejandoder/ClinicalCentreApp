@@ -24,38 +24,38 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Ljekar {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
-	@Column(name="ime")
+
+	@Column(name = "ime")
 	private String ime;
-	
-	@Column(name="prezime")
+
+	@Column(name = "prezime")
 	private String prezime;
-	
-	@Column(name="ocjena")
+
+	@Column(name = "ocjena")
 	private double ocjena;
-	
+
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date godisnji_od;
-	
+
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date godisnji_do;
-	
-	@OneToMany(mappedBy="ljekar", cascade = CascadeType.ALL)
+
+	@OneToMany(mappedBy = "ljekar", cascade = CascadeType.ALL)
 	@JsonIgnore
 	private List<Pregled> pregledi = new ArrayList<>();
-	
+
 	@ManyToOne
 	@JoinColumn(name = "klinika_id")
 	private Klinika klinika;
-	
+
 	@ManyToMany
 	@JoinTable(name = "ljekar_tip_pregleda", joinColumns = @JoinColumn(name = "ljekar_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "tip_pregleda_id", referencedColumnName = "id"))
 	private Set<TipPregleda> tipovi = new HashSet<TipPregleda>();
-	
+
 	public Ljekar() {
 		// TODO Auto-generated constructor stub
 	}
@@ -131,7 +131,5 @@ public class Ljekar {
 	public void setOcjena(double ocjena) {
 		this.ocjena = ocjena;
 	}
-	
 
-	
 }

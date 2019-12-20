@@ -15,57 +15,50 @@ import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-
 @Entity
-
 public class Pregled {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
-	//ostaje veza sa ljekarom
-	//@Column(name="termin")
-	//private Date termin;
-	
+
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date termin;
-	
-	@Column(name="sala")
+
+	@Column(name = "sala")
 	private int sala;
-	
-	@Column(name="cijena")
+
+	@Column(name = "cijena")
 	private int cijena;
-	
-	@Column(name="popust")
+
+	@Column(name = "popust")
 	private int popust;
-	
-	@Column(name="tip")
+
+	@Column(name = "tip")
 	private String tip;
-		
-	@Column(name="trajanje")
+
+	@Column(name = "trajanje")
 	private String trajanje;
-	
+
 	@Enumerated(EnumType.STRING)
-	@Column(name="stanje")
+	@Column(name = "stanje")
 	private StanjePregleda stanje;
-	
-	
+
 	@ManyToOne
 	@JoinColumn(name = "ljekar_id")
 	private Ljekar ljekar;
-	
+
 	@ManyToOne
-	@JoinColumn(name="klinika_id")
+	@JoinColumn(name = "klinika_id")
 	private Klinika klinika;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "korisnik_id")
 	private Korisnik korisnik;
-	
+
 	@OneToOne
 	private TipPregleda tipPregleda;
-	
+
 	public Pregled() {
 		// TODO Auto-generated constructor stub
 	}
@@ -117,8 +110,7 @@ public class Pregled {
 	public void setTip(String tip) {
 		this.tip = tip;
 	}
-	
-	
+
 	public String getTrajanje() {
 		return trajanje;
 	}
@@ -126,7 +118,7 @@ public class Pregled {
 	public void setTrajanje(String trajanje) {
 		this.trajanje = trajanje;
 	}
-	
+
 	public Ljekar getLjekar() {
 		return ljekar;
 	}
@@ -166,7 +158,5 @@ public class Pregled {
 	public void setTipPregleda(TipPregleda tipPregleda) {
 		this.tipPregleda = tipPregleda;
 	}
-	
-	
 
 }

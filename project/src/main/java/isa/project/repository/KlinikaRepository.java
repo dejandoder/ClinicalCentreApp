@@ -5,8 +5,6 @@ import java.util.List;
 import isa.project.model.Klinika;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 
 public interface KlinikaRepository extends JpaRepository<Klinika, Long> {
 	

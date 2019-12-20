@@ -15,23 +15,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-
 @RestController
 @RequestMapping(value = "klinike")
 public class KlinikaController {
-	
+
 	@Autowired
 	private KlinikaService klinikaService;
-	
+
 	@GetMapping(value = "/all")
 	public ResponseEntity<List<Klinika>> getAllPregled() {
-		
+
 		List<Klinika> klinike = klinikaService.findAll();
 		return new ResponseEntity<>(klinike, HttpStatus.OK);
-		
+
 	}
+
 	@RequestMapping(value = "/pretragaKlinika", method = RequestMethod.POST)
-	public PretragaKlinikaDTO pretragaLetova(@RequestBody PretragaKlinikaDTO parametar){
+	public PretragaKlinikaDTO pretragaLetova(
+			@RequestBody PretragaKlinikaDTO parametar) {
 		return klinikaService.pretragaKlinika(parametar);
 	}
 

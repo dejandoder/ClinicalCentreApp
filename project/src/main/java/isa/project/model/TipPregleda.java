@@ -9,31 +9,36 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class TipPregleda {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
-	@Column(name="ime")
+
+	@Column(name = "ime")
 	private String ime;
-	
-	@Column(name="cijena")
+
+	@Column(name = "cijena")
 	private String cijena;
-	
+
+	@Column(name = "trajanje")
+	private int trajanje;
+
+	@Column(name = "sala")
+	private int sala;
+
 	@ManyToMany(mappedBy = "tipovi")
 	@JsonIgnore
 	private Set<Ljekar> ljekari = new HashSet<Ljekar>();
-	
+
 	@ManyToMany(mappedBy = "tipovi")
 	@JsonIgnore
 	private Set<Klinika> klinike = new HashSet<Klinika>();
-	
+
 	public TipPregleda() {
 		// TODO Auto-generated constructor stub
 	}
@@ -78,7 +83,20 @@ public class TipPregleda {
 		this.klinike = klinike;
 	}
 
-	
-	
+	public int getTrajanje() {
+		return trajanje;
+	}
+
+	public void setTrajanje(int trajanje) {
+		this.trajanje = trajanje;
+	}
+
+	public int getSala() {
+		return sala;
+	}
+
+	public void setSala(int sala) {
+		this.sala = sala;
+	}
 
 }

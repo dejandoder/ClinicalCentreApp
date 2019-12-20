@@ -15,16 +15,16 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(value = "tipovi")
 public class TipPregledaController {
-	
+
 	@Autowired
 	private TipPregledaService tipPregledaService;
-	
+
 	@GetMapping(value = "/all")
 	public ResponseEntity<List<TipPregleda>> getAllTipovi() {
-		
+
 		List<TipPregleda> tipovi = tipPregledaService.sviTipoviPregleda();
 		return new ResponseEntity<>(tipovi, HttpStatus.OK);
-		
+
 	}
 
 }

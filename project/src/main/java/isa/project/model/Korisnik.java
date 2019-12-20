@@ -8,70 +8,64 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 public class Korisnik {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	@Column(name = "username")
 	private String username;
-	
-	@Column(name="ime")
+
+	@Column(name = "ime")
 	private String ime;
-	
-	@Column(name="prezime")
+
+	@Column(name = "prezime")
 	private String prezime;
-	
-	@Column(name="email")
+
+	@Column(name = "email")
 	private String email;
-	
-	@Column(name="adresa")
+
+	@Column(name = "adresa")
 	private String adresa;
-	
-	@Column(name="grad")
+
+	@Column(name = "grad")
 	private String grad;
-	
-	@Column(name="drzava")
+
+	@Column(name = "drzava")
 	private String drzava;
-	
-	@Column(name="broj_telefona")
+
+	@Column(name = "broj_telefona")
 	private int brojTelefona;
-	
-	@Column(name="jedinstveni_broj")
+
+	@Column(name = "jedinstveni_broj")
 	private int jedinstveniBroj;
-	
-	@Column(name="password")
+
+	@Column(name = "password")
 	private String password;
-	
+
 	@Enumerated(EnumType.STRING)
 	@Column(name = "role")
 	private Role role;
-	
-	@Column(name="verifikovan")
+
+	@Column(name = "verifikovan")
 	private boolean verifikovan;
-	
-	@OneToMany(mappedBy="korisnik", cascade = CascadeType.ALL)
+
+	@OneToMany(mappedBy = "korisnik", cascade = CascadeType.ALL)
 	@JsonIgnore
-	//@JoinTable(name = "korisnikPregledi")
 	private List<Pregled> pregledi = new ArrayList<>();
-    
+
 	public Korisnik() {
 		// TODO Auto-generated constructor stub
 	}
-	
 
 	public Korisnik(Long id, String ime, String prezime, String email,
 			String adresa, String drzava, int brojTelefona,
@@ -87,7 +81,6 @@ public class Korisnik {
 		this.jedinstveniBroj = jedinstveniBroj;
 		this.password = password;
 	}
-
 
 	public Long getId() {
 		return id;
@@ -161,61 +154,44 @@ public class Korisnik {
 		this.password = password;
 	}
 
-
 	public String getGrad() {
 		return grad;
 	}
-
 
 	public void setGrad(String grad) {
 		this.grad = grad;
 	}
 
-
 	public String getUsername() {
 		return username;
 	}
-
 
 	public void setUsername(String username) {
 		this.username = username;
 	}
 
-
 	public Role getRole() {
 		return role;
 	}
-
 
 	public void setRole(Role role) {
 		this.role = role;
 	}
 
-
 	public boolean isVerifikovan() {
 		return verifikovan;
 	}
-
 
 	public void setVerifikovan(boolean verifikovan) {
 		this.verifikovan = verifikovan;
 	}
 
-
 	public List<Pregled> getPregledi() {
 		return pregledi;
 	}
 
-
 	public void setPregledi(List<Pregled> pregledi) {
 		this.pregledi = pregledi;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
+
 }

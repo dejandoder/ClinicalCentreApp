@@ -15,13 +15,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(value = "ljekari")
 public class LjekarController {
-	
+
 	@Autowired
 	private LjekarService ljekarService;
-	
-	
+
 	@RequestMapping(value = "/pretragaLjekara", method = RequestMethod.POST)
-	public List<Ljekar> pretragaLjekara(@RequestBody PretragaLjekaraDTO parametar){
+	public List<Ljekar> pretragaLjekara(
+			@RequestBody PretragaLjekaraDTO parametar) {
 		return ljekarService.pretragaLjekara(parametar);
 	}
 

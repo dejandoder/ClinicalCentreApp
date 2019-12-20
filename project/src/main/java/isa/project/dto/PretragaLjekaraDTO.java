@@ -3,7 +3,6 @@ package isa.project.dto;
 import isa.project.model.Ljekar;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class PretragaLjekaraDTO {
 	

@@ -10,33 +10,32 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class PregledService {
-	
+
 	@Autowired
 	private PregledRepository pregledRepository;
-	
+
 	public List<Pregled> findAll() {
 		return pregledRepository.findAll();
 	}
-	
+
 	public Pregled savePregled(Pregled pregled) {
 		return pregledRepository.save(pregled);
 	}
-	
+
 	public List<Pregled> getPregledZakazani() {
 		return pregledRepository.getZakazaniPregledi();
 	}
-	
+
 	public List<Pregled> getIstorijaPregleda() {
 		return pregledRepository.getIstorijaPregleda();
 	}
-	
-	public List<Pregled> getDostupniPregledi(){
+
+	public List<Pregled> getDostupniPregledi() {
 		return pregledRepository.getDostupniPregledi();
 	}
-	
-	public List<Pregled> getPreglediPoTipu(String tip){
+
+	public List<Pregled> getPreglediPoTipu(String tip) {
 		return pregledRepository.getPregledPoTipu(tip);
 	}
-	
-	
+
 }

@@ -10,27 +10,28 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class KorisnikService {
-	
+
 	@Autowired
 	KorisnikRepository korisnikRepository;
-	
-	//private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-	
+
+	// private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+
 	public Korisnik saveUser(Korisnik user) {
 		return korisnikRepository.save(user);
 	}
-	
+
 	public Korisnik getCurrentUser() {
-		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		Object principal = SecurityContextHolder.getContext()
+				.getAuthentication().getPrincipal();
 		return korisnikRepository.findByUsername(principal.toString());
 	}
-	
-	public Korisnik registrovanje(Korisnik user){
-		
+
+	public Korisnik registrovanje(Korisnik user) {
+
 		return user;
 	}
-	
-	public Korisnik findByEmail(String email){
+
+	public Korisnik findByEmail(String email) {
 		return korisnikRepository.findOneByEmail(email);
 	}
 
