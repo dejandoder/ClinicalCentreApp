@@ -54,4 +54,9 @@ export class PacijentComponent implements OnInit {
 
   }
 
+  kartonClick(){
+    this.router.navigate(["karton"],{relativeTo: this.route});
+
+  }
+
 }

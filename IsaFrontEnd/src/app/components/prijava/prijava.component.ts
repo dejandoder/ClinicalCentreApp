@@ -13,6 +13,7 @@ import { ToastrService } from 'ngx-toastr';
 export class PrijavaComponent implements OnInit {
 
   user: Korisnik = new Korisnik();
+  validacija: boolean = true;
   validacijaKorisnickoIme: boolean = false;
   validacijaLozinka: boolean = false;
 
@@ -36,33 +37,47 @@ export class PrijavaComponent implements OnInit {
 
 
   clickLogIn() {
-    this.validacijaKorisnickoIme = true;
-    this.validacijaLozinka = true;
-    this.authService.login(this.user).subscribe(
-      success => {
 
-        if (!success) {
-          this.toastr.error("Neispravni kredencijali");
-        } else {
-          this.authService.getCurrentUser().subscribe(
-            data => {
-              // if(data.aktiviraoMail==false){
-              //this.poruka = "Aktivirajte nalog!"
+    if (this.user.username == "") {
+      this.validacijaKorisnickoIme = true;
+      this.validacija = false;
 
-              //}else{
-              localStorage.setItem("ROLE", data.role);
-              localStorage.setItem("USERNAME", data.username);
-              if (localStorage.getItem("ROLE") == "REGISTROVAN") {
-                this.router.navigate(["/registrovan"]);
-              } else {
-                this.router.navigate(["/pocetna"]);
+    }
+
+    if (this.user.password == "") {
+      this.validacijaLozinka = true;
+      this.validacija = false;
+    }
+
+    if (!this.validacija) {
+      this.toastr.warning("Neuspjesna prijava");
+      this.validacija = true;
+    } else {
+      this.authService.login(this.user).subscribe(
+        success => {
+
+          if (!success) {
+            this.toastr.error("Neispravni kredencijali");
+          } else {
+            this.authService.getCurrentUser().subscribe(
+              data => {
+                localStorage.setItem("ROLE", data.role);
+                localStorage.setItem("USERNAME", data.username);
+                if (localStorage.getItem("ROLE") == "REGISTROVAN") {
+                  this.router.navigate(["/registrovan"]);
+                } else {
+                  this.router.navigate(["/pocetna"]);
+                }
               }
-              // }                
-            }
-          )
+            )
+          }
         }
-      }
-    )
+      )
+    }
+  }
+
+  odustani() {
+    this.router.navigate(['/pocetna']);
   }
 
 }

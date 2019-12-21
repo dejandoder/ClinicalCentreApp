@@ -13,6 +13,7 @@
                             <th style="text-align: center;">Sala</th>
                             <th style="text-align: center;">Ljekar</th>
                             <th style="text-align: center;">Klinika</th>
+                            <th style="text-align: center;">Popust</th>
                             <th style="text-align: center;">Cijena</th>
                         </tr>
                     </thead>
@@ -25,7 +26,8 @@
                             <td style="text-align: center;">{{a.sala}}</td>
                             <td style="text-align: center;">{{a.ljekar.ime}}</td>
                             <td style="text-align: center;">{{a.ljekar.klinika.ime}}</td>
-                            <td style="text-align: center;">{{a.cijena}} €</td>
+                            <td style="text-align: center;">{{a.popust}} €</td>
+                            <td style="text-align: center;">{{a.tipPregleda.cijena}} €</td>
                             <td style="text-align: center;"><button class="btn btn-link"
                                     (click)="zakaziDostupniPregled(a)">Zakaži pregled</button></td>
                         </tr>

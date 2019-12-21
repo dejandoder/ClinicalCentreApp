@@ -101,7 +101,7 @@
                             <label>Broj telefona:</label>
                         </div>
                         <div class="col-6">
-                            <input type="number" class="form-control" type="text" placeholder="Unesite broj telefona"
+                            <input type="number" class="form-control" placeholder="Unesite broj telefona"
                                 [(ngModel)]="korisnik.brojTelefona" [ngModelOptions]="{standalone:true}" [ngClass]="{
                                     'is-invalid': validacijaBroj
                                 }" (focus)="validacijaBroj=false">
@@ -143,10 +143,11 @@
                             <label for="pwd">Ponovite lozinku:</label>
                         </div>
                         <div class="col-6">
-                            <input type="password" class="form-control " placeholder="Ponovo unesite lozinku" [ngClass]="{
-                                        'is-invalid': validacijaLozinka
-                                    }" (focus)="validacijaLozinka=false">
-                            <div class="invalid-feedback" *ngIf="validacijaLozinka==true">
+                            <input type="password" class="form-control" [(ngModel)]="ponovljenaLozinka"
+                                [ngModelOptions]="{standalone:true}" placeholder="Ponovo unesite lozinku" [ngClass]="{
+                                        'is-invalid': validacijaLozinkaPonovljena
+                                    }" (focus)="validacijaLozinkaPonovljena=false">
+                            <div class="invalid-feedback" *ngIf="validacijaLozinkaPonovljena==true">
                                 Lozinke se ne poklapaju
                             </div>
                         </div>

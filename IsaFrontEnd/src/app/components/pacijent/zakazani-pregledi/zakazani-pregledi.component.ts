@@ -12,6 +12,8 @@ import { ToastrService } from 'ngx-toastr';
 export class ZakazaniPreglediComponent implements OnInit {
 
   pregledi: Pregled[] = [];
+  danasnjiDatum = new Date;
+  otkazDatum: Date;
 
   constructor(private service: PregledService, private datePipe: DatePipe, private toastr: ToastrService) { }
 
@@ -30,6 +32,10 @@ export class ZakazaniPreglediComponent implements OnInit {
   }
 
   otkaziPregled(pregled: Pregled){
+    this.otkazDatum= new Date(pregled.termin)
+    if((this.otkazDatum.getTime()-this.danasnjiDatum.getTime())<86400000){
+      this.toastr.error("Pregled nije moguce otkazati, jer je manje od 24h do pocetka!");
+    }else{
     this.service.otkaziPregled(pregled).subscribe(
       data => {
         this.toastr.success("Uspjesno ste otkazali pregled!");
@@ -50,6 +56,7 @@ export class ZakazaniPreglediComponent implements OnInit {
         console.log(error);
       }
     )
+  }
 
   }
 

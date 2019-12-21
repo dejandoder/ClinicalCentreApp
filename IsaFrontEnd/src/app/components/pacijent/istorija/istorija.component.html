@@ -25,7 +25,7 @@
                             <td style="text-align: center;">{{a.sala}}</td>
                             <td style="text-align: center;">{{a.ljekar.ime}}</td>
                             <td style="text-align: center;">{{a.ljekar.klinika.ime}}</td>
-                            <td style="text-align: center;">{{a.cijena}} €</td>
+                            <td style="text-align: center;">{{a.tipPregleda.cijena - a.popust}} €</td>
                             <td style="text-align: center;">{{a.stanje}}</td>
                             <td style="text-align: center;"><button class="btn btn-link"
                                     (click)="ocijeniKliniku(ocjKlinika, a)" *ngIf="a.stanje == 'ZAKAZAN'">Ocijeni

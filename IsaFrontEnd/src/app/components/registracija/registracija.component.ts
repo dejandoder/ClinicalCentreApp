@@ -13,7 +13,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class RegistracijaComponent implements OnInit {
 
   korisnik: Korisnik = new Korisnik();
-  haha: boolean = false;
+  validacija: boolean = true;
   validacijaIme: boolean = false;
   validacijaPrezime: boolean = false;
   validacijaMail: boolean = false;
@@ -23,6 +23,8 @@ export class RegistracijaComponent implements OnInit {
   validacijaBroj: boolean = false;
   validacijaJedinstveni: boolean = false;
   validacijaLozinka: boolean = false;
+  ponovljenaLozinka: string = "";
+  validacijaLozinkaPonovljena: boolean = false;
 
   constructor(private korisnikService: KorisnikService, private router: Router, private toastr: ToastrService, private formBuilder: FormBuilder) {
 
@@ -32,26 +34,72 @@ export class RegistracijaComponent implements OnInit {
   }
 
   registujSe() {
-    this.haha = true;
-    this.validacijaIme = true;
-    this.validacijaPrezime = true;
-    this.validacijaMail = true;
-    this.validacijaAdresa = true;
-    this.validacijaGrad = true;
-    this.validacijaDrzava = true;
-    this.validacijaBroj = true;
-    this.validacijaJedinstveni = true;
-    this.validacijaLozinka = true;
-    this.korisnik.username = this.korisnik.email;
-    this.korisnikService.registracija(this.korisnik).subscribe(
-      data => {
-        this.toastr.warning("Dobicete e-mail za verifikaciju!");
-      },
-      error => {
 
-      }
-    );
+    if (this.korisnik.ime == "") {
+      this.validacijaIme = true;
+      this.validacija = false;
+    }
 
+    if (this.korisnik.prezime == "") {
+      this.validacijaPrezime = true;
+      this.validacija = false;
+    }
+
+    if (this.korisnik.email == "") {
+      this.validacijaMail = true;
+      this.validacija = false;
+    }
+
+    if (this.korisnik.adresa == "") {
+      this.validacijaAdresa = true;
+      this.validacija = false;
+    }
+
+    if (this.korisnik.grad == "") {
+      this.validacijaGrad = true;
+      this.validacija = false;
+    }
+
+    if (this.korisnik.drzava == "") {
+      this.validacijaDrzava = true;
+      this.validacija = false;
+    }
+
+    if (this.korisnik.brojTelefona == null) {
+      this.validacijaBroj = true;
+      this.validacija = false;
+    }
+
+    if (this.korisnik.jedinstveniBroj == null) {
+      this.validacijaJedinstveni = true;
+      this.validacija = false;
+    }
+
+    if (this.korisnik.password == "") {
+      this.validacijaLozinka = true;
+      this.validacija = false;
+    }
+
+    if (this.ponovljenaLozinka != this.korisnik.password) {
+      this.toastr.error("Lozinke se ne poklapaju");
+      this.validacijaLozinkaPonovljena = true;
+      this.validacija = false;
+    }
+
+    if (!this.validacija) {
+      this.toastr.warning("Neuspjesna registracija");
+      this.validacija = true;
+    } else {
+      this.korisnik.username = this.korisnik.email;
+      this.korisnikService.registracija(this.korisnik).subscribe(
+        data => {
+          this.toastr.info("Dobicete e-mail za verifikaciju!");
+        },
+        error => {
+
+        }
+      );
+    }
   }
   odustani() {
     this.router.navigate(['/pocetna']);

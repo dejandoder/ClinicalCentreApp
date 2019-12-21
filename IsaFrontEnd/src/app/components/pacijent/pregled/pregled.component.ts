@@ -12,6 +12,8 @@ import { ToastrService } from 'ngx-toastr';
 export class PregledComponent implements OnInit {
 
   pregledi: Pregled[] = [];
+  danasnjiDatum = new Date;
+  num : Date;
 
   constructor(private service: PregledService, private datePipe: DatePipe, private toastr: ToastrService) { }
 

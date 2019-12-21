@@ -12,15 +12,17 @@ import { PocetnaPacijentComponent } from './components/pacijent/pocetna-pacijent
 import { PregledComponent } from './components/pacijent/pregled/pregled.component';
 import { ZakazaniPreglediComponent } from './components/pacijent/zakazani-pregledi/zakazani-pregledi.component';
 import { ZakazivanjePregledaComponent } from './components/pacijent/zakazivanje-pregleda/zakazivanje-pregleda.component';
+import { AuthGuard } from './guards/AuthGuard';
+import { PacijentGuard } from './guards/PacijentGuard';
 
 
 const routes: Routes = [
   { path: '', redirectTo: '/pocetna', pathMatch: 'full' },
   { path: 'pocetna', component: PocetnaStranicaComponent },
-  { path: 'login', component: PrijavaComponent},
+  { path: 'login', component: PrijavaComponent, canActivate:[AuthGuard]},
   { path: 'registracija', component: RegistracijaComponent },
   {
-    path: 'registrovan', component: PacijentComponent,
+    path: 'registrovan', component: PacijentComponent, canActivate: [PacijentGuard],
     children: [
       { path: '', redirectTo: 'pocetnaPacijent',  pathMatch: 'full' },
       {path: 'pocetnaPacijent', component: PocetnaPacijentComponent},

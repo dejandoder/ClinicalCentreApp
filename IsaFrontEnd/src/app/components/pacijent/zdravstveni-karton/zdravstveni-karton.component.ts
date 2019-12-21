@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { PregledService } from 'src/app/service/pregled.service';
+import { DatePipe } from '@angular/common';
+import { Pregled } from 'src/app/model/Pregled';
 
 @Component({
   selector: 'app-zdravstveni-karton',
@@ -7,9 +10,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ZdravstveniKartonComponent implements OnInit {
 
-  constructor() { }
+  pregledi: Pregled[]=[]
+
+  constructor(private service: PregledService, private datePipe: DatePipe) { }
 
   ngOnInit() {
+    this.service.preuzmiZakazanePreglede().subscribe(
+      data => {
+        this.pregledi = data;
+        for (let date of this.pregledi) {
+          date.medium = this.datePipe.transform(date.termin, "MMM d, y");
+        }
+      },
+      error => {
+        console.log(error);
+      }
+    )
   }
 
 }
