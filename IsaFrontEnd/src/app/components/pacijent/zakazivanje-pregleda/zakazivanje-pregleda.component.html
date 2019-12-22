@@ -3,7 +3,7 @@
         <div class="jumbotron anyClass">
             <div class="row" style="max-width: 90%; margin: 0 auto; ">
                 <p text-align="center">Zakazivanje pregleda</p>
-                
+
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
@@ -27,15 +27,9 @@
                     </div>
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="datumPovratka">Ocjena klinike:</label>
-                            <select class="form-control" id="kategorijaIzmjena">
-                                <option value="5">5</option>
-                                <option value="4">4</option>
-                                <option value="3">3</option>
-                                <option value="2">2</option>
-                                <option value="1">1</option>
-                            </select>
-
+                            <label>Ocjena klinike:</label>
+                            <input class="form-control" type="number" [(ngModel)]="ocjenaKlinike"
+                                [ngModelOptions]="{standalone:true}">
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -43,7 +37,8 @@
                             <label for="endDestination">Lokacija klinike: </label>
                             <div class="input-group">
                                 <span class="input-group-addon"> <i class="glyphicon glyphicon-map-marker"></i></span>
-                                <input class="form-control" type="text" id="lokacijaKlinike" required="required">
+                                <input class="form-control" type="text" [(ngModel)]="lokacijaKlinike"
+                                    [ngModelOptions]="{standalone:true}">
                             </div>
                         </div>
                     </div>
@@ -90,6 +85,7 @@
                             <th style="text-align: center;">Ime </th>
                             <th style="text-align: center;">Prezime</th>
                             <th style="text-align: center;">Ocjena</th>
+                            <th style="text-align: center;">Radno vrijeme</th>
                         </tr>
                     </thead>
                     <tbody *ngFor="let ljekar of ljekari">
@@ -97,6 +93,7 @@
                             <td style="text-align: center;">{{ljekar.ime}}</td>
                             <td style="text-align: center;">{{ljekar.prezime}}</td>
                             <td style="text-align: center;">{{ljekar.ocjena}}</td>
+                            <td style="text-align: center;">{{ljekar.radno_vrijeme_od}} - {{ljekar.radno_vrijeme_do}}</td>
                             <td style="text-align: center;"><button class="btn btn-link"
                                     (click)="zakaziPregled(ljekar)">Zakaži pregled</button></td>
                         </tr>
@@ -129,6 +126,7 @@
                         <div class="form-group">
                             <label>Ocjena</label>
                             <div class="input-group">
+                                <span class="input-group-addon"> <i class="glyphicon glyphicon-heart"></i></span>
                                 <input class="form-control" type="number" id="ocjenaLjekara" [(ngModel)]="ocjenaLjekara"
                                     [ngModelOptions]="{standalone:true}">
                             </div>

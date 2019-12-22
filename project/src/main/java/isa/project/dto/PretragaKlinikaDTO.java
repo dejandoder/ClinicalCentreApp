@@ -17,7 +17,7 @@ public class PretragaKlinikaDTO {
 	
 	private String lokacijaKlinike;
 	
-	private int ocjenaKlinike;
+	private double ocjenaKlinike;
 	
 	private List<Klinika> klinike;
 	
@@ -27,7 +27,7 @@ public class PretragaKlinikaDTO {
 	
 	private List<Ljekar> ljekari;
 	
-	private int cijenaPregleda;
+	private double cijenaPregleda;
 	
 	public PretragaKlinikaDTO() {
 		// TODO Auto-generated constructor stub
@@ -57,11 +57,12 @@ public class PretragaKlinikaDTO {
 		this.lokacijaKlinike = lokacijaKlinike;
 	}
 
-	public int getOcjenaKlinike() {
+
+	public double getOcjenaKlinike() {
 		return ocjenaKlinike;
 	}
 
-	public void setOcjenaKlinike(int ocjenaKlinike) {
+	public void setOcjenaKlinike(double ocjenaKlinike) {
 		this.ocjenaKlinike = ocjenaKlinike;
 	}
 
@@ -72,12 +73,12 @@ public class PretragaKlinikaDTO {
 	public void setKlinike(List<Klinika> klinike) {
 		this.klinike = klinike;
 	}
-
-	public int getCijenaPregleda() {
+	
+	public double getCijenaPregleda() {
 		return cijenaPregleda;
 	}
 
-	public void setCijenaPregleda(int cijenaPregleda) {
+	public void setCijenaPregleda(double cijenaPregleda) {
 		this.cijenaPregleda = cijenaPregleda;
 	}
 

@@ -38,11 +38,17 @@ public class Ljekar {
 	@Column(name = "ocjena")
 	private double ocjena;
 
-	@Temporal(TemporalType.TIMESTAMP)
+	@Temporal(TemporalType.DATE)
 	private Date godisnji_od;
 
-	@Temporal(TemporalType.TIMESTAMP)
+	@Temporal(TemporalType.DATE)
 	private Date godisnji_do;
+	
+	@Temporal(TemporalType.TIME)
+	private Date radno_vrijeme_od;
+	
+	@Temporal(TemporalType.TIME)
+	private Date radno_vrijeme_do;
 
 	@OneToMany(mappedBy = "ljekar", cascade = CascadeType.ALL)
 	@JsonIgnore
@@ -130,6 +136,22 @@ public class Ljekar {
 
 	public void setOcjena(double ocjena) {
 		this.ocjena = ocjena;
+	}
+
+	public Date getRadno_vrijeme_od() {
+		return radno_vrijeme_od;
+	}
+
+	public void setRadno_vrijeme_od(Date radno_vrijeme_od) {
+		this.radno_vrijeme_od = radno_vrijeme_od;
+	}
+
+	public Date getRadno_vrijeme_do() {
+		return radno_vrijeme_do;
+	}
+
+	public void setRadno_vrijeme_do(Date radno_vrijeme_do) {
+		this.radno_vrijeme_do = radno_vrijeme_do;
 	}
 
 }

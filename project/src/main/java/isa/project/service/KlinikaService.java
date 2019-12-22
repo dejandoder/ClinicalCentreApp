@@ -31,31 +31,27 @@ public class KlinikaService {
 		List<Klinika> lista = new ArrayList<>();
 		List<KlinikaDTO> listaDTO = new ArrayList<>();
 		PretragaKlinikaDTO konacno = new PretragaKlinikaDTO();
-		int cijena = 0;
+		double cijena = 0;
 
 		List<Pregled> pregledi = pregledRepository.getPregledPoTipu(pom
 				.getTipPregleda());
 
 		for (Pregled p : pregledi) {
-			cijena = p.getCijena();
+			cijena = p.getTipPregleda().getCijena();
 			Klinika temp = p.getLjekar().getKlinika();
 			if (!lista.contains(temp)) {
 				lista.add(temp);
-
 			}
 
-			for (KlinikaDTO k : listaDTO) {
-				k.setIme(temp.getIme());
-				k.setOpis(temp.getOpis());
-				k.setAdresa(temp.getAdresa());
-				k.setCijenaPregleda(p.getCijena());
-				k.setGrad(temp.getGrad());
-				k.setOcjena(temp.getOcjena());
-				k.setLjekari(temp.getLjekari());
-				listaDTO.add(k);
+		}
 
-			}
+		if (pom.getOcjenaKlinike() != 0) {
+			lista.removeIf(n -> (n.getOcjena() > pom.getOcjenaKlinike()));
+		}
 
+		if (pom.getLokacijaKlinike() != "") {
+			lista.removeIf(n -> (!n.getGrad().equalsIgnoreCase(
+					pom.getLokacijaKlinike())));
 		}
 
 		konacno.setKlinike(lista);

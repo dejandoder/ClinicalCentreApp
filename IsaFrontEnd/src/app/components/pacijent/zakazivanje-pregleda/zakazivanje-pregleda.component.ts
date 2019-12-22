@@ -19,21 +19,24 @@ export class ZakazivanjePregledaComponent implements OnInit {
 
   prikazTabeleKlinike: boolean = false;
   prikazTabeleLjekara: boolean = false;
-  sviTipoviPregleda: TipPregleda[]=[];
-  sviTipoviPregledaLjekari: TipPregleda[]=[];
+  sviTipoviPregleda: TipPregleda[] = [];
+  sviTipoviPregledaLjekari: TipPregleda[] = [];
   klinike: Klinika[] = [];
   ljekari: Ljekar[] = [];
   pregled: TipPregleda = new TipPregleda();
   tipLjekar: TipPregleda = new TipPregleda();
   cijena: number;
-  imeLjekaraPretraga: string="";
-  prezimeLjekaraPretraga: string="";
+  imeLjekaraPretraga: string = "";
+  prezimeLjekaraPretraga: string = "";
   ocjenaLjekara: number;
-  ljekar : Ljekar = new Ljekar();
-  zakazaniPregled: Pregled=new Pregled();
-  status: string="ZAKAZAN";
+  ljekar: Ljekar = new Ljekar();
+  zakazaniPregled: Pregled = new Pregled();
+  status: string = "ZAKAZAN";
   klinikaZaPregled: Klinika = new Klinika();
   datumPregleda: Date;
+  validacija: boolean = true;
+  ocjenaKlinike: number;
+  lokacijaKlinike: string="";
 
 
   constructor(private serviceKlinika: KlinikaService, private servicePregled: PregledService, private serviceLjekar: LjekarService, private toastr: ToastrService) { }
@@ -43,7 +46,7 @@ export class ZakazivanjePregledaComponent implements OnInit {
       data => {
 
         this.sviTipoviPregleda = data;
-        this.sviTipoviPregledaLjekari=data;
+        this.sviTipoviPregledaLjekari = data;
       },
       error => {
         console.log(error);
@@ -52,49 +55,55 @@ export class ZakazivanjePregledaComponent implements OnInit {
   }
 
   pretraziKlinike() {
-    console.log(this.pregled.ime);
-    this.prikazTabeleKlinike = true;
-    this.serviceKlinika.pretragaKlinika(this.pregled.ime).subscribe(
-      data => {
-        this.klinike = data.klinike;
-        this.cijena = data.cijenaPregleda;
-        /* for(let a of this.klinike){
-             for(let b of a.ljekari){
-               for(let c of b.pregledi){
-                 this.cijena=c.cijena;
-               }
-             }
-         }*/
 
+    if (this.datumPregleda == null) {
+      this.toastr.error("Morate izabrati datum pregleda");
+      this.validacija = false;
+    }
 
-      }
-    )
+    if (this.pregled.ime == "") {
+      this.toastr.error("Morate izabrati tip pregleda");
+      this.validacija = false;
+    }
+
+    if (!this.validacija) {
+      this.validacija = true;
+    } else {
+      console.log(this.pregled.ime);
+      this.prikazTabeleKlinike = true;
+      this.serviceKlinika.pretragaKlinika(this.pregled.ime, this.ocjenaKlinike, this.lokacijaKlinike).subscribe(
+        data => {
+          this.klinike = data.klinike;
+          this.cijena = data.cijenaPregleda;
+        }
+      )
+    }
   }
   prikaziLjekare(klinika: Klinika) {
     this.prikazTabeleLjekara = true;
     this.ljekari = klinika.ljekari;
-    this.klinikaZaPregled=klinika;
-    
+    this.klinikaZaPregled = klinika;
+
   }
 
-  pretraziLjekare(){
-    
+  pretraziLjekare() {
+
     this.serviceLjekar.pretragaLjekara(this.imeLjekaraPretraga, this.prezimeLjekaraPretraga, this.ocjenaLjekara, this.ljekari).subscribe(
       data => {
-        this.ljekari=data;
+        this.ljekari = data;
       }
     )
 
   }
 
-  zakaziPregled(ljekar: Ljekar){
+  zakaziPregled(ljekar: Ljekar) {
 
-    this.zakazaniPregled.tipPregleda=this.pregled;
-    this.zakazaniPregled.cijena=this.pregled.cijena;
-    this.zakazaniPregled.stanje=this.status;
-    this.zakazaniPregled.klinika=this.klinikaZaPregled;
-    this.zakazaniPregled.ljekar=ljekar;
-    this.zakazaniPregled.termin=this.datumPregleda;
+    this.zakazaniPregled.tipPregleda = this.pregled;
+    this.zakazaniPregled.cijena = this.pregled.cijena;
+    this.zakazaniPregled.stanje = this.status;
+    this.zakazaniPregled.klinika = this.klinikaZaPregled;
+    this.zakazaniPregled.ljekar = ljekar;
+    this.zakazaniPregled.termin = this.datumPregleda;
 
 
     this.servicePregled.zakaziDostupniPregled(this.zakazaniPregled).subscribe(

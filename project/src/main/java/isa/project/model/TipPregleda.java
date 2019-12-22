@@ -23,7 +23,7 @@ public class TipPregleda {
 	private String ime;
 
 	@Column(name = "cijena")
-	private String cijena;
+	private double cijena;
 
 	@Column(name = "trajanje")
 	private int trajanje;
@@ -58,12 +58,13 @@ public class TipPregleda {
 	public void setIme(String ime) {
 		this.ime = ime;
 	}
-
-	public String getCijena() {
+	
+	
+	public double getCijena() {
 		return cijena;
 	}
 
-	public void setCijena(String cijena) {
+	public void setCijena(double cijena) {
 		this.cijena = cijena;
 	}
 
