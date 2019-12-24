@@ -22,7 +22,7 @@ export class ZakazaniPreglediComponent implements OnInit {
       data => {
         this.pregledi = data;
         for (let date of this.pregledi) {
-          date.medium = this.datePipe.transform(date.termin, "MMM d, y, h:mm a");
+          date.medium = this.datePipe.transform(date.termin, "MMM d, y");
         }
       },
       error => {
@@ -43,7 +43,7 @@ export class ZakazaniPreglediComponent implements OnInit {
           data => {
             this.pregledi = data;
             for (let date of this.pregledi) {
-              date.medium = this.datePipe.transform(date.termin, "MMM d, y, h:mm a");
+              date.medium = this.datePipe.transform(date.termin, "MMM d, y");
             }
           },
           error => {

@@ -20,6 +20,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -45,14 +46,19 @@ public class Ljekar {
 	private Date godisnji_do;
 	
 	@Temporal(TemporalType.TIME)
+	@JsonFormat(pattern="HH:mm:ss", timezone="Europe/Belgrade")
 	private Date radno_vrijeme_od;
 	
 	@Temporal(TemporalType.TIME)
+	@JsonFormat(pattern="HH:mm:ss", timezone="Europe/Belgrade")
 	private Date radno_vrijeme_do;
 
 	@OneToMany(mappedBy = "ljekar", cascade = CascadeType.ALL)
 	@JsonIgnore
 	private List<Pregled> pregledi = new ArrayList<>();
+	
+	@OneToMany(mappedBy = "ljekar", cascade = CascadeType.ALL)
+	private List<Termin> termini = new ArrayList<>();
 
 	@ManyToOne
 	@JoinColumn(name = "klinika_id")
@@ -152,6 +158,14 @@ public class Ljekar {
 
 	public void setRadno_vrijeme_do(Date radno_vrijeme_do) {
 		this.radno_vrijeme_do = radno_vrijeme_do;
+	}
+
+	public List<Termin> getTermini() {
+		return termini;
+	}
+
+	public void setTermini(List<Termin> termini) {
+		this.termini = termini;
 	}
 
 }

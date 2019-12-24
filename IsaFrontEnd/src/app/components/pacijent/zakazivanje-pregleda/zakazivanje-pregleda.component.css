@@ -21,6 +21,13 @@ html, body, app-root {
     font: outline;
     font-family: 'Montserrat', sans-serif;
 }
+.jumbotron2{
+    margin: 1cm;
+    text-align: center;
+    color: rgb(0, 47, 255);
+    font: outline;
+    font-family: 'Montserrat', sans-serif;
+}
 .nav-link{
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 

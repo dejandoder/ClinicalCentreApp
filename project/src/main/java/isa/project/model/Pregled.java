@@ -15,6 +15,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 public class Pregled {
 
@@ -22,8 +24,12 @@ public class Pregled {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Temporal(TemporalType.TIMESTAMP)
+	@Temporal(TemporalType.DATE)
 	private Date termin;
+	
+	@Temporal(TemporalType.TIME)
+	@JsonFormat(pattern="HH:mm:ss", timezone="Europe/Belgrade")
+	private Date vrijeme;
 
 	@Column(name = "sala")
 	private int sala;
@@ -58,6 +64,9 @@ public class Pregled {
 
 	@OneToOne
 	private TipPregleda tipPregleda;
+	
+	@OneToOne
+	private Termin vrijemepom;
 
 	public Pregled() {
 		// TODO Auto-generated constructor stub
@@ -158,5 +167,22 @@ public class Pregled {
 	public void setTipPregleda(TipPregleda tipPregleda) {
 		this.tipPregleda = tipPregleda;
 	}
+
+	public Date getVrijeme() {
+		return vrijeme;
+	}
+
+	public void setVrijeme(Date vrijeme) {
+		this.vrijeme = vrijeme;
+	}
+
+	public Termin getVrijemepom() {
+		return vrijemepom;
+	}
+
+	public void setVrijemepom(Termin vrijemepom) {
+		this.vrijemepom = vrijemepom;
+	}
+	
 
 }

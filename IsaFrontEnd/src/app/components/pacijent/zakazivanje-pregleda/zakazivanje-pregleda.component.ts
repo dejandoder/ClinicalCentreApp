@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { KlinikaService } from 'src/app/service/klinika.service';
 import { PregledService } from 'src/app/service/pregled.service';
 import { Pregled } from 'src/app/model/Pregled';
@@ -7,6 +7,9 @@ import { Ljekar } from 'src/app/model/Ljekar';
 import { TipPregleda } from 'src/app/model/TipPregleda';
 import { LjekarService } from 'src/app/service/ljekar.service';
 import { ToastrService } from 'ngx-toastr';
+import { Termin } from 'src/app/model/Termin';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-zakazivanje-pregleda',
@@ -36,87 +39,104 @@ export class ZakazivanjePregledaComponent implements OnInit {
   datumPregleda: Date;
   validacija: boolean = true;
   ocjenaKlinike: number;
-  lokacijaKlinike: string="";
+  lokacijaKlinike: string = "";
+  sviTermini: Termin[] = [];
+  terminLj: Termin = new Termin();
+  modalRef: BsModalRef;
 
 
-  constructor(private serviceKlinika: KlinikaService, private servicePregled: PregledService, private serviceLjekar: LjekarService, private toastr: ToastrService) { }
+    constructor(private serviceKlinika: KlinikaService, private servicePregled: PregledService, private serviceLjekar: LjekarService, private toastr: ToastrService, private modalService: BsModalService, private route : ActivatedRoute, private router : Router) { }
 
-  ngOnInit() {
-    this.servicePregled.preuzmiTipovePregleda().subscribe(
+ngOnInit() {
+  this.servicePregled.preuzmiTipovePregleda().subscribe(
+    data => {
+
+      this.sviTipoviPregleda = data;
+      this.sviTipoviPregledaLjekari = data;
+    },
+    error => {
+      console.log(error);
+    }
+  )
+}
+
+pretraziKlinike() {
+
+  if (this.datumPregleda == null) {
+    this.toastr.error("Morate izabrati datum pregleda");
+    this.validacija = false;
+  }
+
+  if (this.pregled.ime == "") {
+    this.toastr.error("Morate izabrati tip pregleda");
+    this.validacija = false;
+  }
+
+  if (!this.validacija) {
+    this.validacija = true;
+  } else {
+    console.log(this.pregled.ime);
+    this.prikazTabeleKlinike = true;
+    this.serviceKlinika.pretragaKlinika(this.pregled.ime, this.ocjenaKlinike, this.lokacijaKlinike).subscribe(
       data => {
-
-        this.sviTipoviPregleda = data;
-        this.sviTipoviPregledaLjekari = data;
-      },
-      error => {
-        console.log(error);
+        this.klinike = data.klinike;
+        this.cijena = data.cijenaPregleda;
       }
     )
   }
+}
+prikaziLjekare(klinika: Klinika) {
+  this.prikazTabeleLjekara = true;
+  this.ljekari = klinika.ljekari;
+  this.klinikaZaPregled = klinika;
+}
 
-  pretraziKlinike() {
+prikaziTermine(template: TemplateRef<any>, ljekar: Ljekar){
+  this.modalRef = this.modalService.show(template);
+  this.sviTermini=ljekar.termini;
+  this.ljekar=ljekar;
+}
 
-    if (this.datumPregleda == null) {
-      this.toastr.error("Morate izabrati datum pregleda");
-      this.validacija = false;
+izaberiTermin(){
+  this.zakazaniPregled.vrijeme=this.terminLj.termin;
+}
+
+pretraziLjekare() {
+
+  this.serviceLjekar.pretragaLjekara(this.imeLjekaraPretraga, this.prezimeLjekaraPretraga, this.ocjenaLjekara, this.ljekari).subscribe(
+    data => {
+      this.ljekari = data;
     }
+  )
 
-    if (this.pregled.ime == "") {
-      this.toastr.error("Morate izabrati tip pregleda");
-      this.validacija = false;
+}
+
+zakaziPregled() {
+
+  this.modalRef.hide();
+  this.zakazaniPregled.tipPregleda = this.pregled;
+  this.zakazaniPregled.cijena = this.pregled.cijena;
+  this.zakazaniPregled.stanje = this.status;
+  this.zakazaniPregled.klinika = this.klinikaZaPregled;
+  this.zakazaniPregled.ljekar = this.ljekar;
+  this.zakazaniPregled.termin = this.datumPregleda;
+  //this.zakazaniPregled.vrijeme=this.terminLj.termin;
+  this.zakazaniPregled.vrijemepom=this.terminLj;
+
+  this.toastr.info("Molimo sacekajte, u toku je zakazivanje pregleda");
+  this.router.navigate(["karton"],{relativeTo: this.route});
+
+  this.servicePregled.zakaziDostupniPregled(this.zakazaniPregled).subscribe(
+    data => {
+      this.toastr.success("Uspjesno ste zakazali pregled");
+
+    },
+    error => {
+      console.log(error);
     }
+  )
 
-    if (!this.validacija) {
-      this.validacija = true;
-    } else {
-      console.log(this.pregled.ime);
-      this.prikazTabeleKlinike = true;
-      this.serviceKlinika.pretragaKlinika(this.pregled.ime, this.ocjenaKlinike, this.lokacijaKlinike).subscribe(
-        data => {
-          this.klinike = data.klinike;
-          this.cijena = data.cijenaPregleda;
-        }
-      )
-    }
-  }
-  prikaziLjekare(klinika: Klinika) {
-    this.prikazTabeleLjekara = true;
-    this.ljekari = klinika.ljekari;
-    this.klinikaZaPregled = klinika;
-
-  }
-
-  pretraziLjekare() {
-
-    this.serviceLjekar.pretragaLjekara(this.imeLjekaraPretraga, this.prezimeLjekaraPretraga, this.ocjenaLjekara, this.ljekari).subscribe(
-      data => {
-        this.ljekari = data;
-      }
-    )
-
-  }
-
-  zakaziPregled(ljekar: Ljekar) {
-
-    this.zakazaniPregled.tipPregleda = this.pregled;
-    this.zakazaniPregled.cijena = this.pregled.cijena;
-    this.zakazaniPregled.stanje = this.status;
-    this.zakazaniPregled.klinika = this.klinikaZaPregled;
-    this.zakazaniPregled.ljekar = ljekar;
-    this.zakazaniPregled.termin = this.datumPregleda;
-
-
-    this.servicePregled.zakaziDostupniPregled(this.zakazaniPregled).subscribe(
-      data => {
-        this.toastr.success("Uspjesno ste zakazali pregled");
-
-      },
-      error => {
-        console.log(error);
-      }
-    )
-
-  }
+}
 
 
 }

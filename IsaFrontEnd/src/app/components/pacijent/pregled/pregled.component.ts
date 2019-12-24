@@ -22,7 +22,7 @@ export class PregledComponent implements OnInit {
       data => {
         this.pregledi = data;
         for (let date of this.pregledi) {
-          date.medium = this.datePipe.transform(date.termin, "MMM d, y, h:mm a");
+          date.medium = this.datePipe.transform(date.termin, "MMM d, y");
         }
       },
       error => {
@@ -35,6 +35,7 @@ export class PregledComponent implements OnInit {
   }
 
   zakaziDostupniPregled(pregled: Pregled) {
+    this.toastr.info("Molimo sacekajte, u toku je zakazivanje pregleda");
     this.service.zakaziDostupniPregled(pregled).subscribe(
       data => {
         this.toastr.warning("Pregled je moguce otkazati najkasnije 24h prije pocetka!", "Upozorenje!", {
@@ -46,7 +47,7 @@ export class PregledComponent implements OnInit {
           data => {
             this.pregledi = data;
             for (let date of this.pregledi) {
-              date.medium = this.datePipe.transform(date.termin, "MMM d, y, h:mm a");
+              date.medium = this.datePipe.transform(date.termin, "MMM d, y");
             }
           },
           error => {

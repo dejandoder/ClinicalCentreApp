@@ -1,4 +1,5 @@
 import { Pregled } from './Pregled';
+import { Termin } from './Termin';
 
 export class Ljekar{
     id : number;
@@ -10,5 +11,5 @@ export class Ljekar{
     radno_vrijeme_do: Date;
     godisnji_od: Date;
     godisnji_do: Date;
-
+    termini : Termin[]=[];
 }

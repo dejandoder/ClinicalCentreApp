@@ -6,9 +6,11 @@ import java.util.List;
 import isa.project.model.Korisnik;
 import isa.project.model.Pregled;
 import isa.project.model.StanjePregleda;
+import isa.project.model.Termin;
 import isa.project.service.EmailService;
 import isa.project.service.KorisnikService;
 import isa.project.service.PregledService;
+import isa.project.service.TerminService;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,6 +38,9 @@ public class PregledController {
 	@Autowired
 	private EmailService emailService;
 	
+	@Autowired
+	private TerminService terminService;
+		
 	//private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 	
 	@GetMapping(value = "/all")
@@ -55,10 +60,19 @@ public class PregledController {
 	}
 	
 	@RequestMapping(value="/zakaziDostupni", method=RequestMethod.POST)
-	public void zakaziDostupniPregled(@RequestBody Pregled pregled){
+	public ResponseEntity<Pregled> zakaziDostupniPregled(@RequestBody Pregled pregled){
 		Korisnik trenutni = korisnikService.getCurrentUser();
+		
 		pregled.setStanje(StanjePregleda.ZAKAZAN);
 		pregled.setKorisnik(trenutni);
+		
+		Termin novi= pregled.getVrijemepom();
+		novi.setZauzet(true);
+		novi.setLjekar(pregled.getLjekar());
+		
+		pregled.setVrijeme(novi.getTermin());
+		
+		terminService.saveTermin(novi);
 		pregledService.savePregled(pregled);
 		
 		try {
@@ -66,7 +80,7 @@ public class PregledController {
 		}catch( Exception e ){
 			logger.info("Greska prilikom slanja emaila: " + e.getMessage());
 		}
-		//return new ResponseEntity<>(pregled, HttpStatus.OK);
+		return new ResponseEntity<>(pregled, HttpStatus.OK);
 				
 	}
 	

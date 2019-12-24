@@ -93,9 +93,11 @@
                             <td style="text-align: center;">{{ljekar.ime}}</td>
                             <td style="text-align: center;">{{ljekar.prezime}}</td>
                             <td style="text-align: center;">{{ljekar.ocjena}}</td>
-                            <td style="text-align: center;">{{ljekar.radno_vrijeme_od}} - {{ljekar.radno_vrijeme_do}}</td>
+                            <td style="text-align: center;">{{ljekar.radno_vrijeme_od}} - {{ljekar.radno_vrijeme_do}}
+                            </td>
                             <td style="text-align: center;"><button class="btn btn-link"
-                                    (click)="zakaziPregled(ljekar)">Zakaži pregled</button></td>
+                                (click)="prikaziTermine(modal, ljekar)">Prikaži termine</button></td>
+            
                         </tr>
                     </tbody>
                 </table>
@@ -145,3 +147,35 @@
         </div>
     </div>
 </body>
+
+<ng-template #modal>
+    <div class="modal-header">
+        <h4 class="modal-title naslov pull-left">Slobodni termini </h4>
+    </div>
+    <div class="modal-body d-flex ">
+        <div>
+            <div class="jumbotron2">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>Termini</label>
+                            <select class="form-control" [(ngModel)]="terminLj" >
+                                <option *ngFor="let termin of sviTermini" [hidden]="termin.zauzet == true" [ngValue]="termin">
+                                    {{termin.termin}}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                    <div class="col-md-12">
+                            <button style="margin: 5px" type="submit" (click)="zakaziPregled()" class="btn btn-primary ">Zakazi pregled</button>          
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</ng-template>

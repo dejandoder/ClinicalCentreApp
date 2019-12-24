@@ -20,7 +20,7 @@
                     <tbody *ngFor="let a of pregledi; let i = index">
                         <tr>
                             <th style="text-align: center;" scope="row">{{i+1}}</th>
-                            <td style="text-align: center;">{{a.medium}}</td>
+                            <td style="text-align: center;">{{a.medium}} {{a.vrijeme}}</td>
                             <td style="text-align: center;">{{a.tipPregleda.ime}}</td>
                             <td style="text-align: center;">{{a.trajanje}} min</td>
                             <td style="text-align: center;">{{a.sala}}</td>
