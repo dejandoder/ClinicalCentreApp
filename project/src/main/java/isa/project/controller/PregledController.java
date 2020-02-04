@@ -121,16 +121,16 @@ public class PregledController {
 	
 	@GetMapping(value = "/zakazani")
 	public ResponseEntity<List<Pregled>> getZakazani() {
-		
-		List<Pregled> pregledi = pregledService.getPregledZakazani();
+		Korisnik trenutni = korisnikService.getCurrentUser();
+		List<Pregled> pregledi = pregledService.getPregledZakazani(trenutni.getId());
 		return new ResponseEntity<>(pregledi, HttpStatus.OK);
 		
 	}
 	
 	@GetMapping(value = "/istorija")
 	public ResponseEntity<List<Pregled>> getIstorija() {
-		
-		List<Pregled> pregledi = pregledService.getIstorijaPregleda();
+		Korisnik trenutni = korisnikService.getCurrentUser();
+		List<Pregled> pregledi = pregledService.getIstorijaPregleda(trenutni.getId());
 		return new ResponseEntity<>(pregledi, HttpStatus.OK);
 		
 	}

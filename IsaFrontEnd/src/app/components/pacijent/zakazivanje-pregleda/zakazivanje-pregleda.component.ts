@@ -122,19 +122,25 @@ zakaziPregled() {
   this.zakazaniPregled.termin = this.datumPregleda;
   //this.zakazaniPregled.vrijeme=this.terminLj.termin;
   this.zakazaniPregled.vrijemepom=this.terminLj;
-
-  this.toastr.info("Molimo sacekajte, u toku je zakazivanje pregleda");
   this.router.navigate(["karton"],{relativeTo: this.route});
 
-  this.servicePregled.zakaziNoviPregled(this.zakazaniPregled).subscribe(
-    data => {
-      this.toastr.success("Uspjesno ste zakazali pregled");
+  if(this.datumPregleda > this.ljekar.godisnji_od && this.datumPregleda < this.ljekar.godisnji_do){
+    this.toastr.error("Izabrani ljekar je na godisnjem odmoru u periodu od " + this.ljekar.godisnji_od + " do " + this.ljekar.godisnji_do);
+  }else
+  {
+    this.toastr.info("Molimo sacekajte, u toku je zakazivanje pregleda");
+    this.servicePregled.zakaziNoviPregled(this.zakazaniPregled).subscribe(
+      data => {
+        this.toastr.success("Uspjesno ste zakazali pregled");
+  
+      },
+      error => {
+        console.log(error);
+      }
+    )
+  }
 
-    },
-    error => {
-      console.log(error);
-    }
-  )
+ 
 
 }
 

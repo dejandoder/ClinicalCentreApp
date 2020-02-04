@@ -1,8 +1,10 @@
 package isa.project.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import isa.project.model.Pregled;
+import isa.project.repository.KorisnikRepository;
 import isa.project.repository.PregledRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,9 @@ public class PregledService {
 
 	@Autowired
 	private PregledRepository pregledRepository;
+	
+	@Autowired
+	private KorisnikRepository korisnikRepository;
 
 	public List<Pregled> findAll() {
 		return pregledRepository.findAll();
@@ -22,12 +27,18 @@ public class PregledService {
 		return pregledRepository.save(pregled);
 	}
 
-	public List<Pregled> getPregledZakazani() {
-		return pregledRepository.getZakazaniPregledi();
+	public List<Pregled> getPregledZakazani(Long id) {
+		List<Pregled> pregledi = new ArrayList<Pregled>();
+		pregledi.addAll(pregledRepository.getZakazaniPregledi());
+		pregledi.removeIf(n -> (!n.getKorisnik().getId().equals(id)));
+		return pregledi;
 	}
 
-	public List<Pregled> getIstorijaPregleda() {
-		return pregledRepository.getIstorijaPregleda();
+	public List<Pregled> getIstorijaPregleda(Long id) {
+		List<Pregled> pregledi = new ArrayList<Pregled>();
+		pregledi.addAll(pregledRepository.getIstorijaPregleda());
+		pregledi.removeIf(n -> (!n.getKorisnik().getId().equals(id)));
+		return pregledi;
 	}
 
 	public List<Pregled> getDostupniPregledi() {

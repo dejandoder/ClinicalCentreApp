@@ -86,6 +86,11 @@ export class RegistracijaComponent implements OnInit {
       this.validacija = false;
     }
 
+    if(!validateEmail(this.korisnik.email)){
+      this.toastr.error("E-mail nije validan");
+      this.validacija = false;
+    }
+
     if (!this.validacija) {
       this.toastr.warning("Neuspjesna registracija");
       this.validacija = true;
@@ -107,4 +112,10 @@ export class RegistracijaComponent implements OnInit {
 
 
 
+}
+
+function validateEmail(email) 
+{
+    var re = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+    return re.test(email);
 }
