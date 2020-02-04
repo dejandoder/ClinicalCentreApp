@@ -66,6 +66,31 @@ public class PregledController {
 		pregled.setStanje(StanjePregleda.ZAKAZAN);
 		pregled.setKorisnik(trenutni);
 		
+		//Termin novi= pregled.getVrijemepom();
+		//novi.setZauzet(true);
+		//novi.setLjekar(pregled.getLjekar());
+		
+		//pregled.setVrijeme(novi.getTermin());
+		
+		//terminService.saveTermin(novi);
+		pregledService.savePregled(pregled);
+		
+		try {
+			emailService.slanjeMejlaZaDostupnePreglede(trenutni);
+		}catch( Exception e ){
+			logger.info("Greska prilikom slanja emaila: " + e.getMessage());
+		}
+		return new ResponseEntity<>(pregled, HttpStatus.OK);
+				
+	}
+	
+	@RequestMapping(value="/zakaziNovi", method=RequestMethod.POST)
+	public ResponseEntity<Pregled> zakaziNoviPregled(@RequestBody Pregled pregled){
+		Korisnik trenutni = korisnikService.getCurrentUser();
+		
+		pregled.setStanje(StanjePregleda.ZAKAZAN);
+		pregled.setKorisnik(trenutni);
+		
 		Termin novi= pregled.getVrijemepom();
 		novi.setZauzet(true);
 		novi.setLjekar(pregled.getLjekar());

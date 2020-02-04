@@ -17,6 +17,10 @@ export class PregledService {
     return this.http.post<any>("api/pregledi/zakaziDostupni", pregled);
   }
 
+  zakaziNoviPregled(pregled: Pregled) {
+    return this.http.post<any>("api/pregledi/zakaziNovi", pregled);
+  }
+
   otkaziPregled(pregled: Pregled) {
     return this.http.post<any>("api/pregledi/otkazi", pregled);
   }

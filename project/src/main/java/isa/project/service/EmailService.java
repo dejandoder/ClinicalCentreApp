@@ -74,7 +74,7 @@ public class EmailService {
 		mail.setTo(user.getEmail());
 		mail.setFrom(env.getProperty("spring.mail.username"));
 		mail.setSubject("Verifikacija naloga");
-		mail.setText("Da biste verifikovali nalog, otvorite link http://localhost:8888/korisnici/aktiviraj/"
+		mail.setText("Hvala na registraciji, da biste verifikovali nalog, otvorite link http://localhost:8888/korisnici/aktiviraj/"
 				+ user.getEmail() + "/");
 
 		javaMailSender.send(mail);

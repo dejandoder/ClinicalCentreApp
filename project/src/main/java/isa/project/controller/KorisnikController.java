@@ -44,8 +44,11 @@ public class KorisnikController {
 		String hashPass = "";
 		hashPass = encoder.encode(novi.getPassword());
 		novi.setPassword(hashPass);
-		novi.setVerifikovan(false);
-
+		//automatsko postavljanje da je korisnik verifikovan, zbog nepostojanosti profila ljekara
+		novi.setVerifikovan(true);
+		novi.setRole(Role.REGISTROVAN);
+        
+		//simulacija slanja mejla za verifikaciju
 		try {
 			emailService.slanjeMejlaZaVerifikaciju(novi);
 		} catch (Exception e) {
@@ -73,12 +76,24 @@ public class KorisnikController {
 	public @ResponseBody ResponseEntity<Korisnik> izmijeniKorisnika(
 			@RequestBody Korisnik novi) {
 
-		String hashPass = "";
-		hashPass = encoder.encode(novi.getPassword());
-		novi.setPassword(hashPass);
+		//String hashPass = "";
+		//hashPass = encoder.encode(novi.getPassword());
+		//novi.setPassword(hashPass);
 		korisnikService.saveUser(novi);
 
 		return new ResponseEntity<>(novi, HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/izmjenaLozinke", method = RequestMethod.POST)
+	void izmijeniLozinkuKorisnika(
+			@RequestBody String novi) {
+		Korisnik user = korisnikService.getCurrentUser();
+		String hashPass = "";
+		hashPass = encoder.encode(novi);
+		user.setPassword(hashPass);
+		korisnikService.saveUser(user);
+
+		//return novi;
 	}
 
 	@RequestMapping(value = "/verifikuj/{email}", method = RequestMethod.GET)

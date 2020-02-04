@@ -126,7 +126,7 @@ zakaziPregled() {
   this.toastr.info("Molimo sacekajte, u toku je zakazivanje pregleda");
   this.router.navigate(["karton"],{relativeTo: this.route});
 
-  this.servicePregled.zakaziDostupniPregled(this.zakazaniPregled).subscribe(
+  this.servicePregled.zakaziNoviPregled(this.zakazaniPregled).subscribe(
     data => {
       this.toastr.success("Uspjesno ste zakazali pregled");
 

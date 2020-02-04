@@ -20,5 +20,9 @@ export class KorisnikService {
   izmjenaPodataka(korisnik: Korisnik) {
     return this.http.post<Korisnik>('api/korisnici/izmjena', korisnik);
   }
+
+  izmjenaLozinke(novaLozinka: string) {
+    return this.http.post<any>('api/korisnici/izmjenaLozinke', novaLozinka);
+  }
  
 }

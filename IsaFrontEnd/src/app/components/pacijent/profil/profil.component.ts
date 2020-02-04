@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { KorisnikService } from 'src/app/service/korisnik.service';
 import { Korisnik } from 'src/app/model/Korisnik';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap';
 
 @Component({
   selector: 'app-profil',
@@ -12,12 +13,14 @@ import { ToastrModule, ToastrService } from 'ngx-toastr';
 export class ProfilComponent implements OnInit {
 
   trenutniKorisnik: Korisnik=new Korisnik();
+  modalRef: BsModalRef;
   ime : string = ""; 
   prezime : string = "";
   email : string = "";
   grad : string = "";
+  novaLozinka : any;
 
-  constructor(private router : Router, private route : ActivatedRoute, private service: KorisnikService, private toastr: ToastrService) { }
+  constructor(private router : Router, private route : ActivatedRoute, private service: KorisnikService, private toastr: ToastrService, private modalService: BsModalService) { }
 
   ngOnInit() {
     this.service.vratiTrenutnogKorisnika().subscribe(
@@ -43,6 +46,25 @@ export class ProfilComponent implements OnInit {
   
       }
     );
+  }
+
+  izmijeniLozinku(template: TemplateRef<any>){
+    this.modalRef = this.modalService.show(template);
+  }
+  izmijeniLozinku2(){
+    this.service.izmjenaLozinke(this.novaLozinka).subscribe(
+      data => {
+        this.toastr.success("Uspjesno ste promijenili lozinku!");
+      },
+      error => {
+        this.toastr.success("Uspjesno ste promijenili lozinkurac!");
+      }
+    )
+    this.modalRef.hide();
+  }
+
+  odustaniOdIzmjene(){
+     this.modalRef.hide();
   }
 
 }
