@@ -101,7 +101,7 @@ export class RegistracijaComponent implements OnInit {
           this.toastr.info("Dobicete e-mail za verifikaciju!");
         },
         error => {
-
+          this.toastr.error("Nalog sa navedenom e-mail adresom vec postoji!");
         }
       );
     }

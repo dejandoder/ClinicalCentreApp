@@ -7,6 +7,7 @@ import isa.project.model.Ljekar;
 import isa.project.service.LjekarService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -23,6 +24,18 @@ public class LjekarController {
 	public List<Ljekar> pretragaLjekara(
 			@RequestBody PretragaLjekaraDTO parametar) {
 		return ljekarService.pretragaLjekara(parametar);
+	}
+	
+	@RequestMapping(value = "/ocijeniLjekara/{parametar}", method = RequestMethod.POST)
+	public Ljekar ocjenaLjekara(
+			@RequestBody Ljekar ljekar, @PathVariable double parametar) {
+		double rezultat=0;
+		Ljekar lj = ljekarService.findLjekarById(ljekar.getId());
+		rezultat=(lj.getOcjena() + parametar)/2;
+		double konacno = ljekarService.konacanRezultat(rezultat);
+		lj.setOcjena(konacno);
+		ljekarService.saveLjekar(lj);
+		return ljekar;
 	}
 
 }

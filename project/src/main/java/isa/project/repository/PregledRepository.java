@@ -24,6 +24,6 @@ public interface PregledRepository extends JpaRepository<Pregled, Long> {
 	List<Pregled> getPregledPoTipu(String tip);
 	
 	@Query("select pregled from Pregled pregled where korisnik.id = ?1")
-	List<Pregled> getPregledPoKorisniku(int id);
+	List<Pregled> getPregledPoKorisniku(Long id);
 
 }

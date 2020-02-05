@@ -6,5 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface LjekarRepository extends JpaRepository<Ljekar, Long> {
 	
-
+	Ljekar findOneById(Long id);
+	
 }

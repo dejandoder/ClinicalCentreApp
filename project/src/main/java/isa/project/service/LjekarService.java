@@ -35,5 +35,27 @@ public class LjekarService {
 
 		return lista;
 	}
+	
+	public Ljekar findLjekarById(Long id){
+		return ljekarRepository.findOneById(id);
+	}
+	
+	public double konacanRezultat(double rezultat){
+		rezultat=round(rezultat,2);
+		return rezultat;
+	}
+	
+	public Ljekar saveLjekar(Ljekar ljekar){
+		return ljekarRepository.save(ljekar);
+	}
+	
+	public static double round(double value, int places) {
+	    if (places < 0) throw new IllegalArgumentException();
+
+	    long factor = (long) Math.pow(10, places);
+	    value = value * factor;
+	    long tmp = Math.round(value);
+	    return (double) tmp / factor;
+	}
 
 }

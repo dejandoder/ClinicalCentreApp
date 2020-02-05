@@ -74,7 +74,7 @@
                         <div class="col-md-6">
                         <div class="form-group">                           
                                 <label>Moja ocjena</label>                           
-                                <select class="form-control" id="ocjenaKlinika" name="ocjenaKlinika">
+                                <select class="form-control" [(ngModel)]="ocjenjenaKlinika" id="ocjenjenaKlinika" name="ocjenjenaKlinika">
                                     <option value="1">1</option>
                                     <option value="2">2</option>
                                     <option value="3">3</option>
@@ -130,7 +130,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label>Moja ocjena</label>
-                            <select class="form-control" id="ocjenaLjekar" name="ocjenaLjekar">
+                            <select class="form-control" [(ngModel)]="ocjenjenLjekar" id="ocjenjenLjekar" name="ocjenjenLjekar">
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>

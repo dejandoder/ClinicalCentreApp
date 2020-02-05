@@ -135,7 +135,7 @@ zakaziPregled() {
   
       },
       error => {
-        console.log(error);
+        this.toastr.error("Vec imate zakazan pregled u tom terminu!");
       }
     )
   }

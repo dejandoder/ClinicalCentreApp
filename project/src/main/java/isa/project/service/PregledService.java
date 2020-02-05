@@ -44,6 +44,10 @@ public class PregledService {
 	public List<Pregled> getDostupniPregledi() {
 		return pregledRepository.getDostupniPregledi();
 	}
+	
+	public List<Pregled> getPregledPoKorisniku(Long id){
+		return pregledRepository.getPregledPoKorisniku(id);
+	}
 
 	public List<Pregled> getPreglediPoTipu(String tip) {
 		return pregledRepository.getPregledPoTipu(tip);

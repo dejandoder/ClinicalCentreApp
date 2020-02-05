@@ -40,24 +40,38 @@ public class KorisnikController {
 	@RequestMapping(value = "/registracija", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody ResponseEntity<Korisnik> registrujKorisnika(
 			@RequestBody Korisnik novi) {
+		if (novi == null) {
+			return new ResponseEntity<>(novi, HttpStatus.BAD_REQUEST);
+		} else {
+			Korisnik provjeraMejla = korisnikService.findByEmail(novi
+					.getEmail());
+			if (provjeraMejla == null) {
 
-		String hashPass = "";
-		hashPass = encoder.encode(novi.getPassword());
-		novi.setPassword(hashPass);
-		//automatsko postavljanje da je korisnik verifikovan, zbog nepostojanosti profila ljekara
-		novi.setVerifikovan(true);
-		novi.setRole(Role.REGISTROVAN);
-        
-		//simulacija slanja mejla za verifikaciju
-		try {
-			emailService.slanjeMejlaZaVerifikaciju(novi);
-		} catch (Exception e) {
-			logger.info("Greska prilikom slanja emaila: " + e.getMessage());
+				String hashPass = "";
+				hashPass = encoder.encode(novi.getPassword());
+				novi.setPassword(hashPass);
+				// automatsko postavljanje da je korisnik verifikovan, zbog
+				// nepostojanosti profila ljekara
+				novi.setVerifikovan(true);
+				novi.setRole(Role.REGISTROVAN);
+
+				// simulacija slanja mejla za verifikaciju
+				try {
+					emailService.slanjeMejlaZaVerifikaciju(novi);
+				} catch (Exception e) {
+					logger.info("Greska prilikom slanja emaila: "
+							+ e.getMessage());
+				}
+
+				korisnikService.saveUser(novi);
+
+				return new ResponseEntity<>(novi, HttpStatus.OK);
+			} else {
+				return new ResponseEntity<>(novi, HttpStatus.BAD_REQUEST);
+			}
+
 		}
 
-		korisnikService.saveUser(novi);
-
-		return new ResponseEntity<>(novi, HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/getCurrentUser", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -76,24 +90,23 @@ public class KorisnikController {
 	public @ResponseBody ResponseEntity<Korisnik> izmijeniKorisnika(
 			@RequestBody Korisnik novi) {
 
-		//String hashPass = "";
-		//hashPass = encoder.encode(novi.getPassword());
-		//novi.setPassword(hashPass);
+		// String hashPass = "";
+		// hashPass = encoder.encode(novi.getPassword());
+		// novi.setPassword(hashPass);
 		korisnikService.saveUser(novi);
 
 		return new ResponseEntity<>(novi, HttpStatus.OK);
 	}
-	
+
 	@RequestMapping(value = "/izmjenaLozinke", method = RequestMethod.POST)
-	void izmijeniLozinkuKorisnika(
-			@RequestBody String novi) {
+	void izmijeniLozinkuKorisnika(@RequestBody String novi) {
 		Korisnik user = korisnikService.getCurrentUser();
 		String hashPass = "";
 		hashPass = encoder.encode(novi);
 		user.setPassword(hashPass);
 		korisnikService.saveUser(user);
 
-		//return novi;
+		// return novi;
 	}
 
 	@RequestMapping(value = "/verifikuj/{email}", method = RequestMethod.GET)

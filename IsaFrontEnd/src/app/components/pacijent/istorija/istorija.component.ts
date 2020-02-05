@@ -5,6 +5,9 @@ import { Pregled } from 'src/app/model/Pregled';
 import { Sort } from '@angular/material';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap';
 import { Klinika } from 'src/app/model/Klinika';
+import { KlinikaService } from 'src/app/service/klinika.service';
+import { Ljekar } from 'src/app/model/Ljekar';
+import { LjekarService } from 'src/app/service/ljekar.service';
 
 @Component({
   selector: 'app-istorija',
@@ -24,8 +27,12 @@ export class IstorijaComponent implements OnInit {
   imeLjekara : string="";
   prezimeLjekara : string="";
   ocjenaLjekara : number;
+  ocjenjenaKlinika : any;
+  klinikaZaOcjenu: Klinika =  new Klinika;
+  ljekarZaOcjenu: Ljekar = new Ljekar;
+  ocjenjenLjekar : any;
 
-  constructor(private service: PregledService, private datePipe: DatePipe, private modalService: BsModalService) { 
+  constructor(private service: PregledService, private datePipe: DatePipe, private modalService: BsModalService, private klinikaService : KlinikaService, private ljekarService : LjekarService) { 
     this.sortedData = this.pregledi.slice();
   }
 
@@ -75,6 +82,7 @@ export class IstorijaComponent implements OnInit {
   }
 
   ocijeniKliniku(template: TemplateRef<any>, pregled: Pregled) {
+    this.klinikaZaOcjenu= pregled.klinika;
     this.modalRef = this.modalService.show(template);
     this.imeKlinike=pregled.klinika.ime;
     this.adresaKlinike=pregled.klinika.adresa;
@@ -83,11 +91,66 @@ export class IstorijaComponent implements OnInit {
   }
 
   ocijeniLjekara(template: TemplateRef<any>, pregled: Pregled) {
+    this.ljekarZaOcjenu= pregled.ljekar;
     this.modalRef = this.modalService.show(template);
     this.imeLjekara=pregled.ljekar.ime;
     this.prezimeLjekara=pregled.ljekar.prezime;
     this.ocjenaLjekara=pregled.ljekar.ocjena;
-  
+  }
+
+  ocijeniK(){
+    this.modalRef.hide();
+
+    this.klinikaService.ocijeniKliniku(this.ocjenjenaKlinika, this.klinikaZaOcjenu).subscribe(
+      data => {
+        this.service.preuzmiIstoriju().subscribe(
+          data => {
+            this.pregledi = data;
+            
+            for (let date of this.pregledi) {
+              date.medium = this.datePipe.transform(date.termin, "d MMM y, h:mm a");
+            }
+            this.sortedData=this.pregledi;
+          },
+          error => {
+            console.log(error);
+          }
+        )
+      },
+      error => {
+        console.log(error);
+      }
+    )
+
+    
+  }
+
+  ocijeniLj(){
+    this.modalRef.hide();
+
+    this.ljekarService.ocijeniLjekara(this.ocjenjenLjekar, this.ljekarZaOcjenu).subscribe(
+      data => {
+        this.service.preuzmiIstoriju().subscribe(
+          data => {
+            this.pregledi = data;
+            
+            for (let date of this.pregledi) {
+              date.medium = this.datePipe.transform(date.termin, "d MMM y, h:mm a");
+            }
+            this.sortedData=this.pregledi;
+          },
+          error => {
+            console.log(error);
+          }
+        )
+      },
+      error => {
+        console.log(error);
+      }
+    )
+
+    
+
   }
 
 }

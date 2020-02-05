@@ -13,6 +13,7 @@ import isa.project.repository.PregledRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
 @Service
 public class KlinikaService {
 
@@ -24,6 +25,19 @@ public class KlinikaService {
 
 	public List<Klinika> findAll() {
 		return klinikaRepository.findAll();
+	}
+	
+	public Klinika findKlinikaById(Long id) {
+		return klinikaRepository.findOneById(id);
+	}
+	
+	public Klinika saveKlinika(Klinika klinika) {
+		return klinikaRepository.save(klinika);
+	}
+	
+	public double konacanRezultat(double rezultat){
+		rezultat=round(rezultat,2);
+		return rezultat;
 	}
 
 	public PretragaKlinikaDTO pretragaKlinika(PretragaKlinikaDTO pom) {
@@ -60,5 +74,15 @@ public class KlinikaService {
 
 		return konacno;
 	}
+	
+	public static double round(double value, int places) {
+	    if (places < 0) throw new IllegalArgumentException();
+
+	    long factor = (long) Math.pow(10, places);
+	    value = value * factor;
+	    long tmp = Math.round(value);
+	    return (double) tmp / factor;
+	}
+
 
 }
