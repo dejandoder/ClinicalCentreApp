@@ -24,7 +24,7 @@ public class KlinikaController {
 	private KlinikaService klinikaService;
 	
 	@GetMapping(value = "/all")
-	public ResponseEntity<List<Klinika>> getAllPregled() {
+	public ResponseEntity<List<Klinika>> getAllKlinika() {
 
 		List<Klinika> klinike = klinikaService.findAll();
 		return new ResponseEntity<>(klinike, HttpStatus.OK);
