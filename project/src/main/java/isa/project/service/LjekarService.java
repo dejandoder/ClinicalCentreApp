@@ -40,6 +40,10 @@ public class LjekarService {
 		return ljekarRepository.findOneById(id);
 	}
 	
+	public List<Ljekar> findAll() {
+		return ljekarRepository.findAll();
+	}
+	
 	public double konacanRezultat(double rezultat){
 		rezultat=round(rezultat,2);
 		return rezultat;

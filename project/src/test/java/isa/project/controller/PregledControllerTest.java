@@ -20,12 +20,11 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class LjekarControllerTest {
+public class PregledControllerTest {
 	
-private static final String URL_PREFIX = "/ljekari";
+private static final String URL_PREFIX = "/pregledi";
 	
 	private MediaType contentType = new MediaType(MediaType.APPLICATION_JSON.getType(),
 			MediaType.APPLICATION_JSON.getSubtype());
@@ -53,12 +52,20 @@ private static final String URL_PREFIX = "/ljekari";
 	}
 	
 	@Test
-	public void testgetAllLjekar() throws Exception {
-		mockMvc.perform(get(URL_PREFIX + "/all" )).andExpect(status().isOk())
+	public void testgetAllPregled() throws Exception {
+		mockMvc.perform(get(URL_PREFIX + "/allPregled" )).andExpect(status().isOk())
 		.andExpect(content().contentType(contentType))
-		.andExpect(jsonPath("$.[*].id").value(hasItem(11)))
-		.andExpect(jsonPath("$.[*].id").value(hasItem(12)));
+		.andExpect(jsonPath("$.[*].id").value(hasItem(28)))
+		.andExpect(jsonPath("$.[*].id").value(hasItem(29)));
 	}
 	
+	@Test
+	public void testgetAllPregledZakazani() throws Exception {
+		mockMvc.perform(get(URL_PREFIX + "/sviDostupni" )).andExpect(status().isOk())
+		.andExpect(content().contentType(contentType))
+		.andExpect(jsonPath("$.[*].id").value(hasItem(28)))
+		.andExpect(jsonPath("$.[*].id").value(hasItem(29)));
+	}
+
 
 }

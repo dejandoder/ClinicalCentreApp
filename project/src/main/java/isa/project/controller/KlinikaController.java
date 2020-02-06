@@ -32,7 +32,7 @@ public class KlinikaController {
 	}
 
 	@RequestMapping(value = "/pretragaKlinika", method = RequestMethod.POST)
-	public PretragaKlinikaDTO pretragaLetova(
+	public PretragaKlinikaDTO pretragaKlinika(
 			@RequestBody PretragaKlinikaDTO parametar) {
 		return klinikaService.pretragaKlinika(parametar);
 	}

@@ -57,6 +57,15 @@ public class PregledController {
 		return new ResponseEntity<>(tipovi, HttpStatus.OK);
 
 	}
+	
+	@GetMapping(value = "/allPregled")
+	public ResponseEntity<List<Pregled>> getAllPregledi() {
+
+		List<Pregled> pregledi = pregledService.findAll();
+		
+		return new ResponseEntity<>(pregledi, HttpStatus.OK);
+
+	}
 
 	@RequestMapping(value = "/zakaziDostupni", method = RequestMethod.POST)
 	public ResponseEntity<Pregled> zakaziDostupniPregled(
