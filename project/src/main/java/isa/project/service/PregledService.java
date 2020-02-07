@@ -9,6 +9,8 @@ import isa.project.repository.PregledRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class PregledService {
@@ -22,7 +24,8 @@ public class PregledService {
 	public List<Pregled> findAll() {
 		return pregledRepository.findAll();
 	}
-
+	
+	@Transactional(isolation=Isolation.SERIALIZABLE)
 	public Pregled savePregled(Pregled pregled) {
 		return pregledRepository.save(pregled);
 	}
