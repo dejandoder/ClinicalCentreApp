@@ -51,7 +51,7 @@ export class PregledComponent implements OnInit {
             }
           },
           error => {
-            console.log(error);
+            this.toastr.success("U medjuvremenu je zakazan pregled");
           }
         )
 

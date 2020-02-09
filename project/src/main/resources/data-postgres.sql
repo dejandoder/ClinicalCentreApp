@@ -25,6 +25,15 @@ insert into termin  (termin, zauzet, ljekar_id) values ('12:00:00', false, 1);
 insert into termin  (termin, zauzet, ljekar_id) values ('13:00:00', false, 1);
 insert into termin  (termin, zauzet, ljekar_id) values ('14:00:00', false, 1);
 insert into termin  (termin, zauzet, ljekar_id) values ('15:00:00', false, 1);
+
+insert into termin  (termin, zauzet, ljekar_id) values ('08:00:00', false, 2);
+insert into termin  (termin, zauzet, ljekar_id) values ('09:00:00', false, 2);
+insert into termin  (termin, zauzet, ljekar_id) values ('10:00:00', false, 2);
+insert into termin  (termin, zauzet, ljekar_id) values ('11:00:00', false, 2);
+insert into termin  (termin, zauzet, ljekar_id) values ('12:00:00', false, 2);
+insert into termin  (termin, zauzet, ljekar_id) values ('13:00:00', false, 2);
+insert into termin  (termin, zauzet, ljekar_id) values ('14:00:00', false, 2);
+insert into termin  (termin, zauzet, ljekar_id) values ('15:00:00', false, 2);
 --tipovi pregleda
 insert into tip_pregleda(ime, cijena, trajanje, sala) values('oko',100, 10, 1);
 insert into tip_pregleda(ime, cijena, trajanje, sala) values('glava',200, 15, 2);

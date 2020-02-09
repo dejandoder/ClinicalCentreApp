@@ -12,10 +12,8 @@ import static org.mockito.Mockito.when;
 import java.util.Arrays;
 import java.util.List;
 
-import isa.project.model.Klinika;
 import isa.project.model.Korisnik;
 import isa.project.model.Pregled;
-import isa.project.model.TipPregleda;
 import isa.project.repository.PregledRepository;
 
 import org.junit.Test;

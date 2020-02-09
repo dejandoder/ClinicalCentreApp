@@ -3,7 +3,6 @@ package isa.project.controller;
 import java.util.List;
 
 import isa.project.dto.PretragaLjekaraDTO;
-import isa.project.model.Klinika;
 import isa.project.model.Ljekar;
 import isa.project.service.LjekarService;
 
