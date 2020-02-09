@@ -96,9 +96,11 @@ export class RegistracijaComponent implements OnInit {
       this.validacija = true;
     } else {
       this.korisnik.username = this.korisnik.email;
+      this.toastr.info("Molimo sacekajte!");
       this.korisnikService.registracija(this.korisnik).subscribe(
         data => {
           this.toastr.info("Dobicete e-mail za verifikaciju!");
+          this.router.navigate(['/pocetna']);
         },
         error => {
           this.toastr.error("Nalog sa navedenom e-mail adresom vec postoji!");

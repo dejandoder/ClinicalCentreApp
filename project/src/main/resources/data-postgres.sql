@@ -1,5 +1,5 @@
 --korisnici
-insert into korisnik (grad,ime,password,email,prezime,broj_telefona,role,username, jedinstveni_broj, drzava, adresa, verifikovan) VALUES (NULL,'janko','$2a$10$PyUWKQye6ObdS417LOa08u.rmr.ms7lZ7y5JlQ52PfWE16.uraAHC','dejandoder96@gmail.com',NULL,0,'REGISTROVAN','janko',55,'srbija','njegoseva',true);
+insert into korisnik (grad,ime,password,email,prezime,broj_telefona,role,username, jedinstveni_broj, drzava, adresa, verifikovan) VALUES (NULL,'dejan','$2a$10$DzLXsoYXWufty3vsgOTAGue7OcGaf.TC6K5MOT2Kz1U09Upwz1TY6','dejandoder96@gmail.com','Doder',0,'REGISTROVAN','dejan',55,'Srbija','njegoseva',true);
 --klinike
 insert into klinika (ime, adresa, opis, grad, ocjena) values ('Drzavna','Njegoseva','Drzavna klinika', 'Gacko',5);
 insert into klinika (ime, adresa, opis, grad, ocjena) values ('Privatna','Tolstojeva','Privatna klinika', 'Novi Sad',4);
@@ -30,8 +30,6 @@ insert into termin  (termin, zauzet, ljekar_id) values ('08:00:00', false, 2);
 insert into termin  (termin, zauzet, ljekar_id) values ('09:00:00', false, 2);
 insert into termin  (termin, zauzet, ljekar_id) values ('10:00:00', false, 2);
 insert into termin  (termin, zauzet, ljekar_id) values ('11:00:00', false, 2);
-insert into termin  (termin, zauzet, ljekar_id) values ('12:00:00', false, 2);
-insert into termin  (termin, zauzet, ljekar_id) values ('13:00:00', false, 2);
 insert into termin  (termin, zauzet, ljekar_id) values ('14:00:00', false, 2);
 insert into termin  (termin, zauzet, ljekar_id) values ('15:00:00', false, 2);
 --tipovi pregleda
@@ -58,7 +56,11 @@ insert into ljekar_tip_pregleda (ljekar_id, tip_pregleda_id) values (3,1);
 --pregledi
 insert into pregled (stanje, trajanje, cijena, popust, sala, termin, vrijeme, tip, ljekar_id, tip_pregleda_id, klinika_id) values ('SLOBODAN', 10, 99, 0, 3, '2019-12-21', '15:00:00', 'oko', 1, 1, 1);
 insert into pregled (stanje, trajanje, cijena, popust, sala, termin, vrijeme, tip, ljekar_id, tip_pregleda_id, klinika_id) values ('SLOBODAN',15,68,1,2, '2019-12-22', '15:00:00','oko', 2, 1, 2);
-insert into pregled (stanje, trajanje, cijena, popust, sala, termin, vrijeme, tip, ljekar_id, tip_pregleda_id, klinika_id) values ('SLOBODAN',20,114,2,1, '2019-12-21','23:00:00','oko', 3, 1, 3);
+insert into pregled (stanje, trajanje, cijena, popust, sala, termin, vrijeme, tip, ljekar_id, tip_pregleda_id, klinika_id) values ('SLOBODAN',20,114,2,16, '2019-12-21','08:00:00','oko', 3, 1, 3);
+insert into pregled (stanje, trajanje, cijena, popust, sala, termin, vrijeme, tip, ljekar_id, tip_pregleda_id, klinika_id) values ('SLOBODAN',30,200,2,51, '2020-02-21','12:00:00','glava', 3, 2, 1);
+insert into pregled (stanje, trajanje, cijena, popust, sala, termin, vrijeme, tip, ljekar_id, tip_pregleda_id, klinika_id) values ('SLOBODAN',5,88,4,21, '2020-02-19','11:00:00','nos', 3, 2, 1);
+insert into pregled (stanje, trajanje, cijena, popust, sala, termin, vrijeme, tip, ljekar_id, tip_pregleda_id, klinika_id) values ('SLOBODAN',10,28,5,11, '2020-02-20','09:00:00','ruka', 3, 2, 1);
+
 --insert into pregled (stanje, trajanje, cijena, popust, sala, termin, tip, ljekar_id) values ('SLOBODAN',15,178,3,5, '2019-10-06 00:00:00','oko', 1);
 --insert into pregled (stanje, trajanje, cijena, popust, sala, termin, tip, ljekar_id) values ('SLOBODAN',25,286,4,7, '2019-01-22 00:00:00','zub', 2);
 --insert into pregled (stanje, trajanje, cijena, popust, sala, termin, tip, ljekar_id) values ('SLOBODAN',40,44,5,8, '2019-03-16 00:00:00','noga', 3);

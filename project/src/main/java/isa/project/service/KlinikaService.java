@@ -7,6 +7,7 @@ import isa.project.dto.KlinikaDTO;
 import isa.project.dto.PretragaKlinikaDTO;
 import isa.project.model.Klinika;
 import isa.project.model.Pregled;
+import isa.project.model.TipPregleda;
 import isa.project.repository.KlinikaRepository;
 import isa.project.repository.PregledRepository;
 
@@ -43,7 +44,7 @@ public class KlinikaService {
 	public PretragaKlinikaDTO pretragaKlinika(PretragaKlinikaDTO pom) {
 
 		List<Klinika> lista = new ArrayList<>();
-		List<KlinikaDTO> listaDTO = new ArrayList<>();
+		//List<KlinikaDTO> listaDTO = new ArrayList<>();
 		PretragaKlinikaDTO konacno = new PretragaKlinikaDTO();
 		double cijena = 0;
 
@@ -70,7 +71,7 @@ public class KlinikaService {
 
 		konacno.setKlinike(lista);
 		konacno.setCijenaPregleda(cijena);
-		konacno.setKlinikeDTO(listaDTO);
+		//konacno.setKlinikeDTO(listaDTO);
 
 		return konacno;
 	}

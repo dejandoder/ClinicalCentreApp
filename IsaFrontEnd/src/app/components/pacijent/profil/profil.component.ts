@@ -19,6 +19,7 @@ export class ProfilComponent implements OnInit {
   email : string = "";
   grad : string = "";
   novaLozinka : any;
+  novaLozinkaPonovljena: any;
 
   constructor(private router : Router, private route : ActivatedRoute, private service: KorisnikService, private toastr: ToastrService, private modalService: BsModalService) { }
 
@@ -52,15 +53,21 @@ export class ProfilComponent implements OnInit {
     this.modalRef = this.modalService.show(template);
   }
   izmijeniLozinku2(){
-    this.service.izmjenaLozinke(this.novaLozinka).subscribe(
-      data => {
-        this.toastr.success("Uspjesno ste promijenili lozinku!");
-      },
-      error => {
-        this.toastr.success("Uspjesno ste promijenili lozinkurac!");
-      }
-    )
-    this.modalRef.hide();
+    if (this.novaLozinka != this.novaLozinkaPonovljena) {
+      this.toastr.error("Lozinke se ne poklapaju");
+    }else{
+      this.service.izmjenaLozinke(this.novaLozinka).subscribe(
+        data => {
+          this.toastr.success("Uspjesno ste promijenili lozinku!");
+        },
+        error => {
+    
+        }
+      )
+      this.modalRef.hide();
+
+    }
+
   }
 
   odustaniOdIzmjene(){
